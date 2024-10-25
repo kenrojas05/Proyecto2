@@ -10,6 +10,6 @@ package com.mycompany.programa2futoshiki;
 public class Programa2Futoshiki {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        GUIFutoshiki.main(args);
     }
 }
