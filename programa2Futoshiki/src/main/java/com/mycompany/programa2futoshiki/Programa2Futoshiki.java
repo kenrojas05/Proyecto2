@@ -1,12 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
+
 
 package com.mycompany.programa2futoshiki;
 
 /**
  *
- * @author Usuario
+ * @author Kendall Ariel Rojas Cartin
+ * 
  */
 public class Programa2Futoshiki {
 
