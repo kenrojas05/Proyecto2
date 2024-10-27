@@ -4,6 +4,15 @@
  */
 package com.mycompany.programa2futoshiki;
 
+import javax.swing.*; //swing para el gui
+import java.awt.*; //para component componentes 
+import java.io.*; //manejo de archivos
+
+
+import java.util.ArrayList; //DE MOMENTO NO LO USO PERO POR SI ACASO (en caso de no borrar)
+import java.util.Collections;
+import java.util.List;
+
 /**
  *
  * @author Usuario
@@ -26,81 +35,225 @@ public class GUIFutoshiki extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
-        jLabel2 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu5 = new javax.swing.JMenu();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        fondoPanel = new javax.swing.JPanel();
+        panelFutoshiki = new javax.swing.JPanel();
+        labelFutoshiki = new javax.swing.JLabel();
+        labelMenu = new javax.swing.JLabel();
+        indicadorLabel = new javax.swing.JLabel();
+        menuBar = new javax.swing.JMenuBar();
+        menuConfigurar = new javax.swing.JMenu();
+        menuTamanoCuadricula = new javax.swing.JMenu();
+        item3x3 = new javax.swing.JMenuItem();
+        item4x4 = new javax.swing.JMenuItem();
+        item5x5 = new javax.swing.JMenuItem();
+        item6x6 = new javax.swing.JMenuItem();
+        item7x7 = new javax.swing.JMenuItem();
+        item8x8 = new javax.swing.JMenuItem();
+        item9x9 = new javax.swing.JMenuItem();
+        item10x10 = new javax.swing.JMenuItem();
+        menuNivel = new javax.swing.JMenu();
+        nivelFacil = new javax.swing.JMenuItem();
+        nivelIntermedio = new javax.swing.JMenuItem();
+        nivelDificil = new javax.swing.JMenuItem();
+        menuMultinivel = new javax.swing.JMenu();
+        itemNoMultinivel = new javax.swing.JMenuItem();
+        itemSiMultinivel = new javax.swing.JMenuItem();
+        menuReloj = new javax.swing.JMenu();
+        itemRelojCronometro = new javax.swing.JMenuItem();
+        itemRelojNo = new javax.swing.JMenuItem();
+        itemRelojTemporizador = new javax.swing.JMenuItem();
+        menuPanelDigitos = new javax.swing.JMenu();
+        itemPosicionDerecha = new javax.swing.JMenuItem();
+        itemPosicionIzquierda = new javax.swing.JMenuItem();
+        itemNombreJugador = new javax.swing.JMenuItem();
+        menuJugar = new javax.swing.JMenu();
+        menuTop10 = new javax.swing.JMenu();
+        menuAyuda = new javax.swing.JMenu();
+        menuAcercaDe = new javax.swing.JMenu();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        fondoPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(204, 0, 51));
+        panelFutoshiki.setBackground(new java.awt.Color(204, 0, 51));
 
-        jLabel1.setBackground(new java.awt.Color(204, 0, 51));
-        jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("FUTOSHIKI");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        labelFutoshiki.setBackground(new java.awt.Color(204, 0, 51));
+        labelFutoshiki.setFont(new java.awt.Font("Sitka Text", 1, 36)); // NOI18N
+        labelFutoshiki.setForeground(new java.awt.Color(255, 255, 255));
+        labelFutoshiki.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelFutoshiki.setText("FUTOSHIKI");
+        labelFutoshiki.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelFutoshikiLayout = new javax.swing.GroupLayout(panelFutoshiki);
+        panelFutoshiki.setLayout(panelFutoshikiLayout);
+        panelFutoshikiLayout.setHorizontalGroup(
+            panelFutoshikiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFutoshikiLayout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addComponent(labelFutoshiki, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panelFutoshikiLayout.setVerticalGroup(
+            panelFutoshikiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFutoshikiLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
-        );
-
-        jLabel2.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Menu Principal");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(325, 325, 325)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
-                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(137, 137, 137))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(416, 416, 416)
-                .addComponent(jLabel2)
+                .addComponent(labelFutoshiki, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+
+        labelMenu.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
+        labelMenu.setForeground(new java.awt.Color(0, 0, 0));
+        labelMenu.setText("Menu Principal");
+
+        indicadorLabel.setForeground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout fondoPanelLayout = new javax.swing.GroupLayout(fondoPanel);
+        fondoPanel.setLayout(fondoPanelLayout);
+        fondoPanelLayout.setHorizontalGroup(
+            fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fondoPanelLayout.createSequentialGroup()
+                .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fondoPanelLayout.createSequentialGroup()
+                        .addGap(318, 318, 318)
+                        .addComponent(panelFutoshiki, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(fondoPanelLayout.createSequentialGroup()
+                        .addGap(417, 417, 417)
+                        .addComponent(labelMenu)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoPanelLayout.createSequentialGroup()
+                .addGap(0, 46, Short.MAX_VALUE)
+                .addComponent(indicadorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 987, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+        );
+        fondoPanelLayout.setVerticalGroup(
+            fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fondoPanelLayout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(panelFutoshiki, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(195, 195, 195)
-                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(323, Short.MAX_VALUE))
+                .addComponent(labelMenu)
+                .addGap(18, 18, 18)
+                .addComponent(indicadorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jMenuBar1.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
+        menuBar.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
 
-        jMenu5.setText("Configurar");
-        jMenuBar1.add(jMenu5);
+        menuConfigurar.setText("Configurar");
 
-        setJMenuBar(jMenuBar1);
+        menuTamanoCuadricula.setText("Tamaño de la Cuadricula");
+
+        item3x3.setText("3 x 3");
+        menuTamanoCuadricula.add(item3x3);
+
+        item4x4.setText("4 x 4");
+        menuTamanoCuadricula.add(item4x4);
+
+        item5x5.setForeground(new java.awt.Color(255, 0, 51));
+        item5x5.setText("5 x 5");
+        menuTamanoCuadricula.add(item5x5);
+
+        item6x6.setText("6 x 6");
+        menuTamanoCuadricula.add(item6x6);
+
+        item7x7.setText("7 x 7");
+        menuTamanoCuadricula.add(item7x7);
+
+        item8x8.setText("8 x 8");
+        menuTamanoCuadricula.add(item8x8);
+
+        item9x9.setText("9 x 9");
+        menuTamanoCuadricula.add(item9x9);
+
+        item10x10.setText("10 x 10");
+        menuTamanoCuadricula.add(item10x10);
+
+        menuConfigurar.add(menuTamanoCuadricula);
+
+        menuNivel.setText("Nivel de Juego");
+
+        nivelFacil.setForeground(new java.awt.Color(255, 0, 0));
+        nivelFacil.setText("Facil");
+        menuNivel.add(nivelFacil);
+
+        nivelIntermedio.setText("Intermedio");
+        menuNivel.add(nivelIntermedio);
+
+        nivelDificil.setText("Dificil");
+        menuNivel.add(nivelDificil);
+
+        menuConfigurar.add(menuNivel);
+
+        menuMultinivel.setText("Multinivel");
+
+        itemNoMultinivel.setForeground(new java.awt.Color(255, 0, 0));
+        itemNoMultinivel.setText("No");
+        menuMultinivel.add(itemNoMultinivel);
+
+        itemSiMultinivel.setText("Si");
+        menuMultinivel.add(itemSiMultinivel);
+
+        menuConfigurar.add(menuMultinivel);
+
+        menuReloj.setText("Uso del reloj");
+
+        itemRelojCronometro.setForeground(new java.awt.Color(255, 0, 0));
+        itemRelojCronometro.setText("Cronometro");
+        menuReloj.add(itemRelojCronometro);
+
+        itemRelojNo.setText("No");
+        menuReloj.add(itemRelojNo);
+
+        itemRelojTemporizador.setText("Temporizador");
+        menuReloj.add(itemRelojTemporizador);
+
+        menuConfigurar.add(menuReloj);
+
+        menuPanelDigitos.setText("Posición en la ventana del panel de dígitos");
+
+        itemPosicionDerecha.setForeground(new java.awt.Color(255, 0, 0));
+        itemPosicionDerecha.setText("Derecha");
+        menuPanelDigitos.add(itemPosicionDerecha);
+
+        itemPosicionIzquierda.setText("Izquierda");
+        menuPanelDigitos.add(itemPosicionIzquierda);
+
+        menuConfigurar.add(menuPanelDigitos);
+
+        itemNombreJugador.setText("Nombre del jugador");
+        menuConfigurar.add(itemNombreJugador);
+
+        menuBar.add(menuConfigurar);
+
+        menuJugar.setText("Jugar");
+        menuBar.add(menuJugar);
+
+        menuTop10.setText("Top 10");
+        menuBar.add(menuTop10);
+
+        menuAyuda.setText("Ayuda");
+        menuAyuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuAyudaMouseClicked(evt);
+            }
+        });
+        menuBar.add(menuAyuda);
+
+        menuAcercaDe.setText("Acerca de.");
+        menuAcercaDe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuAcercaDeMouseClicked(evt);
+            }
+        });
+        menuBar.add(menuAcercaDe);
+
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,19 +261,59 @@ public class GUIFutoshiki extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(fondoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(fondoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuAcercaDeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAcercaDeMouseClicked
+         System.out.println("Acerca de.");
+        
+         //informacion 
+         JTextArea areaTexto = new JTextArea();
+         areaTexto.setEditable(false);
+         areaTexto.setText("FUTOSHIKI \n"
+                          +"Version: PONER AL TERMINAR \n"
+                          +"Fecha de creación: 24/10/2024 \n"
+                          +"Autor: Kendall Ariel Rojas Cartin");
+         areaTexto.setFont(new Font("Sitka Text",Font.BOLD,22));
+         
+        //ventana para mostrar la informacion
+        JDialog ventanaInfo = new JDialog();
+        ventanaInfo.setTitle("Acerca De.");
+        ventanaInfo.setModal(true); // lo pone en modal lo que hace que no se pueda hacer nada hasta cerrar 
+        ventanaInfo.setBounds(500, 500, 500, 300); // x y ancho y altura
+        
+        ventanaInfo.add(areaTexto);
+        ventanaInfo.setVisible(true);
+        
+        
+    }//GEN-LAST:event_menuAcercaDeMouseClicked
+
+    private void menuAyudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAyudaMouseClicked
+        System.out.println("PDF");
+        try {
+            File archivoPDF = new File("files/programa2_futoshiki_manual_de_usuario.pdf"); //RECORDAR QUE EL MANUAL ESTA VACIO (Borrar comentario luego)
+
+            if (archivoPDF.exists()){ //determina si existe
+                Desktop.getDesktop().open(archivoPDF); //Desktop es para acceder a las funciones y de esta manera abrir el archivo
+            } else {
+                indicadorLabel.setText("No se encontro el PDF");
+            }
+        } 
+        catch (IOException e) { //si hay un error al abrir
+            indicadorLabel.setText(e.getMessage());
+        }
+    }//GEN-LAST:event_menuAyudaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -158,12 +351,42 @@ public class GUIFutoshiki extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.Box.Filler filler1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel fondoPanel;
+    private javax.swing.JLabel indicadorLabel;
+    private javax.swing.JMenuItem item10x10;
+    private javax.swing.JMenuItem item3x3;
+    private javax.swing.JMenuItem item4x4;
+    private javax.swing.JMenuItem item5x5;
+    private javax.swing.JMenuItem item6x6;
+    private javax.swing.JMenuItem item7x7;
+    private javax.swing.JMenuItem item8x8;
+    private javax.swing.JMenuItem item9x9;
+    private javax.swing.JMenuItem itemNoMultinivel;
+    private javax.swing.JMenuItem itemNombreJugador;
+    private javax.swing.JMenuItem itemPosicionDerecha;
+    private javax.swing.JMenuItem itemPosicionIzquierda;
+    private javax.swing.JMenuItem itemRelojCronometro;
+    private javax.swing.JMenuItem itemRelojNo;
+    private javax.swing.JMenuItem itemRelojTemporizador;
+    private javax.swing.JMenuItem itemSiMultinivel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel labelFutoshiki;
+    private javax.swing.JLabel labelMenu;
+    private javax.swing.JMenu menuAcercaDe;
+    private javax.swing.JMenu menuAyuda;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuConfigurar;
+    private javax.swing.JMenu menuJugar;
+    private javax.swing.JMenu menuMultinivel;
+    private javax.swing.JMenu menuNivel;
+    private javax.swing.JMenu menuPanelDigitos;
+    private javax.swing.JMenu menuReloj;
+    private javax.swing.JMenu menuTamanoCuadricula;
+    private javax.swing.JMenu menuTop10;
+    private javax.swing.JMenuItem nivelDificil;
+    private javax.swing.JMenuItem nivelFacil;
+    private javax.swing.JMenuItem nivelIntermedio;
+    private javax.swing.JPanel panelFutoshiki;
     // End of variables declaration//GEN-END:variables
 }
