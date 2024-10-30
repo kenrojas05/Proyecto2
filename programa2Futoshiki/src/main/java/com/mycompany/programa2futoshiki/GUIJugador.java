@@ -60,18 +60,8 @@ public class GUIJugador extends javax.swing.JFrame {
         });
 
         nombreField.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
-        nombreField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreFieldActionPerformed(evt);
-            }
-        });
 
         passwordField.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
-        passwordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordFieldActionPerformed(evt);
-            }
-        });
 
         sesionLabel.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
         sesionLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -183,14 +173,6 @@ public class GUIJugador extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_iniciarButtonActionPerformed
-
-    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordFieldActionPerformed
-
-    private void nombreFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombreFieldActionPerformed
 
     private void registroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroButtonActionPerformed
         // TODO add your handling code here:
