@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.mycompany.programa2futoshiki;
 
 import javax.swing.*; //swing para el gui
@@ -18,7 +15,9 @@ import java.util.List;
  * @author Usuario
  */
 public class GUIFutoshiki extends javax.swing.JFrame {
-
+    //variables globales 
+    private static String nombre = "incognito";
+    private static String password;
     /**
      * Creates new form GUIFutoshiki
      */
@@ -42,6 +41,7 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         labelFutoshiki = new javax.swing.JLabel();
         labelMenu = new javax.swing.JLabel();
         indicadorLabel = new javax.swing.JLabel();
+        jugadorLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         menuConfigurar = new javax.swing.JMenu();
         menuTamanoCuadricula = new javax.swing.JMenu();
@@ -113,28 +113,36 @@ public class GUIFutoshiki extends javax.swing.JFrame {
 
         indicadorLabel.setForeground(new java.awt.Color(0, 0, 0));
 
+        jugadorLabel.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
+        jugadorLabel.setForeground(new java.awt.Color(0, 0, 0));
+        jugadorLabel.setText("Jugador: ");
+
         javax.swing.GroupLayout fondoPanelLayout = new javax.swing.GroupLayout(fondoPanel);
         fondoPanel.setLayout(fondoPanelLayout);
         fondoPanelLayout.setHorizontalGroup(
             fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(fondoPanelLayout.createSequentialGroup()
-                .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(fondoPanelLayout.createSequentialGroup()
-                        .addGap(318, 318, 318)
-                        .addComponent(panelFutoshiki, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(fondoPanelLayout.createSequentialGroup()
-                        .addGap(417, 417, 417)
-                        .addComponent(labelMenu)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoPanelLayout.createSequentialGroup()
                 .addGap(0, 46, Short.MAX_VALUE)
                 .addComponent(indicadorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 987, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
+            .addGroup(fondoPanelLayout.createSequentialGroup()
+                .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fondoPanelLayout.createSequentialGroup()
+                        .addGap(417, 417, 417)
+                        .addComponent(labelMenu))
+                    .addGroup(fondoPanelLayout.createSequentialGroup()
+                        .addGap(318, 318, 318)
+                        .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelFutoshiki, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jugadorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         fondoPanelLayout.setVerticalGroup(
             fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fondoPanelLayout.createSequentialGroup()
-                .addGap(230, 230, 230)
+                .addGap(17, 17, 17)
+                .addComponent(jugadorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(165, 165, 165)
                 .addComponent(panelFutoshiki, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(labelMenu)
@@ -227,6 +235,11 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         menuConfigurar.add(menuPanelDigitos);
 
         itemNombreJugador.setText("Nombre del jugador");
+        itemNombreJugador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemNombreJugadorActionPerformed(evt);
+            }
+        });
         menuConfigurar.add(itemNombreJugador);
 
         menuBar.add(menuConfigurar);
@@ -274,7 +287,26 @@ public class GUIFutoshiki extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public static void setNombre(String pNombre){
+        nombre = pNombre;
+    }
+    
+    public static void setPassword(String pPassword){
+        password = pPassword;
+    }
+    
+    public static void setJugadorLabel(){
+        jugadorLabel.setText("Jugador: "+nombre);
+    }
+    
+    public static String getNombre(){
+        return nombre;
+    }
+    
+    public static String getPassword(){
+        return password;
+    }
+    
     private void menuAcercaDeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAcercaDeMouseClicked
          System.out.println("Acerca de.");
         
@@ -314,6 +346,15 @@ public class GUIFutoshiki extends javax.swing.JFrame {
             indicadorLabel.setText(e.getMessage());
         }
     }//GEN-LAST:event_menuAyudaMouseClicked
+
+    private void itemNombreJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemNombreJugadorActionPerformed
+        System.out.println("Nombre");
+        
+        GUIJugador nuevoInicio = new GUIJugador();
+        nuevoInicio.setVisible(true);
+        nuevoInicio.setEnabled(true);
+        nuevoInicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //para que no se cierre todo al cerrar esta
+    }//GEN-LAST:event_itemNombreJugadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -371,6 +412,7 @@ public class GUIFutoshiki extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemSiMultinivel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private static javax.swing.JLabel jugadorLabel;
     private javax.swing.JLabel labelFutoshiki;
     private javax.swing.JLabel labelMenu;
     private javax.swing.JMenu menuAcercaDe;

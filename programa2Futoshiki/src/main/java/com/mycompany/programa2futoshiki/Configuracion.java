@@ -22,9 +22,25 @@ public class Configuracion {
     private String reloj; //Cronometro, No, Temporizador
     private boolean posicion; // false: derecha, true: izquierda
 
-    private Map<String, String> jugadores = new HashMap<>(); //nombre key password value
+    public static Map<String, String> jugadores = new HashMap<>(); //nombre key password value
     
-    private void setJugadores(String nombre, String password){
+    public String toStringJugador(String nombre){
+        if (jugadores.containsKey(nombre)){
+            return nombre + " " + jugadores.get(nombre);
+        }
+        return "";
+    }
+    
+    public static boolean nombreValido(String nombre){
+        if (nombre.length()>=1 || nombre.length()<=30){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    public static void setJugadores(String nombre, String password){
         if (nombre.length()==0){
             throw new IllegalArgumentException("INCOGNITO DEBERIA SER");
         }
