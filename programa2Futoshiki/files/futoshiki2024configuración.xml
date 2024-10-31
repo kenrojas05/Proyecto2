@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuracion>
+    <cuadricula>3</cuadricula>
+    <jugadores>
+        <entry>
+            <key>Kendall</key>
+            <value>Tango</value>
+        </entry>
+    </jugadores>
+    <multinivel>true</multinivel>
+    <nivel>Intermedio</nivel>
+    <posicion>true</posicion>
+    <reloj>No</reloj>
+</configuracion>

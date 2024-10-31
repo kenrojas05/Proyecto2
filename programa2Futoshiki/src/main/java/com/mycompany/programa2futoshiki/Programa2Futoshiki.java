@@ -10,10 +10,10 @@ package com.mycompany.programa2futoshiki;
 public class Programa2Futoshiki {
 
     public static void main(String[] args) {
+        Configuracion newConfig2 = new Configuracion((byte) 5, "Facil", false, "Cronometro", false);
+        newConfig2.addJugadores("Kendall","Tango");
+        System.out.println(Configuracion.toStringJugador("Kendall"));
         
-        Configuracion newConfig = new Configuracion();
-        newConfig.setJugadores("Kendall", "Tango");
-        System.out.println(newConfig.toStringJugador("Kendall"));
         GUIFutoshiki.main(args);
         
     }
