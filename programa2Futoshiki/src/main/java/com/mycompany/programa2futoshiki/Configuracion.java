@@ -6,11 +6,7 @@ import java.io.File;
 import java.util.HashMap;  //Map es un objeto
 import java.util.Map;      //lo que hace es que guarda valores con Keys o llaves (parecido a un directorio)
 
-//mail y time y properties
-import java.time.LocalDateTime; // Sirve para dar la hora del sistema
-import javax.mail.*; // Se añadió la librería llib al proyecto para la API javax.mail
-import java.util.Properties; 
-import javax.mail.internet.*; // Importa las clases necesarias para MIME
+
 
 //(Documentar mejor PDF final) XML
 import javax.xml.bind.annotation.*; //para la serializacion y el guardado de archivo xml
@@ -49,6 +45,7 @@ public class Configuracion {
         setReloj(pReloj);
         setPosicion(pPosicion);
     }
+    
     
     public static <T> void guardarConfiguracionXML(T objetoConfig) { //programacion generica
         try{
@@ -89,10 +86,20 @@ public class Configuracion {
     
     public static String toStringJugador(String nombre){
         if (jugadores.containsKey(nombre)){
-            return nombre + " " + jugadores.get(nombre);
+            return "Nombre: " + nombre + " Contraseña: " + jugadores.get(nombre);
         }
         return "";
     }
+    
+    public static String toStringJugadores(){
+        String jugadoresRegistrados = "";
+        for (Map.Entry<String, String> jugador : jugadores.entrySet()) {
+            
+            jugadoresRegistrados += "Jugador: "+jugador.getKey()+"\n";
+        }
+        return jugadoresRegistrados;
+    }
+    
     
     public static boolean nombreValido(String nombre){
         if (nombre.length()>=1 || nombre.length()<=30){
@@ -102,7 +109,7 @@ public class Configuracion {
             return false;
         }
     }
-    public void addJugadores(String nombre, String password){
+    public static void addJugadores(String nombre, String password){
         if (nombre.length()==0){
             throw new IllegalArgumentException("INCOGNITO DEBERIA SER");
         }

@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  *
- * @author Usuario
+ * @author Kendall Ariel Rojas Cartin
  */
 public class GUIFutoshiki extends javax.swing.JFrame {
     //variables jugador 
@@ -763,8 +763,9 @@ public class GUIFutoshiki extends javax.swing.JFrame {
                     System.out.println(e);
                 }
                 System.out.println(Configuracion.cargarConfiguracionXML().toStringConfiguracion());
+                System.out.println(Configuracion.toStringJugadores());
                 gui.verificarForeground();
-                 
+                
             }
         });
     }

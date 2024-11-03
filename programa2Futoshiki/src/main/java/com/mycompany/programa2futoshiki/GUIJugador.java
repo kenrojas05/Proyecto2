@@ -4,8 +4,16 @@
  */
 package com.mycompany.programa2futoshiki;
 
+import static com.mycompany.programa2futoshiki.GUIFutoshiki.configFutoshiki;
 import java.awt.*;
+import java.io.UnsupportedEncodingException;
 import javax.swing.*;
+
+//mail y time y properties
+import java.time.LocalDateTime; // Sirve para dar la hora del sistema
+import javax.mail.*; // Se añadió la librería llib al proyecto para la API javax.mail
+import java.util.Properties; 
+import javax.mail.internet.*; // Importa las clases necesarias para MIME
 
 /**
  *
@@ -39,6 +47,7 @@ public class GUIJugador extends javax.swing.JFrame {
         sesionLabel = new javax.swing.JLabel();
         iniciarButton = new javax.swing.JButton();
         indicadorLabel = new javax.swing.JLabel();
+        recuperarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,7 +60,7 @@ public class GUIJugador extends javax.swing.JFrame {
 
         registroButton.setBackground(new java.awt.Color(255, 153, 153));
         registroButton.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
-        registroButton.setForeground(new java.awt.Color(255, 255, 255));
+        registroButton.setForeground(new java.awt.Color(102, 0, 51));
         registroButton.setText("Registrarse");
         registroButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +86,16 @@ public class GUIJugador extends javax.swing.JFrame {
 
         indicadorLabel.setForeground(new java.awt.Color(0, 0, 0));
 
+        recuperarButton.setBackground(new java.awt.Color(204, 255, 204));
+        recuperarButton.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
+        recuperarButton.setForeground(new java.awt.Color(51, 102, 0));
+        recuperarButton.setText("Recuperar Contraseña?");
+        recuperarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recuperarButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout fondoPanelLayout = new javax.swing.GroupLayout(fondoPanel);
         fondoPanel.setLayout(fondoPanelLayout);
         fondoPanelLayout.setHorizontalGroup(
@@ -87,22 +106,26 @@ public class GUIJugador extends javax.swing.JFrame {
                         .addGap(151, 151, 151)
                         .addComponent(tituloLabel)
                         .addGap(30, 30, 30)
-                        .addComponent(sesionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                        .addComponent(sesionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
                     .addGroup(fondoPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                             .addComponent(passwordField))
-                        .addGap(26, 26, 26)
+                        .addGap(37, 37, 37)
                         .addComponent(iniciarButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(registroButton)
+                        .addGap(92, 92, 92)
+                        .addComponent(indicadorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoPanelLayout.createSequentialGroup()
+            .addGroup(fondoPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(registroButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(indicadorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(recuperarButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         fondoPanelLayout.setVerticalGroup(
             fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,13 +137,18 @@ public class GUIJugador extends javax.swing.JFrame {
                     .addGroup(fondoPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(sesionLabel)))
-                .addGap(24, 24, 24)
                 .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(iniciarButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                    .addGroup(fondoPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
+                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(fondoPanelLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(iniciarButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addComponent(recuperarButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(indicadorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(registroButton))
@@ -140,9 +168,10 @@ public class GUIJugador extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void iniciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarButtonActionPerformed
         indicadorLabel.setText("");
+        
         if (nombreField.getText().isEmpty() && passwordField.getText().isEmpty()){
             GUIFutoshiki.setNombre("incognito");
             GUIFutoshiki.setJugadorLabel();
@@ -175,9 +204,207 @@ public class GUIJugador extends javax.swing.JFrame {
     }//GEN-LAST:event_iniciarButtonActionPerformed
 
     private void registroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroButtonActionPerformed
-        // TODO add your handling code here:
+        System.out.println("Registro");
+        sesionLabel.setText("Registrarse");
+        
+        JButton registrarButton = new JButton();
+        registrarButton.setText("Registrar");
+        
+        JButton regresarButton = new JButton();
+        regresarButton.setText("🡄"); //unicode U+1F84 (podria ser <- pero asi se ve mejor)
+        regresarButton.setBackground(Color.CYAN);
+        
+        if (iniciarButton.isEnabled() && iniciarButton.isVisible()){
+            iniciarButton.setEnabled(false);
+            iniciarButton.setVisible(false);
+            registroButton.setEnabled(false);
+            registroButton.setVisible(false);
+            recuperarButton.setEnabled(false);
+            recuperarButton.setVisible(false);
+        }
+        
+        registrarButton.addActionListener(new java.awt.event.ActionListener(){ //poner accion a regresar
+           public void actionPerformed(java.awt.event.ActionEvent evt) {  
+               String nombre = nombreField.getText();
+               String password = passwordField.getText();
+               if (nombreField.getText().isEmpty() && passwordField.getText().isEmpty()){
+                   indicadorLabel.setText("Invalido");
+                }
+               else {
+                  try {
+                      Configuracion.addJugadores(nombre, password);
+                      nombreField.setText("");
+                      passwordField.setText("");
+                      Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+                  } 
+                  catch (Exception e){
+                      indicadorLabel.setText(e.getMessage());
+                  }
+               }
+               
+               
+           }
+        });
+        
+        regresarButton.addActionListener(new java.awt.event.ActionListener(){ //poner accion a regresar
+           public void actionPerformed(java.awt.event.ActionEvent evt) {  
+               if (!iniciarButton.isEnabled() && !iniciarButton.isVisible()){
+                    iniciarButton.setEnabled(true);
+                    iniciarButton.setVisible(true);
+                    registroButton.setEnabled(true);
+                    registroButton.setVisible(true);
+                    regresarButton.setEnabled(false);
+                    regresarButton.setVisible(false);
+                    registrarButton.setEnabled(false);
+                    registrarButton.setVisible(false);
+                    recuperarButton.setEnabled(true);
+                    recuperarButton.setVisible(true);
+                    sesionLabel.setText("Inicio Sesion");
+                    nombreField.setText("");
+                    passwordField.setText("");
+                    indicadorLabel.setText("");
+                }
+           }
+        });
+        
+        
+        
+        registrarButton.setBounds(300,80,100,30);
+        regresarButton.setBounds(10,250,50,30);
+        
+        fondoPanel.add(registrarButton);
+        fondoPanel.add(regresarButton);
+
     }//GEN-LAST:event_registroButtonActionPerformed
 
+    private void recuperarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recuperarButtonActionPerformed
+        System.out.println("Password");
+        sesionLabel.setText("Recuperar");
+        
+         JTextArea areaTexto = new JTextArea();
+         areaTexto.setEditable(false);
+         areaTexto.setText("""
+                           Para recuperar su 
+                           contraseña 
+                           Digite un correo 
+                           para asi poder 
+                           recibir su 
+                           contrasena devuelta""");
+         areaTexto.setFont(new Font("Sitka Text",Font.BOLD,13));
+        
+        
+        JButton enviarCorreoButton = new JButton();
+        enviarCorreoButton.setText("Enviar Correo");
+        
+        JButton regresarButton = new JButton();
+        regresarButton.setText("🡄"); //unicode U+1F84 (podria ser <- pero asi se ve mejor)
+        regresarButton.setBackground(Color.CYAN);
+        
+        if (iniciarButton.isEnabled() && iniciarButton.isVisible()){
+            iniciarButton.setEnabled(false);
+            iniciarButton.setVisible(false);
+            registroButton.setEnabled(false);
+            registroButton.setVisible(false);
+            recuperarButton.setEnabled(false);
+            recuperarButton.setVisible(false);
+            nombreField.setText("Poner nombre aqui");
+            passwordField.setText("Poner correo aqui");
+            
+        }
+        
+        enviarCorreoButton.addActionListener(new java.awt.event.ActionListener(){ //poner accion a regresar
+           public void actionPerformed(java.awt.event.ActionEvent evt) {  
+               try {
+                   String datos = Configuracion.toStringJugador(nombreField.getText());
+                   if (!datos.equals("")){
+                        indicadorLabel.setText(enviarCorreoDatos(passwordField.getText(), datos));
+                   }
+                   else {
+                       indicadorLabel.setText("Jugador invalido!");
+                   }
+               }
+               catch(Exception e){
+                   indicadorLabel.setText(e.getMessage());
+               }
+               
+           }
+        });
+        
+        regresarButton.addActionListener(new java.awt.event.ActionListener(){ //poner accion a regresar
+           public void actionPerformed(java.awt.event.ActionEvent evt) {  
+               if (!iniciarButton.isEnabled() && !iniciarButton.isVisible()){
+                    iniciarButton.setEnabled(true);
+                    iniciarButton.setVisible(true);
+                    registroButton.setEnabled(true);
+                    registroButton.setVisible(true);
+                    recuperarButton.setEnabled(true);
+                    recuperarButton.setVisible(true);
+                    passwordField.setEnabled(true);
+                    passwordField.setVisible(true);
+                    sesionLabel.setText("Inicio Sesion");
+                    nombreField.setText("");
+                    passwordField.setText("");
+                    indicadorLabel.setText("");
+                    
+                    regresarButton.setEnabled(false);
+                    regresarButton.setVisible(false);
+                    enviarCorreoButton.setEnabled(false);
+                    enviarCorreoButton.setVisible(false);
+                    areaTexto.setEnabled(false);
+                    areaTexto.setVisible(false);
+                }
+           }
+        });
+        
+        enviarCorreoButton.setBounds(310,60,150,30);
+        regresarButton.setBounds(10,250,50,30);
+        areaTexto.setBounds(9,50, 150, 150);
+        
+        fondoPanel.add(areaTexto);
+        fondoPanel.add(enviarCorreoButton);
+        fondoPanel.add(regresarButton);
+    }//GEN-LAST:event_recuperarButtonActionPerformed
+
+    public String enviarCorreoDatos(String correo, String datosEnviar) {
+        String validacion;
+        Properties propiedades = new Properties(); //las propiedades del mail (configurado para gmail)
+            propiedades.put("mail.smtp.auth", "true"); //valida la autentificacion a traves de smtp 
+            propiedades.put("mail.smtp.starttls.enable", "true"); // Transport Layer Security o TLS para la conexión SMTP.
+            propiedades.put("mail.smtp.host", "smtp.gmail.com"); // servidor de corres para smtp (en este caso gmail)
+            propiedades.put("mail.smtp.port", "587"); //el puerto (para smtp se usa 587 en conexiones STARTTLS)
+
+            Session sesion = Session.getInstance(propiedades, /* se crea una sesion con el correo, propiedades y la autentificacion*/
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() { //autentifica el correo
+                        return new PasswordAuthentication("proyectokendall@gmail.com", "jvim woqi nqnz puyb"); // correo del proyecto desde donde se envia (correo y contrasena)
+                    }
+                });
+
+            try {
+                Message mensaje = new MimeMessage(sesion); //iniciar mensaje con la sesion indicada
+                mensaje.setFrom(new InternetAddress("proyectokendall@gmail.com", "Parqueos Callejeros")); // desde quien se manda el correo
+                mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(correo, nombreField.getText())); // el destino del correo o destinatario InternetAdress(correo,persona)
+                mensaje.setSubject("Datos del usuario: " + nombreField.getText()); //titulo del correo
+                mensaje.setText(datosEnviar); // el mensaje del correo
+
+                // Enviar el mensaje
+                Transport.send(mensaje);
+                validacion = "Correo enviado exitosamente!";
+                System.out.println("Correo enviado exitosamente!");
+                return validacion;
+
+            } catch (AddressException e) {
+                validacion = "Error con correo"; //error relacionado con la dirección del correo
+                return validacion;
+            } catch (MessagingException e) {
+                validacion = "Error al enviar"; // errores relacionados con el envío de correo
+                return validacion;
+            } catch (UnsupportedEncodingException e) {
+                validacion = "Error codificando"; //errores relacionados con la codificación del mensaje
+                return validacion;
+            }
+        }
+    
     private Component buscarComponente(String nombre){ //Busca un boton con el texto que este posee
         Component[] listaComponentes = fondoPanel.getComponents(); //consigue los componentes del JPanel fondoPabel
             for (Component i : listaComponentes) {
@@ -237,6 +464,7 @@ public class GUIJugador extends javax.swing.JFrame {
     private javax.swing.JButton iniciarButton;
     private javax.swing.JTextField nombreField;
     private javax.swing.JTextField passwordField;
+    private javax.swing.JButton recuperarButton;
     private javax.swing.JButton registroButton;
     private javax.swing.JLabel sesionLabel;
     private javax.swing.JLabel tituloLabel;
