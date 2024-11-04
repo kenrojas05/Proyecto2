@@ -343,6 +343,11 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         menuBar.add(menuConfigurar);
 
         menuJugar.setText("Jugar");
+        menuJugar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuJugarMouseClicked(evt);
+            }
+        });
         menuBar.add(menuJugar);
 
         menuTop10.setText("Top 10");
@@ -723,6 +728,13 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         System.out.println(configFutoshiki.toStringConfiguracion());
         Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
     }//GEN-LAST:event_itemPosicionIzquierdaActionPerformed
+
+    private void menuJugarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuJugarMouseClicked
+        System.out.println("JUGAR");
+        String[] argumentos = {""}; //no le pasa argumentos (de momento talvez lo cambie)
+        GUIJugar.main(argumentos);
+        
+    }//GEN-LAST:event_menuJugarMouseClicked
 
     /**
      * @param args the command line arguments
