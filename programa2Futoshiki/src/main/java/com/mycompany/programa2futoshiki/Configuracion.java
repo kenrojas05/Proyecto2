@@ -1,12 +1,12 @@
 
 package com.mycompany.programa2futoshiki; //correo jvim woqi nqnz puyb
 
+
 //(Documentar mejor en el PDF al final) MAP
 import java.io.File;
 import java.util.HashMap;  //Map es un objeto
 import java.util.Map;      //lo que hace es que guarda valores con Keys o llaves (parecido a un directorio)
-
-
+import javax.swing.SwingUtilities;
 
 //(Documentar mejor PDF final) XML
 import javax.xml.bind.annotation.*; //para la serializacion y el guardado de archivo xml
@@ -26,7 +26,13 @@ public class Configuracion {
     private boolean multinivel = false; //false: no, true: si
     private String reloj = "Cronometro"; //Cronometro, No, Temporizador
     private boolean posicion = false; // false: derecha, true: izquierda
+    
+    public static int temporizadorHora = 0;
+    public static int temporizadorMinuto = 0;
+    public static int temporizadorSegundo = 0;
+    
 
+    
     @XmlTransient //ignora el atributo
     public static Map<String, String> jugadores = new HashMap<>(); //nombre key password value
     
@@ -80,6 +86,10 @@ public class Configuracion {
         }
     }
     
+    
+    
+    
+    
     public String toStringConfiguracion(){
         return "Cuadricula: "+cuadricula+" Nivel: "+nivel+" Multinivel: "+multinivel+" Reloj: "+reloj+" Posicion: "+posicion;
     }
@@ -125,6 +135,12 @@ public class Configuracion {
         
     }
     
+    public void comprobarTemporizador(){
+        if (temporizadorHora == 0 && temporizadorMinuto == 0 && temporizadorSegundo == 0){
+            throw new IllegalArgumentException("0 0 0");
+        }
+    }
+    
     
     //getters
     
@@ -152,6 +168,19 @@ public class Configuracion {
     public Map<String, String> getJugadores(){
         return jugadores;
     }
+    @XmlElement // elemento en el xml
+    public int getTemporizadorHora(){
+        return temporizadorHora;
+    }
+    @XmlElement // elemento en el xml
+    public int getTemporizadorMinuto(){
+        return temporizadorMinuto;
+    }
+    @XmlElement // elemento en el xml
+    public int getTemporizadorSegundo(){
+        return temporizadorSegundo;
+    }
+    
     
     //falta guardar jugaodres
     
@@ -179,7 +208,31 @@ public class Configuracion {
     public void setPosicion(boolean pPosicion){
         posicion = pPosicion;
     }
-                    
+
+    public void setTemporizadorHora(int hora){
+        if (hora<0 || hora>5){
+            throw new IllegalArgumentException("Hora debe ser entre 0 y 5");
+        }
+        else {
+            temporizadorHora = hora;
+        }
+    }
     
+    public void setTemporizadorMinuto(int minuto){
+        if (minuto<0 || minuto>59){
+            throw new IllegalArgumentException("Minuto debe ser entre 0 y 59");
+        }
+        else {
+            temporizadorMinuto = minuto;
+        }
+    }
     
+    public void setTemporizadorSegundo(int segundo){
+        if (segundo<0 || segundo>59){
+            throw new IllegalArgumentException("Segundos debe ser entre 0 y 59");
+        }
+        else {
+            temporizadorSegundo = segundo;
+        }
+    }
 }

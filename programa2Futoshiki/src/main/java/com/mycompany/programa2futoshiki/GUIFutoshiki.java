@@ -503,7 +503,7 @@ public class GUIFutoshiki extends javax.swing.JFrame {
     private void menuAcercaDeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAcercaDeMouseClicked
          System.out.println("Acerca de.");
         
-         //informacion 
+         // la info del acerca de 
          JTextArea areaTexto = new JTextArea();
          areaTexto.setEditable(false);
          areaTexto.setText("FUTOSHIKI \n"
@@ -701,12 +701,99 @@ public class GUIFutoshiki extends javax.swing.JFrame {
 
     private void itemRelojTemporizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRelojTemporizadorActionPerformed
         limpiarForegroundMenu(menuReloj);
-        if (itemRelojTemporizador.getForeground()!= Color.RED){
-            itemRelojTemporizador.setForeground(Color.RED);
-        }
-        configFutoshiki.setReloj("Temporizador");
+        
+        
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        
+        //ventana para el temporizador 
+        JDialog ventanaTemp = new JDialog();
+        ventanaTemp.setTitle("Configurar Temporizador");
+        ventanaTemp.setModal(true); // lo pone en modal lo que hace que no se pueda hacer nada hasta cerrar 
+        ventanaTemp.setBounds(400, 400, 500, 200); // x y ancho y altura
+        
+        ventanaTemp.setLayout(null); //mantener diseno y evitar que se acomoden las cosas
+        
+        JTextField horaField = new JTextField();
+        JTextField minutoField = new JTextField();
+        JTextField segundoField = new JTextField();
+        
+        JLabel horaLabel = new JLabel();
+        JLabel minutoLabel = new JLabel();
+        JLabel segundoLabel = new JLabel();
+        
+        horaLabel.setFont(new Font("Sitka Text",Font.BOLD,12));
+        horaLabel.setText("Hora");
+        minutoLabel.setFont(new Font("Sitka Text",Font.BOLD,12));
+        minutoLabel.setText("Minuto");
+        segundoLabel.setFont(new Font("Sitka Text",Font.BOLD,12));
+        segundoLabel.setText("Segundo");
+        
+        horaField.setText(String.valueOf(configFutoshiki.getTemporizadorHora())); 
+        minutoField.setText(String.valueOf(configFutoshiki.getTemporizadorMinuto()));
+        segundoField.setText(String.valueOf(configFutoshiki.getTemporizadorSegundo()));
+        
+        horaField.setBounds(50, 50, 100, 30);    // x, y, ancho y altura
+        minutoField.setBounds(150, 50, 100, 30);
+        segundoField.setBounds(250, 50, 100, 30);
+        
+        horaLabel.setBounds(50, 10, 100, 30);    // x, y, ancho y altura
+        minutoLabel.setBounds(150, 10, 100, 30);
+        segundoLabel.setBounds(250, 10, 100, 30);
+        
+        //label para indicar error o que se guardo bien
+        JLabel mensajeLabel = new JLabel();
+        mensajeLabel.setFont(new Font("Sitka Text",Font.BOLD,16));
+        mensajeLabel.setForeground(Color.GREEN);
+        mensajeLabel.setText("");
+        mensajeLabel.setBounds(50, 80, 500, 50);    // x, y, ancho y altura
+        
+        //boton para guardar la configuracin
+        JButton guardarTemporizador = new JButton();
+        guardarTemporizador.setText("Guardar");
+        guardarTemporizador.setFont(new Font("Sitka Text",Font.BOLD,12));
+        guardarTemporizador.setBounds(350, 50, 100, 30);
+        
+        guardarTemporizador.addActionListener(new java.awt.event.ActionListener(){ //creacion de boton de crearUsuario
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               try{
+                   configFutoshiki.setTemporizadorHora(Integer.parseInt(horaField.getText()));
+                   configFutoshiki.setTemporizadorMinuto(Integer.parseInt(minutoField.getText()));
+                   configFutoshiki.setTemporizadorSegundo(Integer.parseInt(segundoField.getText()));
+                   
+                   configFutoshiki.comprobarTemporizador();
+                   
+                   configFutoshiki.setReloj("Temporizador");
+                   itemRelojTemporizador.setForeground(Color.RED);
+                   Configuracion.guardarConfiguracionXML(configFutoshiki);
+                   
+                   mensajeLabel.setForeground(Color.BLUE);
+                   mensajeLabel.setText("Configuracion guardada!");
+                   
+                   horaField.setText("");
+                   minutoField.setText("");
+                   segundoField.setText("");
+                   
+               }
+               catch(IllegalArgumentException e){
+                   mensajeLabel.setText(e.getMessage());
+                   mensajeLabel.setForeground(Color.RED);
+               }
+               
+           }
+        });
+        
+        
+        ventanaTemp.add(horaField);
+        ventanaTemp.add(minutoField);
+        ventanaTemp.add(segundoField);
+        ventanaTemp.add(horaLabel);
+        ventanaTemp.add(minutoLabel);
+        ventanaTemp.add(segundoLabel);
+        ventanaTemp.add(mensajeLabel);
+        ventanaTemp.add(guardarTemporizador);
+        ventanaTemp.setVisible(true);
+        
+        verificarForeground();
     }//GEN-LAST:event_itemRelojTemporizadorActionPerformed
 
     private void itemPosicionDerechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemPosicionDerechaActionPerformed

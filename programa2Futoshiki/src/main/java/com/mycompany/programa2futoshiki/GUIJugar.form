@@ -459,6 +459,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Terminar Juego"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="terminarJuegoButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="cargarJuegoButton">
           <Properties>
@@ -664,6 +667,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Iniciar Juego"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="iniciarJuegoButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

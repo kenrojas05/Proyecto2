@@ -1,7 +1,14 @@
 
 package com.mycompany.programa2futoshiki;
 
-import static com.mycompany.programa2futoshiki.GUIFutoshiki.configFutoshiki;
+import static com.mycompany.programa2futoshiki.GUIFutoshiki.configFutoshiki; //por los datos
+
+//Documentar en PDF Timer
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.SwingUtilities;
+
+
 import javax.swing.JFrame;
 
 /**
@@ -12,9 +19,11 @@ import javax.swing.JFrame;
 public class GUIJugar extends javax.swing.JFrame {
     
     Configuracion configJuego = configFutoshiki;
+    Timer timerGlobal = new Timer(); //para guardar el timer actual
     
     public GUIJugar() {
         initComponents();
+        
     }
 
     /**
@@ -211,6 +220,11 @@ public class GUIJugar extends javax.swing.JFrame {
         terminarJuegoButton.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         terminarJuegoButton.setForeground(new java.awt.Color(0, 0, 0));
         terminarJuegoButton.setText("Terminar Juego");
+        terminarJuegoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                terminarJuegoButtonActionPerformed(evt);
+            }
+        });
 
         cargarJuegoButton.setBackground(new java.awt.Color(204, 102, 0));
         cargarJuegoButton.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
@@ -303,6 +317,11 @@ public class GUIJugar extends javax.swing.JFrame {
         iniciarJuegoButton.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
         iniciarJuegoButton.setForeground(new java.awt.Color(0, 0, 0));
         iniciarJuegoButton.setText("Iniciar Juego");
+        iniciarJuegoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iniciarJuegoButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout fondoPanelLayout = new javax.swing.GroupLayout(fondoPanel);
         fondoPanel.setLayout(fondoPanelLayout);
@@ -395,6 +414,14 @@ public class GUIJugar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void iniciarJuegoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarJuegoButtonActionPerformed
+        temporizador();
+    }//GEN-LAST:event_iniciarJuegoButtonActionPerformed
+
+    private void terminarJuegoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarJuegoButtonActionPerformed
+        cancelarTimer(timerGlobal);
+    }//GEN-LAST:event_terminarJuegoButtonActionPerformed
+
     public static void setNombre(){
         nombreJugadorField.setText(GUIFutoshiki.getNombre());
     }
@@ -402,6 +429,85 @@ public class GUIJugar extends javax.swing.JFrame {
     public static void setNivel(){
         nivelLabel.setText(nivelLabel.getText() + " " + configFutoshiki.getNivel());
     }
+    
+    public void temporizador(){
+        Timer timer = new Timer();
+        TimerTask taskCronometro = new TimerTask(){
+            int hora = configFutoshiki.getTemporizadorHora();
+            int minuto = configFutoshiki.getTemporizadorMinuto();
+            int segundo = configFutoshiki.getTemporizadorSegundo();
+            
+            public void run() { //correr la tarea o task
+
+                if (segundo > 0){
+                    segundo -= 1;
+                }
+                
+                else if (segundo == 0 ) {
+                    if (minuto != 0){
+                        minuto -= 1;
+                    }
+                    segundo = 59;
+                }
+                
+                if (segundo == 0 && minuto == 0 && hora!=0) {
+                        hora -= 1;
+                        minuto = 59;
+                        segundo = 59;
+                }
+                
+                if (hora == 0 && minuto == 0 && segundo == 0){
+                    timer.cancel();
+                }
+                
+                SwingUtilities.invokeLater(new Runnable() { //para actualizar el GUI desde otro hilo digamos 
+                public void run() {
+                    tiempoHorasLabel.setText(String.valueOf(hora));
+                    tiempoMinutosLabel.setText(String.valueOf(minuto));
+                    tiempoSegundosLabel.setText(String.valueOf(segundo));
+                }
+                });
+            };
+        };
+        timer.scheduleAtFixedRate(taskCronometro, 0, 1000); //sin delay y actualizar cada 1000ms que son 1 segundo
+        timerGlobal = timer;
+    }
+    
+    public void cronometro(){ 
+        Timer timer = new Timer();
+        TimerTask taskCronometro = new TimerTask(){
+            int hora = 0;
+            int minuto = 0;
+            int segundo = 0;
+            public void run() { //correr la tarea o task
+                
+                segundo += 1;
+                if (segundo == 60) {
+                    segundo = 0;
+                    minuto += 1;
+                }
+                if (minuto == 60) {
+                    minuto = 0;
+                    hora += 1;
+                }
+                
+                SwingUtilities.invokeLater(new Runnable() { //para actualizar el GUI desde otro hilo digamos 
+                public void run() {
+                    tiempoHorasLabel.setText(String.valueOf(hora));
+                    tiempoMinutosLabel.setText(String.valueOf(minuto));
+                    tiempoSegundosLabel.setText(String.valueOf(segundo));
+                }
+                });
+            };
+        };
+        timer.scheduleAtFixedRate(taskCronometro, 0, 1000); //sin delay y actualizar cada 1000ms que son 1 segundo
+        timerGlobal = timer;
+    }
+    
+    public void cancelarTimer(Timer timer){
+        timer.cancel(); //termina el timer
+    }
+    
     
     /**
      * @param args the command line arguments
