@@ -16,10 +16,10 @@
         </entry>
     </jugadores>
     <multinivel>true</multinivel>
-    <nivel>Intermedio</nivel>
+    <nivel>Dificil</nivel>
     <posicion>true</posicion>
-    <reloj>Temporizador</reloj>
+    <reloj>No</reloj>
     <temporizadorHora>0</temporizadorHora>
-    <temporizadorMinuto>0</temporizadorMinuto>
-    <temporizadorSegundo>1</temporizadorSegundo>
+    <temporizadorMinuto>1</temporizadorMinuto>
+    <temporizadorSegundo>0</temporizadorSegundo>
 </configuracion>

@@ -12,9 +12,7 @@ import javax.xml.bind.Marshaller;
 import java.io.File;
 
 
-import java.util.ArrayList; //DE MOMENTO NO LO USO PERO POR SI ACASO (en caso de no borrar)
-import java.util.Collections;
-import java.util.List;
+
 
 /**
  *
@@ -520,8 +518,7 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         
         ventanaInfo.add(areaTexto);
         ventanaInfo.setVisible(true);
-        
-        
+
     }//GEN-LAST:event_menuAcercaDeMouseClicked
 
     private void menuAyudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAyudaMouseClicked

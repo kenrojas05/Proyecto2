@@ -2,6 +2,7 @@
 package com.mycompany.programa2futoshiki;
 
 import static com.mycompany.programa2futoshiki.GUIFutoshiki.configFutoshiki; //por los datos
+import java.awt.LayoutManager;
 
 //Documentar en PDF Timer
 import java.util.Timer;
@@ -328,21 +329,13 @@ public class GUIJugar extends javax.swing.JFrame {
         fondoPanelLayout.setHorizontalGroup(
             fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fondoPanelLayout.createSequentialGroup()
-                .addGap(355, 355, 355)
-                .addComponent(nivelLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(fondoPanelLayout.createSequentialGroup()
                 .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(fondoPanelLayout.createSequentialGroup()
-                        .addGap(334, 334, 334)
-                        .addComponent(tituloPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, fondoPanelLayout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addComponent(iniciarJuegoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9)
-                        .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoPanelLayout.createSequentialGroup()
+                        .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(fondoPanelLayout.createSequentialGroup()
                                 .addGap(36, 36, 36)
                                 .addComponent(relojPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
@@ -357,11 +350,17 @@ public class GUIJugar extends javax.swing.JFrame {
                                 .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cargarJuegoButton)
                                     .addComponent(guardarJuegoButton)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoPanelLayout.createSequentialGroup()
+                            .addGroup(fondoPanelLayout.createSequentialGroup()
                                 .addComponent(nombreJugadorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(numerosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(numerosPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(75, 75, 75))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, fondoPanelLayout.createSequentialGroup()
+                        .addGap(334, 334, 334)
+                        .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tituloPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nivelLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         fondoPanelLayout.setVerticalGroup(
@@ -369,10 +368,10 @@ public class GUIJugar extends javax.swing.JFrame {
             .addGroup(fondoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tituloPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nivelLabel)
                 .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(fondoPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nivelLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nombreJugadorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -395,8 +394,8 @@ public class GUIJugar extends javax.swing.JFrame {
                                 .addComponent(iniciarJuegoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(53, 53, 53))))
                     .addGroup(fondoPanelLayout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(numerosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94)
+                        .addComponent(numerosPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -415,11 +414,11 @@ public class GUIJugar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarJuegoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarJuegoButtonActionPerformed
-        temporizador();
+        
     }//GEN-LAST:event_iniciarJuegoButtonActionPerformed
 
     private void terminarJuegoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarJuegoButtonActionPerformed
-        cancelarTimer(timerGlobal);
+        
     }//GEN-LAST:event_terminarJuegoButtonActionPerformed
 
     public static void setNombre(){
@@ -508,6 +507,50 @@ public class GUIJugar extends javax.swing.JFrame {
         timer.cancel(); //termina el timer
     }
     
+    public void construirJuego(){
+        byte cuadricula = configFutoshiki.getCuadricula(); //puesto que es cuadrada es decir 3x3 y asi solo ocupa el digito
+        String nivel = configFutoshiki.getNivel(); //Facil, Intermedio, Dificil
+        boolean multinivel = configFutoshiki.getMultinivel(); //false: no, true: si
+
+    }
+    
+    public void construirReloj(){
+        String reloj = configFutoshiki.getReloj(); //Cronometro, No, Temporizador
+        
+        if (reloj.equals("No")){
+            relojPanel.setVisible(false);
+            relojPanel.setEnabled(false);   
+        }
+        
+        if (reloj.equals("Cronometro")){
+            relojPanel.setVisible(true);
+            relojPanel.setEnabled(true);  
+            cronometro();
+        }
+        
+        else if (reloj.equals("Temporizador")){
+            relojPanel.setVisible(true);
+            relojPanel.setEnabled(true);  
+            temporizador();
+        }
+        
+        
+        
+    }
+    
+    public static void construirPanel(){
+        boolean posicion = configFutoshiki.getPosicion(); // false: derecha, true: izquierda
+        
+        if (posicion){
+
+            fondoPanel.setLayout(null); //para que se pueda mover bien
+            
+            numerosPanel.setBounds(90, numerosPanel.getY(), numerosPanel.getWidth(), numerosPanel.getHeight());
+            
+            fondoPanel.revalidate();
+            fondoPanel.repaint(); //para poner el cambio
+        }
+    }
     
     /**
      * @param args the command line arguments
@@ -545,6 +588,13 @@ public class GUIJugar extends javax.swing.JFrame {
                 setNombre();
                 setNivel();
                 System.out.println(Configuracion.cargarConfiguracionXML().toStringConfiguracion());
+                
+                if (configFutoshiki.getReloj().equals("No")){
+                    relojPanel.setVisible(false);
+                    relojPanel.setEnabled(false);
+                }
+                construirPanel();
+                
             }
         });
     }
@@ -553,7 +603,7 @@ public class GUIJugar extends javax.swing.JFrame {
     private javax.swing.JButton borrarJuegoButton;
     private javax.swing.JButton borrarJugadaButton;
     private javax.swing.JButton cargarJuegoButton;
-    private javax.swing.JPanel fondoPanel;
+    private static javax.swing.JPanel fondoPanel;
     private javax.swing.JButton guardarJuegoButton;
     private javax.swing.JLabel horasLabel;
     private javax.swing.JButton iniciarJuegoButton;
@@ -568,9 +618,9 @@ public class GUIJugar extends javax.swing.JFrame {
     private javax.swing.JButton numero3Button;
     private javax.swing.JButton numero4Button;
     private javax.swing.JButton numero5Button;
-    private javax.swing.JPanel numerosPanel;
+    private static javax.swing.JPanel numerosPanel;
     private javax.swing.JButton rehacerJugadaButton;
-    private javax.swing.JPanel relojPanel;
+    private static javax.swing.JPanel relojPanel;
     private javax.swing.JLabel segundosLabel;
     private javax.swing.JButton terminarJuegoButton;
     private javax.swing.JLabel tiempoHorasLabel;

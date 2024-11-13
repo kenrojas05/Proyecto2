@@ -10,7 +10,8 @@ package com.mycompany.programa2futoshiki;
 public class Programa2Futoshiki {
 
     public static void main(String[] args) {
-        
+        //PartidasFutoshiki partidaF = new PartidasFutoshiki();
+        //PartidasFutoshiki.guardarPartidaFutoshikiXML(partidaF);
         GUIFutoshiki.main(args);
         
     }
