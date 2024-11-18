@@ -1,2 +1,91 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<partidasFutoshiki/>
+<partidasFutoshiki>
+    <listaPartidas>
+        <partida>
+            <constantes>
+                <cons>2, 1, 2</cons>
+                <cons>3, 1, 0</cons>
+            </constantes>
+            <cuadricula>3</cuadricula>
+            <desigualdades>
+                <des>maf, 2, 1</des>
+                <des>mef, 0, 1</des>
+            </desigualdades>
+            <nivel>Facil</nivel>
+            <partidaJuego>
+                <fila>
+                    <item>1</item>
+                    <item>2</item>
+                    <item>3</item>
+                </fila>
+                <fila>
+                    <item>3</item>
+                    <item>1</item>
+                    <item>2</item>
+                </fila>
+                <fila>
+                    <item>2</item>
+                    <item>3</item>
+                    <item>1</item>
+                </fila>
+            </partidaJuego>
+        </partida>
+        <partida>
+            <constantes>
+                <cons>2, 1, 1</cons>
+            </constantes>
+            <cuadricula>3</cuadricula>
+            <desigualdades>
+                <des>mec, 0, 2</des>
+                <des>mef, 2, 0</des>
+            </desigualdades>
+            <nivel>Intermedio</nivel>
+            <partidaJuego>
+                <fila>
+                    <item>3</item>
+                    <item>2</item>
+                    <item>1</item>
+                </fila>
+                <fila>
+                    <item>2</item>
+                    <item>1</item>
+                    <item>3</item>
+                </fila>
+                <fila>
+                    <item>1</item>
+                    <item>3</item>
+                    <item>2</item>
+                </fila>
+            </partidaJuego>
+        </partida>
+        <partida>
+            <constantes>
+                <cons>1, 2, 0</cons>
+            </constantes>
+            <cuadricula>3</cuadricula>
+            <desigualdades>
+                <des>maf, 2, 1</des>
+                <des>mec, 0, 0</des>
+                <des>mac, 0, 2</des>
+            </desigualdades>
+            <nivel>Dificil</nivel>
+            <partidaJuego>
+                <fila>
+                    <item>2</item>
+                    <item>1</item>
+                    <item>3</item>
+                </fila>
+                <fila>
+                    <item>3</item>
+                    <item>2</item>
+                    <item>1</item>
+                </fila>
+                <fila>
+                    <item>1</item>
+                    <item>3</item>
+                    <item>2</item>
+                </fila>
+            </partidaJuego>
+        </partida>
+    </listaPartidas>
+</partidasFutoshiki>

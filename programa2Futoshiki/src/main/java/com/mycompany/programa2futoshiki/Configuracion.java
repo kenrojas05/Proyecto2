@@ -4,6 +4,7 @@ package com.mycompany.programa2futoshiki; //correo jvim woqi nqnz puyb
 
 //(Documentar mejor en el PDF al final) MAP
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;  //Map es un objeto
 import java.util.Map;      //lo que hace es que guarda valores con Keys o llaves (parecido a un directorio)
 import javax.swing.SwingUtilities;
@@ -34,7 +35,7 @@ public class Configuracion {
 
     
     @XmlTransient //ignora el atributo
-    public static Map<String, String> jugadores = new HashMap<>(); //nombre key password value
+    public static HashMap<String, Jugador> jugadores = new HashMap<>(); //nombre key password value
     
     Configuracion(){
         setCuadricula((byte)5);
@@ -96,16 +97,18 @@ public class Configuracion {
     
     public static String toStringJugador(String nombre){
         if (jugadores.containsKey(nombre)){
-            return "Nombre: " + nombre + " Contraseña: " + jugadores.get(nombre);
+            return "Nombre: " + jugadores.get(nombre).getNombre() + " Contrasena: " + jugadores.get(nombre).getPassword()   + " Cuadricula: " + Arrays.toString(jugadores.get(nombre).getCuadriculaActual())
+                                                                                                    + " PartidaActual: " + jugadores.get(nombre).getPartidaActual()
+                                                                                                    + " Partidas Jugadas: " + jugadores.get(nombre).getListaPartidasJugadas();
         }
         return "";
     }
     
     public static String toStringJugadores(){
         String jugadoresRegistrados = "";
-        for (Map.Entry<String, String> jugador : jugadores.entrySet()) {
+        for (Map.Entry<String, Jugador> jugador : jugadores.entrySet()) {
             
-            jugadoresRegistrados += "Jugador: "+jugador.getKey()+"\n";
+            jugadoresRegistrados += "Jugador: " + toStringJugador(jugador.getKey())+"\n";
         }
         return jugadoresRegistrados;
     }
@@ -119,7 +122,7 @@ public class Configuracion {
             return false;
         }
     }
-    public static void addJugadores(String nombre, String password){
+    public static void addJugadores(String nombre, Jugador jugador){
         if (nombre.length()==0){
             throw new IllegalArgumentException("INCOGNITO DEBERIA SER");
         }
@@ -130,7 +133,7 @@ public class Configuracion {
             throw new IllegalArgumentException("Nombre debe ser unico");
         }
         else{
-            jugadores.put(nombre, password);
+            jugadores.put(nombre, jugador);
         }
         
     }
@@ -165,7 +168,7 @@ public class Configuracion {
         return posicion;
     }
     @XmlElement // elemento en el xml
-    public Map<String, String> getJugadores(){
+    public Map<String, Jugador> getJugadores(){
         return jugadores;
     }
     @XmlElement // elemento en el xml

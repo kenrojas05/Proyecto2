@@ -20,10 +20,41 @@ import java.util.List;
 @XmlRootElement
 public class PartidasFutoshiki {
     
-    List<Partida> listaPartidas;
+    @XmlTransient
+    List<Partida> listaPartidas = new ArrayList<>();
     
     PartidasFutoshiki(){}
     
+    public void agregarPartida(Partida partida){
+        listaPartidas.add(partida);
+    }
+    
+    public int mayorJuego(int[][] partida) {
+        int numMayor = 0; 
+        for (int i = 0; i < partida.length; i++) {
+            for (int j = 0; j < partida[i].length; j++) {
+                if (partida[i][j] > numMayor) {
+                    numMayor = partida[i][j]; 
+                }
+            }
+        }
+        return numMayor;
+    }
+    
+    public void colocaNumero(int numero, int x, int y, int[][] partida) {
+        partida[x][y] = numero;
+    }
+    
+    public void imprimeNumeros(int[][] partida){
+        for (int i = 0; i < partida.length; i++) {
+            for (int j = 0; j < partida[i].length; j++) {
+                    System.out.print(partida[i][j] + " ");
+                }
+        System.out.println();    
+        }
+            
+    }
+
     public static <T> void guardarPartidaFutoshikiXML(T objetoConfig) { //programacion generica
         try{
             JAXBContext objetoContext = JAXBContext.newInstance(objetoConfig.getClass()); // JAXB = Java Architecture for XML Binding. Crea una instancia JAXB del objeto para serializarlo y asi guardarlo
@@ -56,6 +87,13 @@ public class PartidasFutoshiki {
             return null;
         }
     }
+    
 
+    @XmlElementWrapper(name = "listaPartidas")
+    @XmlElement(name = "partida")
+    public List<Partida> getListaPartidas() {
+        return listaPartidas;
+    }
+    
     
 }

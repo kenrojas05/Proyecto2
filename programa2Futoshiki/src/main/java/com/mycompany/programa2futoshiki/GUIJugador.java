@@ -182,9 +182,10 @@ public class GUIJugador extends javax.swing.JFrame {
         }
         else if(Configuracion.nombreValido(nombreField.getText())){
             try {
-            if (Configuracion.jugadores.get(nombreField.getText()).equals(passwordField.getText())){
+            if (Configuracion.jugadores.get(nombreField.getText()).getPassword().equals(passwordField.getText())){
                 GUIFutoshiki.setNombre(nombreField.getText());
                 GUIFutoshiki.setPassword(passwordField.getText());
+                GUIFutoshiki.setJugador(Configuracion.jugadores.get(nombreField.getText()));
                 GUIFutoshiki.setJugadorLabel();
                 System.out.println(GUIFutoshiki.getNombre());
                 System.out.println(GUIFutoshiki.getPassword());
@@ -227,12 +228,13 @@ public class GUIJugador extends javax.swing.JFrame {
            public void actionPerformed(java.awt.event.ActionEvent evt) {  
                String nombre = nombreField.getText();
                String password = passwordField.getText();
+               Jugador jugador = new Jugador(nombre, password);
                if (nombreField.getText().isEmpty() && passwordField.getText().isEmpty()){
                    indicadorLabel.setText("Invalido");
                 }
                else {
                   try {
-                      Configuracion.addJugadores(nombre, password);
+                      Configuracion.addJugadores(nombre, jugador);
                       nombreField.setText("");
                       passwordField.setText("");
                       Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion

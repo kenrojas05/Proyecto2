@@ -3,23 +3,18 @@
     <cuadricula>5</cuadricula>
     <jugadores>
         <entry>
-            <key>Kendall2</key>
-            <value>1221</value>
-        </entry>
-        <entry>
-            <key>Kendall</key>
-            <value>Tango</value>
-        </entry>
-        <entry>
-            <key>Pepe</key>
-            <value>Tanguito</value>
+            <key>Allan</key>
+            <value>
+                <nombre>Allan</nombre>
+                <password>AaA</password>
+            </value>
         </entry>
     </jugadores>
-    <multinivel>true</multinivel>
-    <nivel>Dificil</nivel>
-    <posicion>true</posicion>
-    <reloj>No</reloj>
+    <multinivel>false</multinivel>
+    <nivel>Facil</nivel>
+    <posicion>false</posicion>
+    <reloj>Cronometro</reloj>
     <temporizadorHora>0</temporizadorHora>
-    <temporizadorMinuto>1</temporizadorMinuto>
+    <temporizadorMinuto>0</temporizadorMinuto>
     <temporizadorSegundo>0</temporizadorSegundo>
 </configuracion>

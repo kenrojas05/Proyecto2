@@ -23,6 +23,8 @@ public class GUIFutoshiki extends javax.swing.JFrame {
     private static String nombre = "incognito";
     private static String password;
     
+    public static Jugador jugadorActual;
+    
     public static Configuracion configFutoshiki = new Configuracion((byte) 5, "Facil", false, "Cronometro", false);
     /**
      * Creates new form GUIFutoshiki
@@ -401,6 +403,11 @@ public class GUIFutoshiki extends javax.swing.JFrame {
     public static void setJugadorLabel(){
         jugadorLabel.setText("Jugador: "+nombre);
     }
+    
+    public static void setJugador(Jugador jugador){
+        jugadorActual = jugador;
+    }
+    
     
     public static void setConfiguracion(Configuracion config){
         configFutoshiki = config;
@@ -856,7 +863,7 @@ public class GUIFutoshiki extends javax.swing.JFrame {
                     setConfiguracion(Configuracion.cargarConfiguracionXML()); 
                     
                 } catch (Exception e) {
-                    System.out.println(e);
+                    System.out.println("Archivo no encontrado"); //la primera vez 
                 }
                 System.out.println(Configuracion.cargarConfiguracionXML().toStringConfiguracion());
                 System.out.println(Configuracion.toStringJugadores());
