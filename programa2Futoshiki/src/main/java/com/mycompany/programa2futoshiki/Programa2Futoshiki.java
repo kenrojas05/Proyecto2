@@ -10,6 +10,12 @@ package com.mycompany.programa2futoshiki;
 public class Programa2Futoshiki {
 
     public static void main(String[] args) {
+        
+        GUIFutoshiki.main(args);
+        
+        
+        //crea partidas (BORRAR AL FINAL pero no del archivo)
+        /*
         PartidasFutoshiki partidaFuto = new PartidasFutoshiki();
         Partida partida = new Partida();
         
@@ -66,9 +72,16 @@ public class Programa2Futoshiki {
         partidaFuto.agregarPartida(partida2);
         partidaFuto.agregarPartida(partida3);
         PartidasFutoshiki.guardarPartidaFutoshikiXML(partidaFuto);
+        partidaFuto = PartidasFutoshiki.cargarPartidaFutoshikiXML();
+        System.out.println(partidaFuto.toStringPartidas());
+        
+        PartidasFutoshiki partidas = PartidasFutoshiki.cargarPartidaFutoshikiXML();
+        System.out.println(partidas.toStringPartidas());
+        //System.out.println(Configuracion.cargarConfiguracionXML().toStringJugadores());
+        
         //PartidasFutoshiki.cargarPartidaFutoshikiXML();
         
-        //GUIFutoshiki.main(args);
         
+        */
     }
 }

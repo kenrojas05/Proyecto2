@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <partidasFutoshiki>
-    <listaPartidas>
+    <partidas>
         <partida>
             <constantes>
-                <cons>2, 1, 2</cons>
-                <cons>3, 1, 0</cons>
+                <entry>
+                    <key>2</key>
+                    <value>
+                        <item>1</item>
+                        <item>2</item>
+                    </value>
+                </entry>
+                <entry>
+                    <key>3</key>
+                    <value>
+                        <item>1</item>
+                        <item>0</item>
+                    </value>
+                </entry>
             </constantes>
             <cuadricula>3</cuadricula>
             <desigualdades>
-                <des>maf, 2, 1</des>
-                <des>mef, 0, 1</des>
+                <entry>
+                    <key>maf</key>
+                    <value>
+                        <item>2</item>
+                        <item>1</item>
+                    </value>
+                </entry>
+                <entry>
+                    <key>mef</key>
+                    <value>
+                        <item>0</item>
+                        <item>1</item>
+                    </value>
+                </entry>
             </desigualdades>
             <nivel>Facil</nivel>
             <partidaJuego>
@@ -32,12 +56,30 @@
         </partida>
         <partida>
             <constantes>
-                <cons>2, 1, 1</cons>
+                <entry>
+                    <key>2</key>
+                    <value>
+                        <item>1</item>
+                        <item>1</item>
+                    </value>
+                </entry>
             </constantes>
             <cuadricula>3</cuadricula>
             <desigualdades>
-                <des>mec, 0, 2</des>
-                <des>mef, 2, 0</des>
+                <entry>
+                    <key>mec</key>
+                    <value>
+                        <item>0</item>
+                        <item>2</item>
+                    </value>
+                </entry>
+                <entry>
+                    <key>mef</key>
+                    <value>
+                        <item>2</item>
+                        <item>0</item>
+                    </value>
+                </entry>
             </desigualdades>
             <nivel>Intermedio</nivel>
             <partidaJuego>
@@ -60,13 +102,37 @@
         </partida>
         <partida>
             <constantes>
-                <cons>1, 2, 0</cons>
+                <entry>
+                    <key>1</key>
+                    <value>
+                        <item>2</item>
+                        <item>0</item>
+                    </value>
+                </entry>
             </constantes>
             <cuadricula>3</cuadricula>
             <desigualdades>
-                <des>maf, 2, 1</des>
-                <des>mec, 0, 0</des>
-                <des>mac, 0, 2</des>
+                <entry>
+                    <key>maf</key>
+                    <value>
+                        <item>2</item>
+                        <item>1</item>
+                    </value>
+                </entry>
+                <entry>
+                    <key>mec</key>
+                    <value>
+                        <item>0</item>
+                        <item>0</item>
+                    </value>
+                </entry>
+                <entry>
+                    <key>mac</key>
+                    <value>
+                        <item>0</item>
+                        <item>2</item>
+                    </value>
+                </entry>
             </desigualdades>
             <nivel>Dificil</nivel>
             <partidaJuego>
@@ -87,5 +153,5 @@
                 </fila>
             </partidaJuego>
         </partida>
-    </listaPartidas>
+    </partidas>
 </partidasFutoshiki>

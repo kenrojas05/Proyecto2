@@ -20,7 +20,7 @@ import java.util.List;
 @XmlRootElement
 public class PartidasFutoshiki {
     
-    @XmlTransient
+    
     List<Partida> listaPartidas = new ArrayList<>();
     
     PartidasFutoshiki(){}
@@ -28,21 +28,36 @@ public class PartidasFutoshiki {
     public void agregarPartida(Partida partida){
         listaPartidas.add(partida);
     }
-    
-    public int mayorJuego(int[][] partida) {
-        int numMayor = 0; 
-        for (int i = 0; i < partida.length; i++) {
-            for (int j = 0; j < partida[i].length; j++) {
-                if (partida[i][j] > numMayor) {
-                    numMayor = partida[i][j]; 
-                }
+
+    public Partida partidaJugar(String nivel, byte cuadricula){
+        for (Partida juego : listaPartidas){
+            if (juego.getNivel().equals(nivel) && juego.getCuadricula()==cuadricula){
+                return juego;
             }
         }
-        return numMayor;
+        return null;
     }
     
-    public void colocaNumero(int numero, int x, int y, int[][] partida) {
-        partida[x][y] = numero;
+    
+    public String toStringPartidas() {
+        String partida = "";
+        for (Partida juego : listaPartidas) {
+            partida+="Nivel: " + juego.getNivel()
+                   + " Cuadricula: " + juego.getCuadricula()
+                   + "\nConstantes: " + juego.toStringConstante()
+                   + "\nDesigualdades: " + juego.toStringDesigualdad()
+                   + "\nPartida Juego:\n";
+
+            // Imprimir la partidaJuego de manera legible
+            for (int fila = 0; fila < juego.getPartidaJuego().length; fila++) {
+                for (int columna = 0; columna < juego.getPartidaJuego()[fila].length; columna++) {
+                    partida += juego.getPartidaJuego()[fila][columna] + " ";
+                }
+                partida += "\n";
+            }
+            partida += "\n";
+        }
+        return partida;
     }
     
     public void imprimeNumeros(int[][] partida){
@@ -89,7 +104,7 @@ public class PartidasFutoshiki {
     }
     
 
-    @XmlElementWrapper(name = "listaPartidas")
+    @XmlElementWrapper(name = "partidas")
     @XmlElement(name = "partida")
     public List<Partida> getListaPartidas() {
         return listaPartidas;

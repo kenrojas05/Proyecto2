@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <configuracion>
-    <cuadricula>5</cuadricula>
+    <cuadricula>3</cuadricula>
     <jugadores>
         <entry>
             <key>Allan</key>
@@ -12,7 +12,7 @@
     </jugadores>
     <multinivel>false</multinivel>
     <nivel>Facil</nivel>
-    <posicion>false</posicion>
+    <posicion>true</posicion>
     <reloj>Cronometro</reloj>
     <temporizadorHora>0</temporizadorHora>
     <temporizadorMinuto>0</temporizadorMinuto>

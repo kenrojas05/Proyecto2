@@ -2,15 +2,22 @@
 package com.mycompany.programa2futoshiki;
 
 import static com.mycompany.programa2futoshiki.GUIFutoshiki.configFutoshiki; //por los datos
-import java.awt.LayoutManager;
+
+
+//documentar awt
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 //Documentar en PDF Timer
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.SwingUtilities;
 
-
-import javax.swing.JFrame;
+//documentar awt
+import javax.swing.*;
 
 /**
  *
@@ -21,6 +28,10 @@ public class GUIJugar extends javax.swing.JFrame {
     
     Configuracion configJuego = configFutoshiki;
     Timer timerGlobal = new Timer(); //para guardar el timer actual
+    
+    private int numeroElegido = 0;
+    int[][] cuadriculaEnJuego;
+    
     
     public GUIJugar() {
         initComponents();
@@ -66,8 +77,13 @@ public class GUIJugar extends javax.swing.JFrame {
         iniciarJuegoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1100, 900));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         fondoPanel.setBackground(new java.awt.Color(255, 255, 255));
+        fondoPanel.setPreferredSize(new java.awt.Dimension(1000, 900));
+        fondoPanel.setLayout(null);
 
         tituloPanel.setBackground(new java.awt.Color(204, 0, 51));
 
@@ -79,18 +95,21 @@ public class GUIJugar extends javax.swing.JFrame {
         tituloPanel.setLayout(tituloPanelLayout);
         tituloPanelLayout.setHorizontalGroup(
             tituloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tituloPanelLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tituloPanelLayout.createSequentialGroup()
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(tituloLabel)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGap(49, 49, 49))
         );
         tituloPanelLayout.setVerticalGroup(
             tituloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tituloPanelLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tituloPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(tituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        fondoPanel.add(tituloPanel);
+        tituloPanel.setBounds(370, 10, 239, 43);
 
         numerosPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -143,9 +162,14 @@ public class GUIJugar extends javax.swing.JFrame {
                 .addComponent(numero5Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        fondoPanel.add(numerosPanel);
+        numerosPanel.setBounds(980, 230, 50, 271);
+
         nivelLabel.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         nivelLabel.setForeground(new java.awt.Color(0, 0, 0));
         nivelLabel.setText("Nivel: ");
+        fondoPanel.add(nivelLabel);
+        nivelLabel.setBounds(360, 60, 239, 18);
 
         nombreJugadorPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -158,31 +182,33 @@ public class GUIJugar extends javax.swing.JFrame {
         nombreJugadorField.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         nombreJugadorField.setForeground(new java.awt.Color(0, 0, 0));
 
+        juegoPanel.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout juegoPanelLayout = new javax.swing.GroupLayout(juegoPanel);
         juegoPanel.setLayout(juegoPanelLayout);
         juegoPanelLayout.setHorizontalGroup(
             juegoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 591, Short.MAX_VALUE)
+            .addGap(0, 713, Short.MAX_VALUE)
         );
         juegoPanelLayout.setVerticalGroup(
             juegoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 332, Short.MAX_VALUE)
+            .addGap(0, 551, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout nombreJugadorPanelLayout = new javax.swing.GroupLayout(nombreJugadorPanel);
         nombreJugadorPanel.setLayout(nombreJugadorPanelLayout);
         nombreJugadorPanelLayout.setHorizontalGroup(
             nombreJugadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(nombreJugadorPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nombreJugadorPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(nombreJugadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(nombreJugadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(nombreJugadorPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(juegoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(nombreJugadorPanelLayout.createSequentialGroup()
                         .addComponent(nombreJugadorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreJugadorField))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nombreJugadorPanelLayout.createSequentialGroup()
-                        .addGap(0, 14, Short.MAX_VALUE)
-                        .addComponent(juegoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(nombreJugadorField, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         nombreJugadorPanelLayout.setVerticalGroup(
@@ -192,30 +218,41 @@ public class GUIJugar extends javax.swing.JFrame {
                 .addGroup(nombreJugadorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombreJugadorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nombreJugadorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(juegoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addContainerGap())
         );
+
+        fondoPanel.add(nombreJugadorPanel);
+        nombreJugadorPanel.setBounds(188, 85, 759, 593);
 
         guardarJuegoButton.setBackground(new java.awt.Color(0, 153, 0));
         guardarJuegoButton.setFont(new java.awt.Font("Sitka Text", 1, 13)); // NOI18N
         guardarJuegoButton.setForeground(new java.awt.Color(0, 0, 0));
         guardarJuegoButton.setText("Guardar Juego");
+        fondoPanel.add(guardarJuegoButton);
+        guardarJuegoButton.setBounds(930, 700, 121, 57);
 
         borrarJuegoButton.setBackground(new java.awt.Color(51, 204, 255));
         borrarJuegoButton.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         borrarJuegoButton.setForeground(new java.awt.Color(0, 0, 0));
         borrarJuegoButton.setText("Borrar Juego");
+        fondoPanel.add(borrarJuegoButton);
+        borrarJuegoButton.setBounds(780, 700, 139, 57);
 
         borrarJugadaButton.setBackground(new java.awt.Color(0, 204, 204));
         borrarJugadaButton.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         borrarJugadaButton.setForeground(new java.awt.Color(0, 0, 0));
         borrarJugadaButton.setText("Borrar Jugada");
+        fondoPanel.add(borrarJugadaButton);
+        borrarJugadaButton.setBounds(630, 700, 139, 57);
 
         rehacerJugadaButton.setBackground(new java.awt.Color(255, 204, 153));
         rehacerJugadaButton.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         rehacerJugadaButton.setForeground(new java.awt.Color(0, 0, 0));
         rehacerJugadaButton.setText("Rehacer Jugada");
+        fondoPanel.add(rehacerJugadaButton);
+        rehacerJugadaButton.setBounds(630, 770, 139, 59);
 
         terminarJuegoButton.setBackground(new java.awt.Color(255, 255, 153));
         terminarJuegoButton.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
@@ -226,11 +263,15 @@ public class GUIJugar extends javax.swing.JFrame {
                 terminarJuegoButtonActionPerformed(evt);
             }
         });
+        fondoPanel.add(terminarJuegoButton);
+        terminarJuegoButton.setBounds(780, 770, 139, 59);
 
         cargarJuegoButton.setBackground(new java.awt.Color(204, 102, 0));
         cargarJuegoButton.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         cargarJuegoButton.setForeground(new java.awt.Color(0, 0, 0));
         cargarJuegoButton.setText("Cargar Juego");
+        fondoPanel.add(cargarJuegoButton);
+        cargarJuegoButton.setBounds(930, 770, 120, 59);
 
         relojPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -281,16 +322,15 @@ public class GUIJugar extends javax.swing.JFrame {
         relojPanelLayout.setHorizontalGroup(
             relojPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(relojPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(66, Short.MAX_VALUE)
                 .addGroup(relojPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(relojPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, relojPanelLayout.createSequentialGroup()
                         .addComponent(horasLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(minutosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(segundosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, relojPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(tiempoHorasLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tiempoMinutosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,6 +354,9 @@ public class GUIJugar extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        fondoPanel.add(relojPanel);
+        relojPanel.setBounds(220, 700, 393, 147);
+
         iniciarJuegoButton.setBackground(new java.awt.Color(255, 0, 51));
         iniciarJuegoButton.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
         iniciarJuegoButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -323,98 +366,145 @@ public class GUIJugar extends javax.swing.JFrame {
                 iniciarJuegoButtonActionPerformed(evt);
             }
         });
+        fondoPanel.add(iniciarJuegoButton);
+        iniciarJuegoButton.setBounds(70, 740, 117, 62);
 
-        javax.swing.GroupLayout fondoPanelLayout = new javax.swing.GroupLayout(fondoPanel);
-        fondoPanel.setLayout(fondoPanelLayout);
-        fondoPanelLayout.setHorizontalGroup(
-            fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(fondoPanelLayout.createSequentialGroup()
-                .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, fondoPanelLayout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(iniciarJuegoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(fondoPanelLayout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(relojPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(rehacerJugadaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(borrarJugadaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(borrarJuegoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(terminarJuegoButton))
-                                .addGap(12, 12, 12)
-                                .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cargarJuegoButton)
-                                    .addComponent(guardarJuegoButton)))
-                            .addGroup(fondoPanelLayout.createSequentialGroup()
-                                .addComponent(nombreJugadorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(numerosPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(75, 75, 75))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, fondoPanelLayout.createSequentialGroup()
-                        .addGap(334, 334, 334)
-                        .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tituloPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nivelLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        fondoPanelLayout.setVerticalGroup(
-            fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(fondoPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tituloPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(fondoPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nivelLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreJugadorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoPanelLayout.createSequentialGroup()
-                                .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(relojPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(fondoPanelLayout.createSequentialGroup()
-                                        .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(guardarJuegoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(borrarJuegoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(borrarJugadaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(rehacerJugadaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(terminarJuegoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cargarJuegoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoPanelLayout.createSequentialGroup()
-                                .addComponent(iniciarJuegoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53))))
-                    .addGroup(fondoPanelLayout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(numerosPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fondoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fondoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(fondoPanel);
+        fondoPanel.setBounds(0, 0, 1100, 900);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    public int[][] crearCuadriculaEnJuego(int filas, int columnas){
+        int[][] cuadricula = new int[filas][columnas];
 
-    private void iniciarJuegoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarJuegoButtonActionPerformed
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                cuadricula[i][j] = 0;
+            }
+        }
+        return cuadricula;
+    }
+    
+    public String cuadriculaToString(int[][] cuadricula) {
+        String cuadriculaString = "";
+
+        for (int i = 0; i < cuadricula.length; i++) {
+            for (int j = 0; j < cuadricula[i].length; j++) {
+                cuadriculaString += cuadricula[i][j];
+                if (j < cuadricula[i].length - 1) {
+                    cuadriculaString += " "; 
+                }
+            }
+            cuadriculaString += "\n"; 
+        }
+        return cuadriculaString;
+    }
+    
+    public void generarCuadricula(Partida partida, byte cuadriculaTamano) {
+        JPanel panel = juegoPanel;
+        panel.removeAll(); //reiniciar panel
+
+        int[][] cuadriculaJuego = partida.getPartidaJuego();
+        Map<String, int[]> desigualdades = partida.getDesigualdades();
+
+        int filas = cuadriculaJuego.length;
+        int columnas = cuadriculaJuego[0].length;
+
+        cuadriculaEnJuego = crearCuadriculaEnJuego(filas, columnas);
+
+        GridLayout gridLayout = new GridLayout(filas * 2 - 1, columnas * 2 - 1); //son filas y columnas * 2 - 1 para sacar espacios entre numeros y poner las desigualdades
+                                                                                        // y juntarlo con la matriz original es decir 3x3 seria 5x5 y asi
+        panel.setLayout(gridLayout);
+
+        int espacioHorizontal = Math.max(5, 40 / cuadriculaTamano); //para evitar que sean muy grandes y no entren en pantalla las matrices del juego se hacen calculos
+        int espacioVertical = Math.max(5, 40 / cuadriculaTamano); //math max minimo maximo
+        gridLayout.setHgap(espacioHorizontal); // hgap = gap horizontal
+        gridLayout.setVgap(espacioVertical); // vgap = gap horizontal
         
+        int botonTamano = Math.max(20, 180 / cuadriculaTamano); //evitar botones muy grandes
+
+        for (int i = 0; i < filas * 2 - 1; i++) {
+            for (int j = 0; j < columnas * 2 - 1; j++) {
+                if (i % 2 == 0 && j % 2 == 0) { //si i y j son par entonces es espacio de boton
+                    int filaBoton = i / 2;
+                    int columnaBoton = j / 2;
+                    JButton boton = new JButton(filaBoton + "," + columnaBoton);
+                    boton.setFont(new Font("Sitka Text", Font.PLAIN, Math.max(10, botonTamano / 2))); //cambia con el tamano de cuadricula
+                    boton.setFocusable(false);
+                    boton.setPreferredSize(new Dimension(botonTamano, botonTamano)); //para el tamano
+                    boton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1)); //para los bordes documentar
+                    panel.add(boton);
+
+                    boton.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            cuadriculaEnJuego[filaBoton][columnaBoton] = numeroElegido;
+                            System.out.println("Número colocado en (" + filaBoton + "," + columnaBoton + "): " + numeroElegido);
+                            System.out.println("Botón presionado: " + boton.getText());
+                            System.out.println(cuadriculaToString(cuadriculaEnJuego));
+                            boton.setText(String.valueOf(numeroElegido));
+                        }
+                    });
+
+                } else if (i % 2 == 0 || j % 2 == 0) { //si alguno no es par entonces es espacio de desigualdad
+                    JLabel desigualdad = new JLabel();
+                    desigualdad.setFont(new Font("Sitka Text", Font.BOLD, Math.max(10, botonTamano / 3)));
+                    desigualdad.setHorizontalAlignment(SwingConstants.CENTER);
+
+                    int filaBoton = i / 2;
+                    int columnaBoton = j / 2;
+
+                    if (i % 2 == 0 && j % 2 != 0) { //desigualdad en fila maf o mef
+                        for (Map.Entry<String, int[]> entry : desigualdades.entrySet()) {
+                            String clave = entry.getKey();
+                            int[] posicion = entry.getValue();
+
+                            if (posicion[0] == filaBoton && posicion[1] == columnaBoton) {
+                                if (clave.equals("maf")) {
+                                    desigualdad.setText(">");
+                                } else if (clave.equals("mef")) {
+                                    desigualdad.setText("<");
+                                }
+                                break;
+                            }
+                        }
+                    } else if (i % 2 != 0 && j % 2 == 0) { //desigualdad en columna mac o mec
+                        for (Map.Entry<String, int[]> entry : desigualdades.entrySet()) {
+                            String clave = entry.getKey();
+                            int[] posicion = entry.getValue();
+
+                            if (posicion[0] == filaBoton && posicion[1] == columnaBoton) {
+                                if (clave.equals("mac")) {
+                                    desigualdad.setText("v");
+                                } else if (clave.equals("mec")) {
+                                    desigualdad.setText("^");
+                                }
+                                break;
+                            }
+                        }
+                    }
+
+                    panel.add(desigualdad);
+
+                } else {
+                    JLabel espacio = new JLabel(); //vacio
+                    panel.add(espacio);
+                }
+            }
+        }
+
+        panel.revalidate();
+        panel.repaint();
+    }
+
+
+    
+    
+    private void iniciarJuegoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarJuegoButtonActionPerformed
+        Jugador jugador = configFutoshiki.conseguirJugador(nombreJugadorField.getText());
+        PartidasFutoshiki partidas = PartidasFutoshiki.cargarPartidaFutoshikiXML();
+        Partida partidaJuego = partidas.partidaJugar(configFutoshiki.getNivel(), configFutoshiki.getCuadricula());
+        generarCuadricula(partidaJuego, configFutoshiki.getCuadricula());
     }//GEN-LAST:event_iniciarJuegoButtonActionPerformed
 
     private void terminarJuegoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarJuegoButtonActionPerformed

@@ -53,6 +53,14 @@ public class Configuracion {
         setPosicion(pPosicion);
     }
     
+    public Jugador conseguirJugador(String keyNombre){ //si no se encuentra entonces incognito
+        if (jugadores.containsKey(keyNombre)){
+            return jugadores.get(keyNombre);
+        }
+        else {
+            return new Jugador();
+        }
+    }
     
     public static <T> void guardarConfiguracionXML(T objetoConfig) { //programacion generica
         try{

@@ -25,10 +25,9 @@ public class Partida {
     private String nivel;  
     private byte cuadricula;
     
-    @XmlTransient 
-    private Map<String, List<int[]>> desigualdades = new HashMap<>(); 
-    @XmlTransient 
-    private Map<String, List<int[]>> constantes = new HashMap<>();     
+   
+    private Map<String, int[]> desigualdades = new HashMap<>(); 
+    private Map<Integer, int[]> constantes = new HashMap<>();     
     
     private int[][] partidaJuego;
     
@@ -40,13 +39,42 @@ public class Partida {
     Partida(){}
     
     public void agregarDes(String tipoDesigualdad, int fila, int columna) {
-        desigualdades.putIfAbsent(tipoDesigualdad, new ArrayList<>()); // solo si no existe
-        desigualdades.get(tipoDesigualdad).add(new int[] {fila, columna});
+        desigualdades.putIfAbsent(tipoDesigualdad, new int[] {fila, columna}); // solo si no existe
     }
+    
+    public Map<String, int[]> conseguirDes() {
+        return desigualdades;
+    }
+    
+    public Map<Integer, int[]> conseguirCons() {
+        return constantes;
+    }
+    
 
-    public void agregarCons(int constante, int fila, int columna) {
-        constantes.putIfAbsent(String.valueOf(constante), new ArrayList<>()); // put solo si no existe
-        constantes.get(String.valueOf(constante)).add(new int[] {fila, columna});                
+    public void agregarCons(Integer constante, int fila, int columna) {
+        constantes.putIfAbsent(constante, new int[] {fila, columna}); // put solo si no existe          
+    }
+    
+    public String toStringConstante(){
+       String constanteString = "";
+        for (Map.Entry<Integer, int[]> constante : constantes.entrySet()) {
+            constanteString += " "+constante.getKey();
+            for (int i : constante.getValue()) {
+                constanteString += " "+ i;
+            }
+        }
+        return constanteString;
+    }
+    
+    public String toStringDesigualdad(){
+       String desigualdadString = "";
+        for (Map.Entry<String, int[]> desigualdad : desigualdades.entrySet()) {
+            desigualdadString += " "+desigualdad.getKey();
+            for (int i : desigualdad.getValue()) {
+                desigualdadString += " " + i;
+            }
+        }
+        return desigualdadString;
     }
     
     // getters 
@@ -59,30 +87,19 @@ public class Partida {
     public byte getCuadricula() {
         return cuadricula;
     }
-
-    @XmlElementWrapper(name = "desigualdades")
-    @XmlElement(name = "des")
-    public List<String> getDesigualdades() {
-        List<String> des = new ArrayList<>();
-        for (Map.Entry<String, List<int[]>> desigualdad : desigualdades.entrySet()) {
-            for (int[] i : desigualdad.getValue()) {
-                des.add(desigualdad.getKey() + ", " + i[0] + ", " + i[1]);
-            }
-        }
-        return des;
+    
+    @XmlElementWrapper(name = "desigualdades") //nose como evitar que se vea como key item
+    public Map<String, int[]> getDesigualdades() {
+        return desigualdades;
     }
 
     @XmlElementWrapper(name = "constantes")
-    @XmlElement(name = "cons")
-    public List<String> getConstantes() {
-        List<String> cons = new ArrayList<>();
-        for (Map.Entry<String, List<int[]>> constante : constantes.entrySet()) {
-            for (int[] i : constante.getValue()) {
-                cons.add(constante.getKey() + ", " + i[0] + ", " + i[1]);
-            }
-        }
-        return cons;
+    public Map<Integer, int[]> getConstantes() {
+        return constantes;
     }
+    
+    
+    
     
     @XmlElementWrapper(name = "partidaJuego")
     @XmlElement(name = "fila")
@@ -100,11 +117,13 @@ public class Partida {
         cuadricula = pCuadricula;
     }
 
-    public void setDesigualdades(Map<String, List<int[]>> pDesigualdades) {
+
+    public void setDesigualdades(Map<String, int[]> pDesigualdades) {
         desigualdades = pDesigualdades;
     }
 
-    public void setConstantes(Map<String, List<int[]>> pConstantes) {
+
+    public void setConstantes(Map<Integer, int[]> pConstantes) {
         constantes = pConstantes;
     }
 
