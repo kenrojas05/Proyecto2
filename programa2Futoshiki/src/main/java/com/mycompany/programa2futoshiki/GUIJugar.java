@@ -30,8 +30,12 @@ public class GUIJugar extends javax.swing.JFrame {
     Timer timerGlobal = new Timer(); //para guardar el timer actual
     
     private int numeroElegido = 0;
-    int[][] cuadriculaEnJuego;
     
+    String errorString; //columna, fila, mayor, menor
+    
+    int[][] cuadriculaJuego;
+    int[][] cuadriculaEnJuego;
+    JButton[][] cuadriculaBotones;
     
     public GUIJugar() {
         initComponents();
@@ -56,6 +60,11 @@ public class GUIJugar extends javax.swing.JFrame {
         numero3Button = new javax.swing.JButton();
         numero4Button = new javax.swing.JButton();
         numero5Button = new javax.swing.JButton();
+        numero6Button = new javax.swing.JButton();
+        numero7Button = new javax.swing.JButton();
+        numero8Button = new javax.swing.JButton();
+        numero9Button = new javax.swing.JButton();
+        numero10Button = new javax.swing.JButton();
         nivelLabel = new javax.swing.JLabel();
         nombreJugadorPanel = new javax.swing.JPanel();
         nombreJugadorLabel = new javax.swing.JLabel();
@@ -112,58 +121,130 @@ public class GUIJugar extends javax.swing.JFrame {
         tituloPanel.setBounds(370, 10, 239, 43);
 
         numerosPanel.setBackground(new java.awt.Color(255, 255, 255));
+        numerosPanel.setLayout(null);
 
         numero1Button.setBackground(new java.awt.Color(255, 255, 255));
         numero1Button.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         numero1Button.setForeground(new java.awt.Color(0, 0, 0));
         numero1Button.setText("1");
+        numero1Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numero1ButtonActionPerformed(evt);
+            }
+        });
+        numerosPanel.add(numero1Button);
+        numero1Button.setBounds(0, 0, 72, 51);
 
         numero2Button.setBackground(new java.awt.Color(255, 255, 255));
         numero2Button.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         numero2Button.setForeground(new java.awt.Color(0, 0, 0));
         numero2Button.setText("2");
+        numero2Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numero2ButtonActionPerformed(evt);
+            }
+        });
+        numerosPanel.add(numero2Button);
+        numero2Button.setBounds(0, 57, 72, 49);
 
         numero3Button.setBackground(new java.awt.Color(255, 255, 255));
         numero3Button.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         numero3Button.setForeground(new java.awt.Color(0, 0, 0));
         numero3Button.setText("3");
+        numero3Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numero3ButtonActionPerformed(evt);
+            }
+        });
+        numerosPanel.add(numero3Button);
+        numero3Button.setBounds(0, 112, 72, 50);
 
         numero4Button.setBackground(new java.awt.Color(255, 255, 255));
         numero4Button.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         numero4Button.setForeground(new java.awt.Color(0, 0, 0));
         numero4Button.setText("4");
+        numero4Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numero4ButtonActionPerformed(evt);
+            }
+        });
+        numerosPanel.add(numero4Button);
+        numero4Button.setBounds(0, 168, 72, 47);
 
         numero5Button.setBackground(new java.awt.Color(255, 255, 255));
         numero5Button.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         numero5Button.setForeground(new java.awt.Color(0, 0, 0));
         numero5Button.setText("5");
+        numero5Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numero5ButtonActionPerformed(evt);
+            }
+        });
+        numerosPanel.add(numero5Button);
+        numero5Button.setBounds(0, 221, 72, 50);
 
-        javax.swing.GroupLayout numerosPanelLayout = new javax.swing.GroupLayout(numerosPanel);
-        numerosPanel.setLayout(numerosPanelLayout);
-        numerosPanelLayout.setHorizontalGroup(
-            numerosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(numero1Button)
-            .addComponent(numero2Button)
-            .addComponent(numero3Button)
-            .addComponent(numero4Button)
-            .addComponent(numero5Button)
-        );
-        numerosPanelLayout.setVerticalGroup(
-            numerosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(numerosPanelLayout.createSequentialGroup()
-                .addComponent(numero1Button, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(numero2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(numero3Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(numero4Button, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(numero5Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        numero6Button.setBackground(new java.awt.Color(255, 255, 255));
+        numero6Button.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
+        numero6Button.setForeground(new java.awt.Color(0, 0, 0));
+        numero6Button.setText("6");
+        numero6Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numero6ButtonActionPerformed(evt);
+            }
+        });
+        numerosPanel.add(numero6Button);
+        numero6Button.setBounds(0, 277, 72, 50);
+
+        numero7Button.setBackground(new java.awt.Color(255, 255, 255));
+        numero7Button.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
+        numero7Button.setForeground(new java.awt.Color(0, 0, 0));
+        numero7Button.setText("7");
+        numero7Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numero7ButtonActionPerformed(evt);
+            }
+        });
+        numerosPanel.add(numero7Button);
+        numero7Button.setBounds(0, 333, 72, 50);
+
+        numero8Button.setBackground(new java.awt.Color(255, 255, 255));
+        numero8Button.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
+        numero8Button.setForeground(new java.awt.Color(0, 0, 0));
+        numero8Button.setText("8");
+        numero8Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numero8ButtonActionPerformed(evt);
+            }
+        });
+        numerosPanel.add(numero8Button);
+        numero8Button.setBounds(0, 393, 72, 50);
+
+        numero9Button.setBackground(new java.awt.Color(255, 255, 255));
+        numero9Button.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
+        numero9Button.setForeground(new java.awt.Color(0, 0, 0));
+        numero9Button.setText("9");
+        numero9Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numero9ButtonActionPerformed(evt);
+            }
+        });
+        numerosPanel.add(numero9Button);
+        numero9Button.setBounds(0, 449, 72, 50);
+
+        numero10Button.setBackground(new java.awt.Color(255, 255, 255));
+        numero10Button.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
+        numero10Button.setForeground(new java.awt.Color(0, 0, 0));
+        numero10Button.setText("10");
+        numero10Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numero10ButtonActionPerformed(evt);
+            }
+        });
+        numerosPanel.add(numero10Button);
+        numero10Button.setBounds(0, 505, 72, 50);
 
         fondoPanel.add(numerosPanel);
-        numerosPanel.setBounds(980, 230, 50, 271);
+        numerosPanel.setBounds(1000, 110, 80, 570);
 
         nivelLabel.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         nivelLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -374,6 +455,152 @@ public class GUIJugar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    
+    public void verificarDesigualdad(Partida partida, int[][] cuadricula) {
+        
+        Map<String, int[]> desigualdades = partida.getDesigualdades();
+        for (Map.Entry<String, int[]> entry : desigualdades.entrySet()) {
+            
+            String desigualdad = entry.getKey();
+            int[] posicion = entry.getValue();
+
+            int fila = posicion[0];
+            int columna = posicion[1];
+            int numActual = cuadricula[fila][columna];
+            
+            switch (desigualdad) {
+                case "maf":
+                    if (columna + 1 < cuadricula[fila].length) {
+                        int numSiguiente = cuadricula[fila][columna + 1];
+                        if (!(numActual > numSiguiente) && (numActual != 0 && numSiguiente!=0)) {
+                            cuadriculaBotones[fila][columna].setForeground(Color.RED);
+                            System.out.println(desigualdad);
+                        }
+                        else if ((numActual > numSiguiente) && (numActual != 0 && numSiguiente!=0)){
+                            cuadriculaBotones[fila][columna].setForeground(new Color(0,100,0));
+                        }
+                    }   break;
+                case "mef":
+                    if (columna + 1 < cuadricula[fila].length) {
+                        int numSiguiente = cuadricula[fila][columna + 1];
+                        
+                        if (!(numActual < numSiguiente) && (numActual != 0 && numSiguiente!=0)) {
+                            cuadriculaBotones[fila][columna].setForeground(Color.RED);
+                            System.out.println(desigualdad);
+                        }
+                        else if ((numActual < numSiguiente) && (numActual != 0 && numSiguiente!=0)){
+                            cuadriculaBotones[fila][columna].setForeground(new Color(0,100,0));
+                        }
+                    }   break;
+                case "mac":
+                    if (fila + 1 < cuadricula.length) {
+                        
+                        int numSiguiente = cuadricula[fila + 1][columna];
+                        if (!(numActual > numSiguiente) && (numActual != 0 && numSiguiente!=0)) {
+                            cuadriculaBotones[fila][columna].setForeground(Color.RED);
+                            System.out.println(desigualdad);
+                        }
+                        else if ((numActual > numSiguiente) && (numActual != 0 && numSiguiente!=0)){
+                            cuadriculaBotones[fila][columna].setForeground(new Color(0,100,0));
+                        }
+                    }   break;
+                case "mec":
+                    if (fila + 1 < cuadricula.length) {
+                        
+                        int numSiguiente = cuadricula[fila + 1][columna];
+                        if (!(numActual < numSiguiente) && (numActual != 0 && numSiguiente!=0)) {
+                            cuadriculaBotones[fila][columna].setForeground(Color.RED);
+                            System.out.println( desigualdad);
+                        }
+                        else if ((numActual < numSiguiente) && (numActual != 0 && numSiguiente!=0)){
+                            cuadriculaBotones[fila][columna].setForeground(new Color(0,100,0));
+                        }
+                    }   break;
+                default: //ninguno por si acaso fuera ""
+                    break;
+            }
+        }
+    }
+
+    
+    public void alertaFinalizar(){
+        String mensaje;
+        for (int filaNum = 0; filaNum < cuadriculaEnJuego.length; filaNum++) {
+            for (int columnaNum = 0; columnaNum < cuadriculaEnJuego[filaNum].length; columnaNum++) {
+                    if (cuadriculaEnJuego[filaNum][columnaNum] != cuadriculaJuego[filaNum][columnaNum]) {
+                        System.out.println("Aun no termina");
+                        return;
+                    }
+                }
+        }
+        
+        mensaje = ("Finalizado!");
+        
+        
+        JTextArea areaTexto = new JTextArea();
+         areaTexto.setEditable(false);
+         areaTexto.setText("FINALIZADO!" +"\n" + " ¡EXCELENTE! JUEGO TERMINADO CON ÉXITO.");
+         areaTexto.setFont(new Font("Sitka Text",Font.BOLD,14));
+         areaTexto.setForeground(new Color(0,100,0));
+         
+        //ventana para mostrar la informacion
+        JDialog ventanaInfo = new JDialog();
+        ventanaInfo.setTitle("Finalizado!");
+        ventanaInfo.setModal(true); // lo pone en modal lo que hace que no se pueda hacer nada hasta cerrar y asi que el jugador vea
+        ventanaInfo.setBounds(500, 500, 500, 300); // x y ancho y altura
+        
+        ventanaInfo.add(areaTexto);
+        ventanaInfo.setVisible(true);
+        if (timerGlobal != null){
+            cancelarTimer(timerGlobal);
+        }
+        if (iniciarJuegoButton.isVisible()==false){
+            iniciarJuegoButton.setVisible(true);
+        
+        }
+        
+        
+    }    
+        
+    
+    public void alertaMensaje(String mensaje){
+        System.out.println("Alerta");
+
+        String infoAlerta = "";
+        
+        switch (mensaje) {
+            case "columna":
+                infoAlerta = "JUGADA NO ES VÁLIDA PORQUE EL ELEMENTO YA ESTÁ EN LA \n" +  "COLUMNA ";
+                                                                                   
+                break;
+            case "fila":
+                infoAlerta = "JUGADA NO ES VÁLIDA PORQUE EL ELEMENTO YA ESTÁ EN LA FILA";
+                break;
+            case "mayor":
+                infoAlerta = "JUGADA NO ES VÁLIDA PORQUE NO CUMPLE CON LA RESTRICCIÓN \n" + "DE MAYOR";
+                break;
+            case "menor":
+                infoAlerta = "JUGADA NO ES VÁLIDA PORQUE NO CUMPLE CON LA RESTRICCIÓN \n" + "DE MENOR ";
+                break;
+        }
+        
+        
+         JTextArea areaTexto = new JTextArea();
+         areaTexto.setEditable(false);
+         areaTexto.setText("Alerta" +"\n" + infoAlerta);
+         areaTexto.setFont(new Font("Sitka Text",Font.BOLD,14));
+         areaTexto.setForeground(Color.RED);
+         
+        //ventana para mostrar la informacion
+        JDialog ventanaInfo = new JDialog();
+        ventanaInfo.setTitle("Alerta");
+        ventanaInfo.setModal(true); // lo pone en modal lo que hace que no se pueda hacer nada hasta cerrar y asi que el jugador vea
+        ventanaInfo.setBounds(500, 500, 500, 300); // x y ancho y altura
+        
+        ventanaInfo.add(areaTexto);
+        ventanaInfo.setVisible(true);
+    }
     
     public int[][] crearCuadriculaEnJuego(int filas, int columnas){
         int[][] cuadricula = new int[filas][columnas];
@@ -384,6 +611,24 @@ public class GUIJugar extends javax.swing.JFrame {
             }
         }
         return cuadricula;
+    }
+    
+    public JButton[][] crearCuadriculaBotones(int filas, int columnas){
+        JButton[][] cuadricula = new JButton[filas][columnas];
+
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                cuadricula[i][j] = new JButton();
+            }
+        }
+        return cuadricula;
+    }
+    
+    public void limpiarBotonesJuego(){
+        for (Component componente : numerosPanel.getComponents()){
+            JButton boton = (JButton) componente;
+            boton.setBackground(Color.WHITE);
+        }
     }
     
     public String cuadriculaToString(int[][] cuadricula) {
@@ -401,11 +646,53 @@ public class GUIJugar extends javax.swing.JFrame {
         return cuadriculaString;
     }
     
+    
+    public int[] comprobarFilasColumnas(int[][] cuadricula) {
+        int n = cuadricula.length; 
+        
+        for (int fila = 0; fila < n; fila++) { //filas
+            for (int columna = 0; columna < n; columna++) {
+                int valor = cuadricula[fila][columna];
+                if (valor != 0) { 
+                    for (int pComparar = columna + 1; pComparar < n; pComparar++) {
+                        if (cuadricula[fila][pComparar] == valor) {
+                            errorString = "fila";
+                            cuadriculaBotones[fila][pComparar].setForeground(Color.RED);
+                            return new int[] {fila, pComparar}; 
+                        }
+                        else if (cuadricula[fila][pComparar] != valor && cuadriculaBotones[fila][pComparar].getForeground() == Color.RED){
+                            cuadriculaBotones[fila][pComparar].setForeground(new Color(0,100,0));
+                        }
+                    }
+                }
+            }
+        }
+
+        for (int columna = 0; columna < n; columna++) { //columnas
+            for (int fila = 0; fila < n; fila++) {
+                int valor = cuadricula[fila][columna];
+                if (valor != 0) { 
+                    for (int pComparar = fila + 1; pComparar < n; pComparar++) {
+                        if (cuadricula[pComparar][columna] == valor) {
+                            errorString = "columna";
+                            cuadriculaBotones[pComparar][columna].setForeground(Color.RED);
+                            return new int[] {pComparar, columna}; 
+                        }
+                        else if (cuadricula[pComparar][columna] != valor && cuadriculaBotones[pComparar][columna].getForeground() == Color.RED){
+                            cuadriculaBotones[pComparar][columna].setForeground(new Color(0,100,0));
+                        }
+                    }
+                }
+            }
+        }
+        return null; 
+    }
+    
     public void generarCuadricula(Partida partida, byte cuadriculaTamano) {
         JPanel panel = juegoPanel;
         panel.removeAll(); //reiniciar panel
 
-        int[][] cuadriculaJuego = partida.getPartidaJuego();
+        cuadriculaJuego = partida.getPartidaJuego();
         Map<String, int[]> desigualdades = partida.getDesigualdades();
 
         int filas = cuadriculaJuego.length;
@@ -413,6 +700,8 @@ public class GUIJugar extends javax.swing.JFrame {
 
         cuadriculaEnJuego = crearCuadriculaEnJuego(filas, columnas);
 
+        cuadriculaBotones = crearCuadriculaBotones(filas, columnas);
+        
         GridLayout gridLayout = new GridLayout(filas * 2 - 1, columnas * 2 - 1); //son filas y columnas * 2 - 1 para sacar espacios entre numeros y poner las desigualdades
                                                                                         // y juntarlo con la matriz original es decir 3x3 seria 5x5 y asi
         panel.setLayout(gridLayout);
@@ -429,24 +718,61 @@ public class GUIJugar extends javax.swing.JFrame {
                 if (i % 2 == 0 && j % 2 == 0) { //si i y j son par entonces es espacio de boton
                     int filaBoton = i / 2;
                     int columnaBoton = j / 2;
-                    JButton boton = new JButton(filaBoton + "," + columnaBoton);
+                    
+                    JButton boton = new JButton();
                     boton.setFont(new Font("Sitka Text", Font.PLAIN, Math.max(10, botonTamano / 2))); //cambia con el tamano de cuadricula
                     boton.setFocusable(false);
                     boton.setPreferredSize(new Dimension(botonTamano, botonTamano)); //para el tamano
                     boton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1)); //para los bordes documentar
                     panel.add(boton);
-
-                    boton.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            cuadriculaEnJuego[filaBoton][columnaBoton] = numeroElegido;
-                            System.out.println("Número colocado en (" + filaBoton + "," + columnaBoton + "): " + numeroElegido);
-                            System.out.println("Botón presionado: " + boton.getText());
+                    boton.setForeground(Color.RED);
+                    cuadriculaBotones[filaBoton][columnaBoton] = boton;
+                    
+                    //comprueba constante
+                    boolean esCons = false;
+                    for (Map.Entry<Integer, int[]> cons : partida.getConstantes().entrySet()){
+                        if (cons.getValue()[0] == filaBoton && cons.getValue()[1] == columnaBoton){
+                            boton.setForeground(new Color(0,100,0));
+                            boton.setText(String.valueOf(cons.getKey()));
+                            cuadriculaEnJuego[filaBoton][columnaBoton] = cons.getKey();
                             System.out.println(cuadriculaToString(cuadriculaEnJuego));
-                            boton.setText(String.valueOf(numeroElegido));
+                            esCons = true;
+                            break;
                         }
-                    });
+                    }
+                    
+                    if (esCons == false){
+                        boton.setText("");
+                        boton.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                
+                                if (numeroElegido != 0){
+                                    boton.setText(String.valueOf(numeroElegido));
+                                    cuadriculaEnJuego[filaBoton][columnaBoton] = numeroElegido;
+                                    
+                                    System.out.println("Numero colocado en (" + filaBoton + "," + columnaBoton + "): " + numeroElegido);
+                                    System.out.println("Boton presionado: " + boton.getText());
+                                    System.out.println(cuadriculaToString(cuadriculaEnJuego));
+                                    System.out.println(cuadriculaToString(cuadriculaJuego));
 
-                } else if (i % 2 == 0 || j % 2 == 0) { //si alguno no es par entonces es espacio de desigualdad
+                                    int [] resultado = comprobarFilasColumnas(cuadriculaEnJuego);
+                                    if (resultado!=null){
+                                        alertaMensaje(errorString);
+                                    }
+                                    else {
+                                        System.out.println("Nada");
+                                        errorString = "";
+                                        boton.setForeground(new Color(0,100,0)); //rgb de verde oscuro 
+                                    }
+
+                                }
+                                alertaFinalizar();
+                                verificarDesigualdad(partida, cuadriculaEnJuego);
+                            }
+                        });
+                    }
+                    
+                } else if (i % 2 == 0 || j % 2 == 0) { //si alguno no par entonces es espacio de desigualdad
                     JLabel desigualdad = new JLabel();
                     desigualdad.setFont(new Font("Sitka Text", Font.BOLD, Math.max(10, botonTamano / 3)));
                     desigualdad.setHorizontalAlignment(SwingConstants.CENTER);
@@ -496,8 +822,35 @@ public class GUIJugar extends javax.swing.JFrame {
         panel.revalidate();
         panel.repaint();
     }
-
-
+    
+    public void cancelarTimer(Timer timer){
+        timer.cancel(); //termina el timer
+    }
+    
+    
+    public void construirReloj(){
+        String reloj = configFutoshiki.getReloj(); //Cronometro, No, Temporizador
+        
+        if (reloj.equals("No")){
+            relojPanel.setVisible(false);
+            relojPanel.setEnabled(false);   
+        }
+        
+        if (reloj.equals("Cronometro")){
+            relojPanel.setVisible(true);
+            relojPanel.setEnabled(true);  
+            cronometro();
+        }
+        
+        else if (reloj.equals("Temporizador")){
+            relojPanel.setVisible(true);
+            relojPanel.setEnabled(true);  
+            temporizador();
+        }
+        
+        
+        
+    }
     
     
     private void iniciarJuegoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarJuegoButtonActionPerformed
@@ -505,11 +858,76 @@ public class GUIJugar extends javax.swing.JFrame {
         PartidasFutoshiki partidas = PartidasFutoshiki.cargarPartidaFutoshikiXML();
         Partida partidaJuego = partidas.partidaJugar(configFutoshiki.getNivel(), configFutoshiki.getCuadricula());
         generarCuadricula(partidaJuego, configFutoshiki.getCuadricula());
+        construirReloj();
+        iniciarJuegoButton.setVisible(false);
     }//GEN-LAST:event_iniciarJuegoButtonActionPerformed
 
     private void terminarJuegoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarJuegoButtonActionPerformed
         
     }//GEN-LAST:event_terminarJuegoButtonActionPerformed
+
+    private void numero1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero1ButtonActionPerformed
+        limpiarBotonesJuego();
+        numeroElegido = 1;
+        System.out.println("1");
+        numero1Button.setBackground(Color.GREEN);
+    }//GEN-LAST:event_numero1ButtonActionPerformed
+
+    private void numero2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero2ButtonActionPerformed
+        limpiarBotonesJuego();
+        numeroElegido = 2;
+        System.out.println("2");
+        numero2Button.setBackground(Color.GREEN);
+    }//GEN-LAST:event_numero2ButtonActionPerformed
+
+    private void numero3ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero3ButtonActionPerformed
+        limpiarBotonesJuego();
+        numeroElegido = 3;
+        System.out.println("3");
+        numero3Button.setBackground(Color.GREEN);
+    }//GEN-LAST:event_numero3ButtonActionPerformed
+
+    private void numero4ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero4ButtonActionPerformed
+        limpiarBotonesJuego();
+        numeroElegido = 4;
+        numero4Button.setBackground(Color.GREEN);
+    }//GEN-LAST:event_numero4ButtonActionPerformed
+
+    private void numero5ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero5ButtonActionPerformed
+        limpiarBotonesJuego();
+        numeroElegido = 5;
+        numero5Button.setBackground(Color.GREEN);
+    }//GEN-LAST:event_numero5ButtonActionPerformed
+
+    private void numero7ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero7ButtonActionPerformed
+        limpiarBotonesJuego();
+        numeroElegido = 7;
+        numero7Button.setBackground(Color.GREEN);
+    }//GEN-LAST:event_numero7ButtonActionPerformed
+
+    private void numero8ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero8ButtonActionPerformed
+        limpiarBotonesJuego();
+        numeroElegido = 8;
+        numero8Button.setBackground(Color.GREEN);
+    }//GEN-LAST:event_numero8ButtonActionPerformed
+
+    private void numero9ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero9ButtonActionPerformed
+        limpiarBotonesJuego();
+        numeroElegido = 9;
+        numero9Button.setBackground(Color.GREEN);
+    }//GEN-LAST:event_numero9ButtonActionPerformed
+
+    private void numero6ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero6ButtonActionPerformed
+        limpiarBotonesJuego();
+        numeroElegido = 6;
+        numero6Button.setBackground(Color.GREEN);
+    }//GEN-LAST:event_numero6ButtonActionPerformed
+
+    private void numero10ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero10ButtonActionPerformed
+        limpiarBotonesJuego();
+        numeroElegido = 10;
+        numero10Button.setBackground(Color.GREEN);
+    }//GEN-LAST:event_numero10ButtonActionPerformed
 
     public static void setNombre(){
         nombreJugadorField.setText(GUIFutoshiki.getNombre());
@@ -547,6 +965,7 @@ public class GUIJugar extends javax.swing.JFrame {
                 
                 if (hora == 0 && minuto == 0 && segundo == 0){
                     timer.cancel();
+                    System.out.println("Termino!");
                 }
                 
                 SwingUtilities.invokeLater(new Runnable() { //para actualizar el GUI desde otro hilo digamos 
@@ -593,53 +1012,39 @@ public class GUIJugar extends javax.swing.JFrame {
         timerGlobal = timer;
     }
     
-    public void cancelarTimer(Timer timer){
-        timer.cancel(); //termina el timer
-    }
     
-    public void construirJuego(){
-        byte cuadricula = configFutoshiki.getCuadricula(); //puesto que es cuadrada es decir 3x3 y asi solo ocupa el digito
-        String nivel = configFutoshiki.getNivel(); //Facil, Intermedio, Dificil
-        boolean multinivel = configFutoshiki.getMultinivel(); //false: no, true: si
+    
+    public static void construirPanel() { //para el panel de numeros
+        boolean posicion = configFutoshiki.getPosicion();
+        byte cuadricula = configFutoshiki.getCuadricula();
+        
+        int contador = 0;
+        for (Component componente : numerosPanel.getComponents()) {
+                if (componente instanceof JButton) {
+                    JButton boton = (JButton) componente;
 
-    }
-    
-    public void construirReloj(){
-        String reloj = configFutoshiki.getReloj(); //Cronometro, No, Temporizador
-        
-        if (reloj.equals("No")){
-            relojPanel.setVisible(false);
-            relojPanel.setEnabled(false);   
-        }
-        
-        if (reloj.equals("Cronometro")){
-            relojPanel.setVisible(true);
-            relojPanel.setEnabled(true);  
-            cronometro();
-        }
-        
-        else if (reloj.equals("Temporizador")){
-            relojPanel.setVisible(true);
-            relojPanel.setEnabled(true);  
-            temporizador();
-        }
-        
-        
-        
-    }
-    
-    public static void construirPanel(){
-        boolean posicion = configFutoshiki.getPosicion(); // false: derecha, true: izquierda
-        
-        if (posicion){
+                    if (contador < cuadricula) {
+                        boton.setVisible(true); 
+                        boton.setEnabled(true);
+                    } else {
+                        boton.setVisible(false); //cuando supera al contador entonces oculta
+                        boton.setEnabled(false); 
+                    }
 
-            fondoPanel.setLayout(null); //para que se pueda mover bien
+                    contador++;
+                }
+            }
+        
+        
+        if (posicion) {
             
+            fondoPanel.setLayout(null); // para que se puedan mover los componentes bien
             numerosPanel.setBounds(90, numerosPanel.getY(), numerosPanel.getWidth(), numerosPanel.getHeight());
             
-            fondoPanel.revalidate();
-            fondoPanel.repaint(); //para poner el cambio
         }
+        
+        fondoPanel.revalidate(); 
+        fondoPanel.repaint();  
     }
     
     /**
@@ -703,11 +1108,16 @@ public class GUIJugar extends javax.swing.JFrame {
     private static javax.swing.JTextField nombreJugadorField;
     private javax.swing.JLabel nombreJugadorLabel;
     private javax.swing.JPanel nombreJugadorPanel;
+    private javax.swing.JButton numero10Button;
     private javax.swing.JButton numero1Button;
     private javax.swing.JButton numero2Button;
     private javax.swing.JButton numero3Button;
     private javax.swing.JButton numero4Button;
     private javax.swing.JButton numero5Button;
+    private javax.swing.JButton numero6Button;
+    private javax.swing.JButton numero7Button;
+    private javax.swing.JButton numero8Button;
+    private javax.swing.JButton numero9Button;
     private static javax.swing.JPanel numerosPanel;
     private javax.swing.JButton rehacerJugadaButton;
     private static javax.swing.JPanel relojPanel;

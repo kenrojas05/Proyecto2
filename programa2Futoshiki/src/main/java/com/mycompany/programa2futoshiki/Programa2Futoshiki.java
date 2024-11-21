@@ -48,7 +48,7 @@ public class Programa2Futoshiki {
         partida2.agregarDes("mec", 0, 2);
         partida2.agregarDes("mef", 2, 0);
         
-        partida2.agregarCons(2, 1, 1);
+        partida2.agregarCons(1, 1, 1);
         
         Partida partida3 = new Partida();
         

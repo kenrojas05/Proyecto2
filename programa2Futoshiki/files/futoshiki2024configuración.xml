@@ -11,10 +11,10 @@
         </entry>
     </jugadores>
     <multinivel>false</multinivel>
-    <nivel>Facil</nivel>
+    <nivel>Dificil</nivel>
     <posicion>true</posicion>
     <reloj>Cronometro</reloj>
     <temporizadorHora>0</temporizadorHora>
-    <temporizadorMinuto>0</temporizadorMinuto>
+    <temporizadorMinuto>1</temporizadorMinuto>
     <temporizadorSegundo>0</temporizadorSegundo>
 </configuracion>
