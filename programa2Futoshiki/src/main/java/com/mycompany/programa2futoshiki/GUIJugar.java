@@ -28,6 +28,10 @@ public class GUIJugar extends javax.swing.JFrame {
     
     Configuracion configJuego = configFutoshiki;
     Timer timerGlobal = new Timer(); //para guardar el timer actual
+    private int horaGlobal = 0;
+    private int minutoGlobal = 0;
+    private int segundosGlobal = 0;
+    
     
     private int numeroElegido = 0;
     
@@ -536,24 +540,28 @@ public class GUIJugar extends javax.swing.JFrame {
         }
         
         mensaje = ("Finalizado!");
+        cancelarTimer(timerGlobal);
         
         
+
         JTextArea areaTexto = new JTextArea();
-         areaTexto.setEditable(false);
-         areaTexto.setText("FINALIZADO!" +"\n" + " ¡EXCELENTE! JUEGO TERMINADO CON ÉXITO.");
-         areaTexto.setFont(new Font("Sitka Text",Font.BOLD,14));
-         areaTexto.setForeground(new Color(0,100,0));
+        areaTexto.setEditable(false);
+        areaTexto.setText("FINALIZADO!" +"\n" + " ¡EXCELENTE! JUEGO TERMINADO CON ÉXITO.");
+        areaTexto.setFont(new Font("Sitka Text",Font.BOLD,14));
+        areaTexto.setForeground(new Color(0,100,0));
+
          
         //ventana para mostrar la informacion
         JDialog ventanaInfo = new JDialog();
         ventanaInfo.setTitle("Finalizado!");
         ventanaInfo.setModal(true); // lo pone en modal lo que hace que no se pueda hacer nada hasta cerrar y asi que el jugador vea
-        ventanaInfo.setBounds(500, 500, 500, 300); // x y ancho y altura
+        ventanaInfo.setBounds(500, 500, 500, 200); // x y ancho y altura
         
         ventanaInfo.add(areaTexto);
         ventanaInfo.setVisible(true);
         if (timerGlobal != null){
             cancelarTimer(timerGlobal);
+            top10();
         }
         if (iniciarJuegoButton.isVisible()==false){
             iniciarJuegoButton.setVisible(true);
@@ -561,7 +569,33 @@ public class GUIJugar extends javax.swing.JFrame {
         }
         
         
-    }    
+        
+        
+    }
+    
+    public void top10(){
+        System.out.println("Top 10");
+        if (!nombreJugadorField.getText().equals("incognito")){
+            Top10 top = new Top10();
+            String jugador = nombreJugadorField.getText();
+            int hora = horaGlobal;
+            int minutos = minutoGlobal;
+            int segundos = segundosGlobal;
+            
+            String nivel = configFutoshiki.getNivel();
+            System.out.println(jugador +" "+ hora +" "+ minutos +" "+" "+segundos);
+            Top10.addJugadores(jugador, hora, minutos, segundos, nivel);
+            
+            Top10.guardarTopXML(top);
+            
+            System.out.println("Guardado");
+            System.out.println(Top10.toStringJugadoresFacil());
+        }
+        horaGlobal = 0;
+        minutoGlobal = 0;
+        segundosGlobal = 0;
+        
+    }
         
     
     public void alertaMensaje(String mensaje){
@@ -732,7 +766,7 @@ public class GUIJugar extends javax.swing.JFrame {
                     boolean esCons = false;
                     for (Map.Entry<Integer, int[]> cons : partida.getConstantes().entrySet()){
                         if (cons.getValue()[0] == filaBoton && cons.getValue()[1] == columnaBoton){
-                            boton.setForeground(new Color(0,100,0));
+                            boton.setForeground(new Color(0,0,0));
                             boton.setText(String.valueOf(cons.getKey()));
                             cuadriculaEnJuego[filaBoton][columnaBoton] = cons.getKey();
                             System.out.println(cuadriculaToString(cuadriculaEnJuego));
@@ -766,8 +800,10 @@ public class GUIJugar extends javax.swing.JFrame {
                                     }
 
                                 }
-                                alertaFinalizar();
+                                
                                 verificarDesigualdad(partida, cuadriculaEnJuego);
+                                alertaFinalizar();
+
                             }
                         });
                     }
@@ -939,6 +975,9 @@ public class GUIJugar extends javax.swing.JFrame {
     
     public void temporizador(){
         Timer timer = new Timer();
+         horaGlobal = 0;
+         minutoGlobal = 0;
+         segundosGlobal = 0;
         TimerTask taskCronometro = new TimerTask(){
             int hora = configFutoshiki.getTemporizadorHora();
             int minuto = configFutoshiki.getTemporizadorMinuto();
@@ -968,11 +1007,14 @@ public class GUIJugar extends javax.swing.JFrame {
                     System.out.println("Termino!");
                 }
                 
+                
+                
                 SwingUtilities.invokeLater(new Runnable() { //para actualizar el GUI desde otro hilo digamos 
                 public void run() {
                     tiempoHorasLabel.setText(String.valueOf(hora));
                     tiempoMinutosLabel.setText(String.valueOf(minuto));
                     tiempoSegundosLabel.setText(String.valueOf(segundo));
+                    
                 }
                 });
             };
@@ -983,6 +1025,9 @@ public class GUIJugar extends javax.swing.JFrame {
     
     public void cronometro(){ 
         Timer timer = new Timer();
+        horaGlobal = 0;
+        minutoGlobal = 0;
+        segundosGlobal = 0;
         TimerTask taskCronometro = new TimerTask(){
             int hora = 0;
             int minuto = 0;
@@ -1004,6 +1049,9 @@ public class GUIJugar extends javax.swing.JFrame {
                     tiempoHorasLabel.setText(String.valueOf(hora));
                     tiempoMinutosLabel.setText(String.valueOf(minuto));
                     tiempoSegundosLabel.setText(String.valueOf(segundo));
+                    horaGlobal = hora;
+                    minutoGlobal = minuto;
+                    segundosGlobal = segundo;
                 }
                 });
             };

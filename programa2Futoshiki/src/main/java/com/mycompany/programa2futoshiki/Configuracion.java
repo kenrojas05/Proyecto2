@@ -179,6 +179,7 @@ public class Configuracion {
     public Map<String, Jugador> getJugadores(){
         return jugadores;
     }
+    
     @XmlElement // elemento en el xml
     public int getTemporizadorHora(){
         return temporizadorHora;

@@ -1,6 +1,8 @@
 
 package com.mycompany.programa2futoshiki;
 
+import static com.mycompany.programa2futoshiki.GUITop10.setTop; // para cargar el top
+
 import javax.swing.*; //swing para el gui
 import java.awt.*; //para component componentes 
 import java.io.*; //manejo de archivos
@@ -351,6 +353,11 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         menuBar.add(menuJugar);
 
         menuTop10.setText("Top 10");
+        menuTop10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuTop10MouseClicked(evt);
+            }
+        });
         menuBar.add(menuTop10);
 
         menuAyuda.setText("Ayuda");
@@ -827,6 +834,12 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         
     }//GEN-LAST:event_menuJugarMouseClicked
 
+    private void menuTop10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTop10MouseClicked
+        System.out.println("TOP10");
+        String[] argumentos = {""}; //no le pasa argumentos (de momento talvez lo cambie)
+        GUITop10.main(argumentos);
+    }//GEN-LAST:event_menuTop10MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -860,7 +873,8 @@ public class GUIFutoshiki extends javax.swing.JFrame {
                 GUIFutoshiki gui = new GUIFutoshiki();
                 gui.setVisible(true);
                 try {
-                    setConfiguracion(Configuracion.cargarConfiguracionXML()); 
+                    setConfiguracion(Configuracion.cargarConfiguracionXML());
+                    setTop(Top10.cargarTopXML());
                     
                 } catch (Exception e) {
                     System.out.println("Archivo no encontrado"); //la primera vez 

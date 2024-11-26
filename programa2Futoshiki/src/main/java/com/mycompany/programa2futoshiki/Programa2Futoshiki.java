@@ -14,6 +14,7 @@ public class Programa2Futoshiki {
         GUIFutoshiki.main(args);
         
         
+        
         //crea partidas (BORRAR AL FINAL pero no del archivo)
         /*
         PartidasFutoshiki partidaFuto = new PartidasFutoshiki();
