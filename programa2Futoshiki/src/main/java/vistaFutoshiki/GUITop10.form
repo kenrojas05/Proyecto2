@@ -232,7 +232,7 @@
                       <Data value="7"/>
                       <Data value="8"/>
                       <Data value="9"/>
-                      <Data value="null"/>
+                      <Data value="10"/>
                     </Column>
                     <Column editable="false" title="JUGADOR" type="java.lang.String"/>
                     <Column editable="false" title="TIEMPO" type="java.lang.String"/>
@@ -293,7 +293,7 @@
                       <Data value="7"/>
                       <Data value="8"/>
                       <Data value="9"/>
-                      <Data value="null"/>
+                      <Data value="10"/>
                     </Column>
                     <Column editable="false" title="JUGADOR" type="java.lang.String"/>
                     <Column editable="false" title="TIEMPO" type="java.lang.String"/>
@@ -354,7 +354,7 @@
                       <Data value="7"/>
                       <Data value="8"/>
                       <Data value="9"/>
-                      <Data value="null"/>
+                      <Data value="10"/>
                     </Column>
                     <Column editable="false" title="JUGADOR" type="java.lang.String"/>
                     <Column editable="false" title="TIEMPO" type="java.lang.String"/>

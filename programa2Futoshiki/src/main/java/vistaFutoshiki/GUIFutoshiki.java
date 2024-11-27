@@ -1,16 +1,16 @@
 
-package com.mycompany.programa2futoshiki;
+package vistaFutoshiki;
 
-import static com.mycompany.programa2futoshiki.GUITop10.setTop; // para cargar el top
+import controladorFutoshiki.*;
+import modeloFutoshiki.*; 
+
+import static vistaFutoshiki.GUITop10.setTop; //para cargar el Top10
 
 import javax.swing.*; //swing para el gui
 import java.awt.*; //para component componentes 
 import java.io.*; //manejo de archivos
 
-//archivos y xml (JAXB)
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+//archivos
 import java.io.File;
 
 
@@ -27,7 +27,7 @@ public class GUIFutoshiki extends javax.swing.JFrame {
     
     public static Jugador jugadorActual;
     
-    public static Configuracion configFutoshiki = new Configuracion((byte) 5, "Facil", false, "Cronometro", false);
+    public static Configuracion configFutoshiki = new Configuracion((byte) 5, "Facil", false, "Cronometro", false); //set en predeterminado
     /**
      * Creates new form GUIFutoshiki
      */
@@ -398,23 +398,45 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * Set del nombre del jugador
+     * @param pNombre nombre 
+     **/
     
     public static void setNombre(String pNombre){
         nombre = pNombre;
     }
     
+    /**
+     * Set de la constrasena del jugador
+     * @param pPassword password 
+     **/
+    
     public static void setPassword(String pPassword){
         password = pPassword;
     }
+    
+    /**
+     * Set del label de jugador
+     **/
     
     public static void setJugadorLabel(){
         jugadorLabel.setText("Jugador: "+nombre);
     }
     
+    /**
+     * Set del Jugador
+        * @param jugador Jugador 
+     **/
+    
     public static void setJugador(Jugador jugador){
         jugadorActual = jugador;
     }
     
+    /**
+     * Set la configuracion
+     * @param config Configuracion del juego
+     **/
     
     public static void setConfiguracion(Configuracion config){
         configFutoshiki = config;
@@ -424,9 +446,19 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         return nombre;
     }
     
+    /**
+     *Consigue la contrasena 
+     * @return String password
+     **/
+    
     public static String getPassword(){
         return password;
     }
+    
+    /**
+     * Limpia el foreground de un JMenu
+     * @param menuRecorrer Menu a recorrer
+     **/
     
     public void limpiarForegroundMenu(JMenu menuRecorrer){ //para volver normal a los demas cuando se selecciona algo
         for (int i = 0; i < menuRecorrer.getItemCount(); i++) { //consigue la cantidad de items
@@ -436,6 +468,10 @@ public class GUIFutoshiki extends javax.swing.JFrame {
             }
         }
     }
+    
+    /**
+     * Verifica el Foreground de las opciones
+     **/
     
     public void verificarForeground(){ //pone en color rojo la configuracion guardada al iniciar
         Component[] componentesConfigurar = menuConfigurar.getMenuComponents();
@@ -507,10 +543,11 @@ public class GUIFutoshiki extends javax.swing.JFrame {
                     }
                 }
             }
-
     
-
-    
+    /**
+     * Para conseguir el acerda de
+     * @param evt evento
+     **/
     
     private void menuAcercaDeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAcercaDeMouseClicked
          System.out.println("Acerca de.");
@@ -519,7 +556,8 @@ public class GUIFutoshiki extends javax.swing.JFrame {
          JTextArea areaTexto = new JTextArea();
          areaTexto.setEditable(false);
          areaTexto.setText("FUTOSHIKI \n"
-                          +"Version: PONER AL TERMINAR \n"
+                          +"Version del Programa Futoshiki: 11\n" //11 porque he hecho 11 copias de este 
+                          +"Version Java: " + System.getProperty("java.version") +"\n" //version de java usado
                           +"Fecha de creación: 24/10/2024 \n"
                           +"Autor: Kendall Ariel Rojas Cartin");
          areaTexto.setFont(new Font("Sitka Text",Font.BOLD,22));
@@ -534,7 +572,12 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         ventanaInfo.setVisible(true);
 
     }//GEN-LAST:event_menuAcercaDeMouseClicked
-
+    
+    /**
+     * Menu de ayuda 
+     * @param evt evento
+     **/
+    
     private void menuAyudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAyudaMouseClicked
         System.out.println("PDF");
         try {
@@ -551,6 +594,11 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuAyudaMouseClicked
 
+    /**
+     * Para poner el nombre del jugador 
+     * @param evt evento
+     **/
+    
     private void itemNombreJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemNombreJugadorActionPerformed
         System.out.println("Nombre");
         
@@ -560,6 +608,11 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         nuevoInicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //para que no se cierre todo al cerrar esta
     }//GEN-LAST:event_itemNombreJugadorActionPerformed
 
+    /**
+     * Seleccionar 3x3 
+     * @param evt evento
+     **/
+    
     private void item3x3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item3x3ActionPerformed
         limpiarForegroundMenu(menuTamanoCuadricula);
         if (item3x3.getForeground()!= Color.RED){
@@ -567,9 +620,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setCuadricula((byte)3);
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_item3x3ActionPerformed
 
+    /**
+     * Seleccionar 4x4
+     * @param evt evento
+     **/
+    
     private void item4x4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item4x4ActionPerformed
         limpiarForegroundMenu(menuTamanoCuadricula);
         if (item4x4.getForeground()!= Color.RED){
@@ -577,9 +635,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setCuadricula((byte)4);
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_item4x4ActionPerformed
 
+    /**
+     * Seleccionar 5x5 
+     * @param evt evento
+     **/
+    
     private void item5x5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item5x5ActionPerformed
         limpiarForegroundMenu(menuTamanoCuadricula);
         if (item5x5.getForeground()!= Color.RED){
@@ -587,9 +650,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setCuadricula((byte)5);
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_item5x5ActionPerformed
 
+    /**
+     * Seleccionar 6x6
+     * @param evt evento
+     **/
+    
     private void item6x6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item6x6ActionPerformed
         limpiarForegroundMenu(menuTamanoCuadricula);
         if (item6x6.getForeground()!= Color.RED){
@@ -597,9 +665,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setCuadricula((byte)6);
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_item6x6ActionPerformed
 
+    /**
+     * Seleccionar 7x7
+     * @param evt evento
+     **/
+    
     private void item7x7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item7x7ActionPerformed
         limpiarForegroundMenu(menuTamanoCuadricula);
         if (item7x7.getForeground()!= Color.RED){
@@ -607,9 +680,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setCuadricula((byte)7);
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_item7x7ActionPerformed
 
+    /**
+     * Seleccionar 8x8 
+     * @param evt evento
+     **/
+    
     private void item8x8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item8x8ActionPerformed
         limpiarForegroundMenu(menuTamanoCuadricula);
         if (item8x8.getForeground()!= Color.RED){
@@ -617,9 +695,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setCuadricula((byte)8);
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_item8x8ActionPerformed
 
+    /**
+     * Seleccionar 9x9
+     * @param evt evento
+     **/
+    
     private void item9x9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item9x9ActionPerformed
         limpiarForegroundMenu(menuTamanoCuadricula);
         if (item9x9.getForeground()!= Color.RED){
@@ -627,9 +710,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setCuadricula((byte)9);
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_item9x9ActionPerformed
 
+    /**
+     * Seleccionar 10x10
+     * @param evt evento
+     **/
+    
     private void item10x10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item10x10ActionPerformed
         limpiarForegroundMenu(menuTamanoCuadricula);
         if (item10x10.getForeground()!= Color.RED){
@@ -637,9 +725,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setCuadricula((byte)10);
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_item10x10ActionPerformed
 
+    /**
+     * Seleccionar nivel facil
+     * @param evt evento
+     **/
+    
     private void nivelFacilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nivelFacilActionPerformed
         limpiarForegroundMenu(menuNivel);
         if (nivelFacil.getForeground()!= Color.RED){
@@ -647,9 +740,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setNivel("Facil");
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_nivelFacilActionPerformed
 
+    /**
+     * Seleccionar nivel intermedio 
+     * @param evt evento
+     **/
+    
     private void nivelIntermedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nivelIntermedioActionPerformed
         limpiarForegroundMenu(menuNivel);
         if (nivelIntermedio.getForeground()!= Color.RED){
@@ -657,9 +755,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setNivel("Intermedio");
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_nivelIntermedioActionPerformed
 
+    /**
+     * Seleccionar nivel dificil
+     * @param evt evento
+     **/
+    
     private void nivelDificilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nivelDificilActionPerformed
         limpiarForegroundMenu(menuNivel);
         if (nivelDificil.getForeground()!= Color.RED){
@@ -667,9 +770,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setNivel("Dificil");
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_nivelDificilActionPerformed
 
+    /**
+     * Seleccionar No a multinivel
+     * @param evt evento
+     **/
+    
     private void itemNoMultinivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemNoMultinivelActionPerformed
         limpiarForegroundMenu(menuMultinivel);
         if (itemNoMultinivel.getForeground()!= Color.RED){
@@ -677,9 +785,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setMultinivel(false);
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_itemNoMultinivelActionPerformed
 
+    /**
+     * Seleccionar Si a multinivel
+     * @param evt evento
+     **/
+    
     private void itemSiMultinivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSiMultinivelActionPerformed
         limpiarForegroundMenu(menuMultinivel);
         if (itemSiMultinivel.getForeground()!= Color.RED){
@@ -687,9 +800,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setMultinivel(true);
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_itemSiMultinivelActionPerformed
 
+    /**
+     * Seleccionar Reloj Cronometro
+     * @param evt evento
+     **/
+    
     private void itemRelojCronometroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRelojCronometroActionPerformed
         limpiarForegroundMenu(menuReloj);
         if (itemRelojCronometro.getForeground()!= Color.RED){
@@ -697,9 +815,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setReloj("Cronometro");
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_itemRelojCronometroActionPerformed
 
+    /**
+     * Seleccionar No a Reloj
+     * @param evt evento
+     **/
+    
     private void itemRelojNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRelojNoActionPerformed
         limpiarForegroundMenu(menuReloj);
         if (itemRelojNo.getForeground()!= Color.RED){
@@ -707,9 +830,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setReloj("No");
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_itemRelojNoActionPerformed
 
+    /**
+     * Seleccionar Reloj Temporizador
+     * @param evt evento
+     **/
+    
     private void itemRelojTemporizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRelojTemporizadorActionPerformed
         limpiarForegroundMenu(menuReloj);
         
@@ -775,7 +903,7 @@ public class GUIFutoshiki extends javax.swing.JFrame {
                    
                    configFutoshiki.setReloj("Temporizador");
                    itemRelojTemporizador.setForeground(Color.RED);
-                   Configuracion.guardarConfiguracionXML(configFutoshiki);
+                   ControladorFutoshiki.guardarObjeto(configFutoshiki);
                    
                    mensajeLabel.setForeground(Color.BLUE);
                    mensajeLabel.setText("Configuracion guardada!");
@@ -807,6 +935,11 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         verificarForeground();
     }//GEN-LAST:event_itemRelojTemporizadorActionPerformed
 
+    /**
+     * Seleccionar posicion derecha
+     * @param evt evento
+     **/
+    
     private void itemPosicionDerechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemPosicionDerechaActionPerformed
         limpiarForegroundMenu(menuPanelDigitos);
         if (itemPosicionDerecha.getForeground()!= Color.RED){
@@ -814,9 +947,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setPosicion(false);
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_itemPosicionDerechaActionPerformed
 
+    /**
+     * Seleccionar Posicion izquierda
+     * @param evt evento
+     **/
+    
     private void itemPosicionIzquierdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemPosicionIzquierdaActionPerformed
         limpiarForegroundMenu(menuPanelDigitos);
         if (itemPosicionIzquierda.getForeground()!= Color.RED){
@@ -824,9 +962,14 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         }
         configFutoshiki.setPosicion(true);
         System.out.println(configFutoshiki.toStringConfiguracion());
-        Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+        ControladorFutoshiki.guardarObjeto(configFutoshiki);
     }//GEN-LAST:event_itemPosicionIzquierdaActionPerformed
 
+    /**
+     * Seleccionar Jugar
+     * @param evt evento
+     **/
+    
     private void menuJugarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuJugarMouseClicked
         System.out.println("JUGAR");
         String[] argumentos = {""}; //no le pasa argumentos (de momento talvez lo cambie)
@@ -834,6 +977,11 @@ public class GUIFutoshiki extends javax.swing.JFrame {
         
     }//GEN-LAST:event_menuJugarMouseClicked
 
+    /**
+     * Seleccionar ver Top10
+     * @param evt evento
+     **/
+    
     private void menuTop10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTop10MouseClicked
         System.out.println("TOP10");
         String[] argumentos = {""}; //no le pasa argumentos (de momento talvez lo cambie)

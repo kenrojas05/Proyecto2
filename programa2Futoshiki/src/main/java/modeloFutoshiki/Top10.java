@@ -1,9 +1,11 @@
 
-package com.mycompany.programa2futoshiki;
+package modeloFutoshiki;
+
+import controladorFutoshiki.*;
+
 
 import java.io.File;
 import java.util.Map;
-import java.util.HashMap;
 import java.util.LinkedHashMap; //para que mantenga forma el hashmap en el Xml
 
 //Para guardar en XML
@@ -24,21 +26,49 @@ public class Top10 {
     @XmlTransient
     public static LinkedHashMap<String, String> jugadoresDificil = new LinkedHashMap(); //key nombre value tiempo (el tiempo se guarda 00:00:00 para evitar problemas con Xml y listas)
     
-    Top10(){}
+    /**
+     * Constructor vacio de Top10
+     **/
+    
+    public Top10(){}
+    
+    /**
+     * Constructor de Top10
+     * @param jugFacil LinkedHashMap de los jugadores que ganaron en Facil
+     * @param jugIntermedio LinkedHashMap de los jugadores que ganaron en Intermedio
+     * @param jugDificil LinkedHashMap de los jugadores que ganaron en Dificil
+     **/
+    
+    public Top10(LinkedHashMap<String, String> jugFacil , LinkedHashMap<String, String> jugIntermedio, LinkedHashMap<String, String> jugDificil){
+        jugadoresFacil = jugFacil;
+        jugadoresIntermedio = jugIntermedio;
+        jugadoresDificil = jugDificil;
+    }
+    
+    /**
+     * Actualiza el Map para guardar los jugadores dependiendo del tiempo que hicieron
+     * @param jugadores key nombre del jugador value el numero en formato 00:00:00
+     * @param nombre nombre del jugador a poner
+     * @param hora numero de la hora que hizo
+     * @param minuto numero de los minutos que hizo
+     * @param segundo numero de los segundos que hizo
+     * @return el Map actualizado
+     **/
     
     private static Map<String, String> actualizarJugadores(Map<String, String> jugadores, String nombre, int hora, int minuto, int segundo) {
         
-        int tiempoJugadorActual = hora * 3600 + minuto * 60 + segundo;
+        int tiempoJugadorActual = hora * 3600 + minuto * 60 + segundo; //para tener el valor del tiempo tipo a segundos
+        
         boolean reemplazado = false;
 
-        int[] tiempos = new int[10];
-        String[] tiemposStr = new String[10];
-        String[] jugadoresNombres = new String[10];
+        int[] tiempos = new int[10]; //los tiempos en segundos
+        String[] tiemposStr = new String[10]; //los tiempos en string
+        String[] jugadoresNombres = new String[10]; //los jugadores
+        
         int contador = 0;
-
         for (Map.Entry<String, String> jugador : jugadores.entrySet()) {
             String tiempo = jugador.getValue();
-            String[] tiempoDividido = tiempo.split(":"); //divide el string en 00 00 00 para volverlos int
+            String[] tiempoDividido = tiempo.split(":"); //divide el string en 00 00 00 para volverlos int (Documentar Split)
 
             int horasJugador = Integer.parseInt(tiempoDividido[0]);
             int minutosJugador = Integer.parseInt(tiempoDividido[1]);
@@ -97,7 +127,7 @@ public class Top10 {
                     String actualTiempoStr = tiemposStr[i];
                     tiemposStr[i] = tiemposStr[j];
                     tiemposStr[j] = actualTiempoStr;
-                    
+                   
                     
                     String actualJugadorNombre = jugadoresNombres[i];
                     jugadoresNombres[i] = jugadoresNombres[j];
@@ -114,9 +144,15 @@ public class Top10 {
         }
         return jugadores;
     }
-
-
-
+    
+    /**
+     * Agrega el jugador dependiendo del nivel y de si su tiempo cumple para entrar en el Top10
+     * @param nombre nombre del jugador
+     * @param hora numero de la hora que hizo
+     * @param minuto numero de los minutos que hizo
+     * @param segundo numero de los segundos que hizo
+     * @param nivel nivel de dificultad
+     **/
     
     public static void addJugadores(String nombre, int hora, int minuto, int segundo, String nivel){
         switch(nivel){
@@ -124,26 +160,31 @@ public class Top10 {
                 System.out.println("Facil");
                 jugadoresFacil = (LinkedHashMap) actualizarJugadores(jugadoresFacil, nombre, hora, minuto, segundo);
                 Top10.setJugadoresFacil(jugadoresFacil);
-                Top10.guardarTopXML(new Top10());
+                ControladorFutoshiki.guardarObjeto(new Top10()); //guardar
                 System.out.println(Top10.toStringJugadoresFacil());
                 break;
             case "Intermedio":
                 System.out.println("Intermedio");
                 jugadoresIntermedio = (LinkedHashMap) actualizarJugadores(jugadoresIntermedio, nombre, hora, minuto, segundo);
                 Top10.setJugadoresIntermedio(jugadoresIntermedio);
-                Top10.guardarTopXML(new Top10());
+                ControladorFutoshiki.guardarObjeto(new Top10()); //guardar
                 System.out.println(Top10.toStringJugadoresIntermedio());
                 break;
             case "Dificil":
                 System.out.println("Dificil");
                 jugadoresDificil = (LinkedHashMap) actualizarJugadores(jugadoresDificil, nombre, hora, minuto, segundo);
                 Top10.setJugadoresDificil(jugadoresDificil);
-                Top10.guardarTopXML(new Top10());
+                ControladorFutoshiki.guardarObjeto(new Top10()); //guardar
                 System.out.println(Top10.toStringJugadoresDificil());
                 break;
             
             }
     }
+    
+    /**
+     * toString de los jugadores en dificultad facil
+     * @return los jugadores en facil
+     **/
     
     public static String toStringJugadoresFacil(){
         String jugadores = "";
@@ -153,6 +194,11 @@ public class Top10 {
         return jugadores;
     }
     
+    /**
+     * toString de los jugadores en dificultad intermedio
+     * @return los jugadores en intermedio
+     **/
+    
     public static String toStringJugadoresIntermedio(){
         String jugadores = "";
         for (Map.Entry<String, String> jugador : jugadoresIntermedio.entrySet()) {
@@ -160,6 +206,11 @@ public class Top10 {
         }
         return jugadores;
     }
+    
+    /**
+     * toString de los jugadores en dificultad dificil
+     * @return los jugadores en dificil
+     **/
     
     public static String toStringJugadoresDificil(){
         String jugadores = "";
@@ -169,20 +220,31 @@ public class Top10 {
         return jugadores;
     }
     
-    public static <T> void guardarTopXML(T objetoConfig) { //programacion generica
+    /**
+     * Guarda el TOP10 en un archivo Xml
+     * @param <T> objeto 
+     * @param objetoTop el objeto del Top a guardar
+     **/
+    
+    public static <T> void guardarTopXML(T objetoTop) { //programacion generica
         try{
-            JAXBContext objetoContext = JAXBContext.newInstance(objetoConfig.getClass()); // JAXB = Java Architecture for XML Binding. Crea una instancia JAXB del objeto para serializarlo y asi guardarlo
+            JAXBContext objetoContext = JAXBContext.newInstance(objetoTop.getClass()); // JAXB = Java Architecture for XML Binding. Crea una instancia JAXB del objeto para serializarlo y asi guardarlo
 
             Marshaller objetoMarsh = objetoContext.createMarshaller(); //java a xml
             objetoMarsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); // las propiedades del archivo
 
-            objetoMarsh.marshal(objetoConfig, new File("files/futoshiki2024top10.xml")); //convierte el objeto a xml
+            objetoMarsh.marshal(objetoTop, new File("files/futoshiki2024top10.xml")); //convierte el objeto a xml
             System.out.println("Se guardo correctamente");
         }
         catch (JAXBException e){ //error al hacerlo
             System.out.println(e);
         }
     }
+    
+    /**
+     * Carga el TOP10 de un archivo Xml
+     * @return Top10 del Xml
+     **/
     
     public static Top10 cargarTopXML() {
     try {
@@ -204,15 +266,30 @@ public class Top10 {
     
     //getters
     
+    /**
+     * Consigue el Map de los jugadores en Facil
+     * @return key es nombre value es tiempo tipo 00:00:00
+     **/
+    
     @XmlElement // elemento en el xml
     public Map<String, String> getJugadoresFacil(){
         return jugadoresFacil;
     }
     
+    /**
+     * Consigue el Map de los jugadores en Intermedio
+     * @return key es nombre value es tiempo tipo 00:00:00
+     **/
+    
     @XmlElement // elemento en el xml
     public Map<String, String> getJugadoresIntermedio(){
         return jugadoresIntermedio;
     }
+    
+    /**
+     * Consigue el Map de los jugadores en Dificil
+     * @return key es nombre value es tiempo tipo 00:00:00
+     **/
     
     @XmlElement // elemento en el xml
     public Map<String, String> getJugadoresDificil(){
@@ -221,13 +298,28 @@ public class Top10 {
     
     //setters
     
+    /**
+     * Set los jugadores en facil
+     * @param pJugadoresFacil LinkedHashMap con key nombre y value tiempo en formato 00:00:00
+     **/
+    
     public static void setJugadoresFacil(LinkedHashMap<String, String> pJugadoresFacil){
         jugadoresFacil = (LinkedHashMap) pJugadoresFacil;
     }
     
+    /**
+     * Set los jugadores en intermedio
+     * @param pJugadoresIntermedio LinkedHashMap con key nombre y value tiempo en formato 00:00:00
+     **/
+
     public static void setJugadoresIntermedio(LinkedHashMap<String, String> pJugadoresIntermedio){
         jugadoresIntermedio = (LinkedHashMap) pJugadoresIntermedio;
     }
+    
+    /**
+     * Set los jugadores en Dificil
+     * @param pJugadoresDificil LinkedHashMap con key nombre y value tiempo en formato 00:00:00
+     **/
 
     public static void setJugadoresDificil(LinkedHashMap<String, String> pJugadoresDificil){
         jugadoresDificil = (LinkedHashMap) pJugadoresDificil;

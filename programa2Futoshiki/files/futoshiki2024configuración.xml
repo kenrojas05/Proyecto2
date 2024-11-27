@@ -39,7 +39,7 @@
         </entry>
     </jugadores>
     <multinivel>false</multinivel>
-    <nivel>Facil</nivel>
+    <nivel>Dificil</nivel>
     <posicion>true</posicion>
     <reloj>Cronometro</reloj>
     <temporizadorHora>0</temporizadorHora>

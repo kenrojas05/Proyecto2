@@ -1,15 +1,16 @@
 
-package com.mycompany.programa2futoshiki; //correo jvim woqi nqnz puyb
+package modeloFutoshiki; 
 
 
-//(Documentar mejor en el PDF al final) MAP
-import java.io.File;
+
+//MAP
+
 import java.util.Arrays;
 import java.util.HashMap;  //Map es un objeto
 import java.util.Map;      //lo que hace es que guarda valores con Keys o llaves (parecido a un directorio)
-import javax.swing.SwingUtilities;
 
-//(Documentar mejor PDF final) XML
+//XML
+import java.io.File;
 import javax.xml.bind.annotation.*; //para la serializacion y el guardado de archivo xml
 import javax.xml.bind.*;            
 
@@ -34,10 +35,14 @@ public class Configuracion {
     
 
     
-    @XmlTransient //ignora el atributo
+    @XmlTransient //ignora el atributo al formar el XML
     public static HashMap<String, Jugador> jugadores = new HashMap<>(); //nombre key password value
     
-    Configuracion(){
+    /**
+     * Constructor de la configuracion inicializada en los valores predeterminados
+     **/
+    
+    public Configuracion(){
         setCuadricula((byte)5);
         setNivel("Facil");
         setMultinivel(false);
@@ -45,13 +50,28 @@ public class Configuracion {
         setPosicion(false);
     }
     
-    Configuracion(byte pCuadricula, String pNivel, boolean pMultinivel, String pReloj, boolean pPosicion){
+    /**
+     * Constructor con valores perzonalizados
+     * @param pCuadricula byte que determina la matriz del juego
+     * @param pNivel String que decide el nivel en "Facil" "Intermedio" "Dificil"
+     * @param pMultinivel determina si es multinivel o no 
+     * @param pReloj String que determina si se utiliza reloj "No" y de que tipo Cronometro o Temporizador
+     * @param pPosicion false se posiciona los numeros en la derecha true en la izquierda
+     **/
+    
+    public Configuracion(byte pCuadricula, String pNivel, boolean pMultinivel, String pReloj, boolean pPosicion){
         setCuadricula(pCuadricula);
         setNivel(pNivel);
         setMultinivel(pMultinivel);
         setReloj(pReloj);
         setPosicion(pPosicion);
     }
+    
+    /**
+     * Consigue el jugador del HashMap de los jugadores con el nombre de este
+     * @param keyNombre el nombre del jugador a buscar
+     * @return retorna el objeto Jugador de este
+     **/
     
     public Jugador conseguirJugador(String keyNombre){ //si no se encuentra entonces incognito
         if (jugadores.containsKey(keyNombre)){
@@ -61,6 +81,12 @@ public class Configuracion {
             return new Jugador();
         }
     }
+    
+    /**
+     * Guarda la configuracion en un archivo XML
+     * @param objetoConfig Objeto a guardar
+     * @param <T> Objeto de Configuracion ya que se guarda en un archivo dedicado
+     **/
     
     public static <T> void guardarConfiguracionXML(T objetoConfig) { //programacion generica
         try{
@@ -76,6 +102,11 @@ public class Configuracion {
             System.out.println(e);
         }
     }
+    
+    /**
+     * Carga la configuracion del archivo XML
+     * @return objeto Configuracion
+     **/
     
     public static Configuracion cargarConfiguracionXML() {
     try {
@@ -95,13 +126,20 @@ public class Configuracion {
         }
     }
     
-    
-    
-    
+    /**
+     * toString de la configuracion
+     * @return String de la configuracion
+     **/
     
     public String toStringConfiguracion(){
         return "Cuadricula: "+cuadricula+" Nivel: "+nivel+" Multinivel: "+multinivel+" Reloj: "+reloj+" Posicion: "+posicion;
     }
+    
+    /**
+     * toString del Jugador buscado con nombre
+     * @param nombre nombre del jugador a buscar
+     * @return String de los datos del jugador
+     **/
     
     public static String toStringJugador(String nombre){
         if (jugadores.containsKey(nombre)){
@@ -112,6 +150,11 @@ public class Configuracion {
         return "";
     }
     
+    /**
+     * toString de los jugadores
+     * @return String de los jugadores del Map
+     **/
+    
     public static String toStringJugadores(){
         String jugadoresRegistrados = "";
         for (Map.Entry<String, Jugador> jugador : jugadores.entrySet()) {
@@ -121,6 +164,11 @@ public class Configuracion {
         return jugadoresRegistrados;
     }
     
+    /**
+     * Determina si el nombre tiene un tamano valido
+     * @param nombre el nombre
+     * @return true si es valido false en caso contrario
+     **/
     
     public static boolean nombreValido(String nombre){
         if (nombre.length()>=1 || nombre.length()<=30){
@@ -130,6 +178,13 @@ public class Configuracion {
             return false;
         }
     }
+    
+    /**
+     * Agrega el jugador si es valido su nombre y es unico
+     * @param nombre nombre del jugador
+     * @param jugador objeto jugador 
+     **/
+    
     public static void addJugadores(String nombre, Jugador jugador){
         if (nombre.length()==0){
             throw new IllegalArgumentException("INCOGNITO DEBERIA SER");
@@ -146,6 +201,10 @@ public class Configuracion {
         
     }
     
+    /**
+     * Comprueba que el temporizador no inicie en 0
+     **/
+    
     public void comprobarTemporizador(){
         if (temporizadorHora == 0 && temporizadorMinuto == 0 && temporizadorSegundo == 0){
             throw new IllegalArgumentException("0 0 0");
@@ -155,48 +214,103 @@ public class Configuracion {
     
     //getters
     
+    /**
+     * Consigue el byte que determina la cuadricula
+     * @return byte del 3 al 10
+     **/
+    
     @XmlElement // elemento en el xml
     public byte getCuadricula(){
         return cuadricula;
     }
+    
+    /**
+     * Consigue el nivel de dificultad
+     * @return String dificultad entre "Facil "Intermedio" "Dificil
+     **/
+    
     @XmlElement // elemento en el xml
     public String getNivel(){
         return nivel;
     }
+    
+    /**
+     * Consigue el booleano que determina si es multinivel o no
+     * @return boolean false no multinivel true multinivel
+     **/
+    
     @XmlElement // elemento en el xml
     public boolean getMultinivel(){
         return multinivel;
     }
+    
+    /**
+     * Consigue el string que determina el reloj
+     * @return Cronometro, No, Temporizador
+     **/
+    
     @XmlElement // elemento en el xml
     public String getReloj(){
         return reloj;
     }
+    
+    /**
+     * Consigue la posicion del panel de numeros en booleano
+     * @return false derecha true izquierda
+     **/
+    
     @XmlElement // elemento en el xml
     public boolean getPosicion(){
         return posicion;
     }
+    
+    /**
+     * Consigue el map de los jugadores
+     * @return Map de jugadores key nombre string value objeto Jugador
+     **/
+    
     @XmlElement // elemento en el xml
     public Map<String, Jugador> getJugadores(){
         return jugadores;
     }
     
+    /**
+     * Consigue la hora del temporizador 
+     * @return int hora 
+     **/
+    
     @XmlElement // elemento en el xml
     public int getTemporizadorHora(){
         return temporizadorHora;
     }
+    
+    /**
+     * Consigue los minutos del temporizador
+     * @return int minutos
+     **/
+    
     @XmlElement // elemento en el xml
     public int getTemporizadorMinuto(){
         return temporizadorMinuto;
     }
+    
+    /**
+     * Consigue los segundos del temporizador
+     * @return int segundos
+     **/
+    
     @XmlElement // elemento en el xml
     public int getTemporizadorSegundo(){
         return temporizadorSegundo;
     }
     
     
-    //falta guardar jugaodres
-    
     //setters
+    
+    /**
+     * Set la cuadricula
+     * @param pCuadricula byte numero de la cuadricula
+     **/
     
     public void setCuadricula(byte pCuadricula){
         if (pCuadricula<3 || pCuadricula>10){
@@ -206,20 +320,47 @@ public class Configuracion {
             cuadricula = pCuadricula;
         }
     }
-    public void setNivel(String pNivel){
+    
+    /**
+     * Set del nivel
+     * @param pNivel String que determina la dificultad
+     **/
+    
+    public void setNivel(String pNivel){ 
         nivel = pNivel;
     }
+    
+    /**
+     * Set de si es Multinivel o no
+     * @param pMultinivel boolean que determina el multinivel
+     **/
     
     public void setMultinivel(boolean pMultinivel){
         multinivel = pMultinivel;
     }
     
+    /**
+     * Set del reloj
+     * @param pReloj string del tipo de reloj que se quiere
+     **/
+    
     public void setReloj(String pReloj){
         reloj = pReloj;
     }
+    
+    /**
+     * Set de la posicion del panel de numeros
+     * @param pPosicion boolean que determina derecha o izquierda
+     **/
+    
     public void setPosicion(boolean pPosicion){
         posicion = pPosicion;
     }
+    
+    /**
+     * Set del temporizadorHora
+     * @param hora int que dicta la hora del temporizador
+     **/
 
     public void setTemporizadorHora(int hora){
         if (hora<0 || hora>5){
@@ -230,6 +371,11 @@ public class Configuracion {
         }
     }
     
+    /**
+     * Set del temporizadorMinuto
+     * @param minuto int que dicta los minutos del temporizador
+     **/
+    
     public void setTemporizadorMinuto(int minuto){
         if (minuto<0 || minuto>59){
             throw new IllegalArgumentException("Minuto debe ser entre 0 y 59");
@@ -239,8 +385,13 @@ public class Configuracion {
         }
     }
     
+    /**
+     * Set del temporizadorSegundo
+     * @param segundo byte numero de la cuadricula
+     **/
+    
     public void setTemporizadorSegundo(int segundo){
-        if (segundo<0 || segundo>59){
+        if (segundo<0 || segundo>59){ //puesto que ya se valida par evitar 0s en todo no es necesario ver si los segundos son validos para que no pongan vacio asi que el tiempo minio es 1sec
             throw new IllegalArgumentException("Segundos debe ser entre 0 y 59");
         }
         else {

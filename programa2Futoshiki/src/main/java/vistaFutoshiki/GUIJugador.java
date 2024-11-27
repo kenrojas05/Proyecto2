@@ -1,19 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package com.mycompany.programa2futoshiki;
 
-import static com.mycompany.programa2futoshiki.GUIFutoshiki.configFutoshiki;
+package vistaFutoshiki;
+
+// el correo para el envio de contraseñas usa jvim woqi nqnz puyb como codigo para enviarlo por netbeans como app permitida
+
+import controladorFutoshiki.*;
+import modeloFutoshiki.*;
+
 import java.awt.*;
 import java.io.UnsupportedEncodingException;
 import javax.swing.*;
 
 //mail y time y properties
-import java.time.LocalDateTime; // Sirve para dar la hora del sistema
 import javax.mail.*; // Se añadió la librería llib al proyecto para la API javax.mail
 import java.util.Properties; 
 import javax.mail.internet.*; // Importa las clases necesarias para MIME
+import static vistaFutoshiki.GUIFutoshiki.configFutoshiki;
 
 /**
  *
@@ -169,6 +170,11 @@ public class GUIJugador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * Iniciar Sesion boton
+     * @param evt evento
+     **/
+    
     private void iniciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarButtonActionPerformed
         indicadorLabel.setText("");
         
@@ -204,6 +210,11 @@ public class GUIJugador extends javax.swing.JFrame {
         
     }//GEN-LAST:event_iniciarButtonActionPerformed
 
+    /**
+     * Registro boton
+     * @param evt evento
+     **/
+    
     private void registroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroButtonActionPerformed
         System.out.println("Registro");
         sesionLabel.setText("Registrarse");
@@ -237,7 +248,7 @@ public class GUIJugador extends javax.swing.JFrame {
                       Configuracion.addJugadores(nombre, jugador);
                       nombreField.setText("");
                       passwordField.setText("");
-                      Configuracion.guardarConfiguracionXML(configFutoshiki); //guardar en archivo la configuracion
+                      ControladorFutoshiki.guardarObjeto(configFutoshiki);
                   } 
                   catch (Exception e){
                       indicadorLabel.setText(e.getMessage());
@@ -279,6 +290,11 @@ public class GUIJugador extends javax.swing.JFrame {
 
     }//GEN-LAST:event_registroButtonActionPerformed
 
+    /**
+     * Recuperar boton
+     * @param evt evento
+     **/
+    
     private void recuperarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recuperarButtonActionPerformed
         System.out.println("Password");
         sesionLabel.setText("Recuperar");
@@ -367,6 +383,12 @@ public class GUIJugador extends javax.swing.JFrame {
         fondoPanel.add(regresarButton);
     }//GEN-LAST:event_recuperarButtonActionPerformed
 
+    /**
+     * Enviar los datos del jugador por correo que el escriba
+     * @param correo el correo
+     * @return string con la validacion
+     **/
+    
     public String enviarCorreoDatos(String correo, String datosEnviar) {
         String validacion;
         Properties propiedades = new Properties(); //las propiedades del mail (configurado para gmail)
@@ -407,6 +429,12 @@ public class GUIJugador extends javax.swing.JFrame {
             }
         }
     
+    /**
+     * Buscar un componente por el nombre
+     * @param nombre nombre del componente
+     * @return Component
+     **/
+    
     private Component buscarComponente(String nombre){ //Busca un boton con el texto que este posee
         Component[] listaComponentes = fondoPanel.getComponents(); //consigue los componentes del JPanel fondoPabel
             for (Component i : listaComponentes) {
@@ -418,12 +446,6 @@ public class GUIJugador extends javax.swing.JFrame {
             }
         return null;
     }
-      /*  
-    public String getNombre(){
-        return nombre;
-    }
-    public String getPassword(){
-        return password;*/
     
     /**
      * @param args the command line arguments

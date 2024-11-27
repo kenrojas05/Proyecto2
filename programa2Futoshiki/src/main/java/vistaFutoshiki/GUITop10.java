@@ -1,23 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package com.mycompany.programa2futoshiki;
 
-import static com.mycompany.programa2futoshiki.Top10.jugadoresFacil;
+package vistaFutoshiki;
+
+import modeloFutoshiki.Top10;
 import java.util.Map;
 
-/**
- *
- * @author Usuario
- */
 public class GUITop10 extends javax.swing.JFrame {
     
     public static Top10 top10Actual;
     
-    /**
-     * Creates new form GUITop10
-     */
     public GUITop10() {
         initComponents();
     }
@@ -106,7 +96,7 @@ public class GUITop10 extends javax.swing.JFrame {
                 { new Integer(7), null, null},
                 { new Integer(8), null, null},
                 { new Integer(9), null, null},
-                {null, null, null}
+                { new Integer(10), null, null}
             },
             new String [] {
                 "", "JUGADOR", "TIEMPO"
@@ -154,7 +144,7 @@ public class GUITop10 extends javax.swing.JFrame {
                 { new Integer(7), null, null},
                 { new Integer(8), null, null},
                 { new Integer(9), null, null},
-                {null, null, null}
+                { new Integer(10), null, null}
             },
             new String [] {
                 "", "JUGADOR", "TIEMPO"
@@ -202,7 +192,7 @@ public class GUITop10 extends javax.swing.JFrame {
                 { new Integer(7), null, null},
                 { new Integer(8), null, null},
                 { new Integer(9), null, null},
-                {null, null, null}
+                { new Integer(10), null, null}
             },
             new String [] {
                 "", "JUGADOR", "TIEMPO"
@@ -300,9 +290,18 @@ public class GUITop10 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Set del top10
+     * @param top top10
+     **/
+    
     public static void setTop(Top10 top){
         top10Actual = top;
     }
+    
+    /**
+     * Construye en las table de cada panel los datos del top10
+     **/
     
     public static void construirTablas(){
         int contador;

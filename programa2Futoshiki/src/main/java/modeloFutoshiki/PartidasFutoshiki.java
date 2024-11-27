@@ -1,6 +1,5 @@
 
-package com.mycompany.programa2futoshiki;
-import static com.mycompany.programa2futoshiki.GUIFutoshiki.configFutoshiki; //por los datos
+package modeloFutoshiki;
 
 
 /**
@@ -14,7 +13,6 @@ import javax.xml.bind.*;
 import java.io.File;
 
 import java.util.ArrayList; //DE MOMENTO NO LO USO PERO POR SI ACASO (en caso de no borrar)
-import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement
@@ -23,12 +21,37 @@ public class PartidasFutoshiki {
     
     List<Partida> listaPartidas = new ArrayList<>();
     
+    /**
+     * Constructor vacio de partidas futoshiki
+     **/
+    
     PartidasFutoshiki(){}
+    
+    /**
+     * Constructor de las partidas futoshiki
+     * @param pListaPartidas lista de partidas;
+     **/
+    
+    public PartidasFutoshiki(List<Partida> pListaPartidas){
+        listaPartidas = pListaPartidas;
+    }
+    
+    /**
+     * Agregar la partida a la lista de partidas
+     * @param partida la partida a agregar
+     **/
     
     public void agregarPartida(Partida partida){
         listaPartidas.add(partida);
     }
 
+    /**
+     * Consigue la Partida para jugar dependiendo del nivel y la cuadricula
+     * @param nivel nivel de dificultad
+     * @param cuadricula byte del tamano de cuadricula
+     * @return Partida juego
+     **/
+    
     public Partida partidaJugar(String nivel, byte cuadricula){
         for (Partida juego : listaPartidas){
             if (juego.getNivel().equals(nivel) && juego.getCuadricula()==cuadricula){
@@ -38,6 +61,10 @@ public class PartidasFutoshiki {
         return null;
     }
     
+    /**
+     * toString de las partidas
+     * @return String de todas las partidas
+     **/
     
     public String toStringPartidas() {
         String partida = "";
@@ -60,6 +87,11 @@ public class PartidasFutoshiki {
         return partida;
     }
     
+    /**
+     * Imprime los numeros de la partida int[][]
+     * @param partida la partida en matriz
+     **/
+    
     public void imprimeNumeros(int[][] partida){
         for (int i = 0; i < partida.length; i++) {
             for (int j = 0; j < partida[i].length; j++) {
@@ -70,6 +102,12 @@ public class PartidasFutoshiki {
             
     }
 
+    /**
+     * Guarda PartidaFutoshiji en un XML
+     * @param <T> recibeobjeto
+     * @param objetoConfig el objeto a guardar
+     **/
+    
     public static <T> void guardarPartidaFutoshikiXML(T objetoConfig) { //programacion generica
         try{
             JAXBContext objetoContext = JAXBContext.newInstance(objetoConfig.getClass()); // JAXB = Java Architecture for XML Binding. Crea una instancia JAXB del objeto para serializarlo y asi guardarlo
@@ -84,6 +122,11 @@ public class PartidasFutoshiki {
             System.out.println(e);
         }
     }
+    
+    /**
+     * Recupera los datos del XML 
+     * @return PartidasFutoshiki
+     **/
     
     public static PartidasFutoshiki cargarPartidaFutoshikiXML() {
     try {
@@ -104,6 +147,11 @@ public class PartidasFutoshiki {
     }
     
 
+    /**
+     * Consigue la lista de partidas 
+     * @return List de todas las Partida
+     **/
+    
     @XmlElementWrapper(name = "partidas")
     @XmlElement(name = "partida")
     public List<Partida> getListaPartidas() {

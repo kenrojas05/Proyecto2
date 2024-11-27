@@ -2,6 +2,9 @@
 
 package com.mycompany.programa2futoshiki;
 
+import vistaFutoshiki.*;
+import modeloFutoshiki.*;
+
 /**
  *
  * @author Kendall Ariel Rojas Cartin

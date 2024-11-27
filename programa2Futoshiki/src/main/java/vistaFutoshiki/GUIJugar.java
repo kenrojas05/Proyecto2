@@ -1,7 +1,17 @@
 
-package com.mycompany.programa2futoshiki;
+package vistaFutoshiki;
 
-import static com.mycompany.programa2futoshiki.GUIFutoshiki.configFutoshiki; //por los datos
+import controladorFutoshiki.ControladorFutoshiki;
+import modeloFutoshiki.*;
+
+import modeloFutoshiki.Configuracion; //por los datos
+import modeloFutoshiki.Jugador;
+import modeloFutoshiki.Partida;
+import modeloFutoshiki.PartidasFutoshiki;
+import modeloFutoshiki.Top10;
+import static vistaFutoshiki.GUIFutoshiki.configFutoshiki;
+
+
 
 
 //documentar awt
@@ -31,7 +41,7 @@ public class GUIJugar extends javax.swing.JFrame {
     private int horaGlobal = 0;
     private int minutoGlobal = 0;
     private int segundosGlobal = 0;
-    
+    boolean borrarGlobal = false;
     
     private int numeroElegido = 0;
     
@@ -88,10 +98,12 @@ public class GUIJugar extends javax.swing.JFrame {
         tiempoHorasLabel = new javax.swing.JLabel();
         tiempoMinutosLabel = new javax.swing.JLabel();
         iniciarJuegoButton = new javax.swing.JButton();
+        anuncioLabel = new javax.swing.JLabel();
+        borrarBoton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1100, 900));
         setResizable(false);
+        setSize(new java.awt.Dimension(1000, 1000));
         getContentPane().setLayout(null);
 
         fondoPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -454,12 +466,35 @@ public class GUIJugar extends javax.swing.JFrame {
         fondoPanel.add(iniciarJuegoButton);
         iniciarJuegoButton.setBounds(70, 740, 117, 62);
 
+        anuncioLabel.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
+        anuncioLabel.setForeground(new java.awt.Color(0, 0, 0));
+        fondoPanel.add(anuncioLabel);
+        anuncioLabel.setBounds(620, 10, 350, 50);
+
+        borrarBoton.setBackground(new java.awt.Color(255, 255, 255));
+        borrarBoton.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
+        borrarBoton.setForeground(new java.awt.Color(0, 0, 0));
+        borrarBoton.setText("Borrar");
+        borrarBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarBotonActionPerformed(evt);
+            }
+        });
+        fondoPanel.add(borrarBoton);
+        borrarBoton.setBounds(1000, 50, 75, 50);
+
         getContentPane().add(fondoPanel);
         fondoPanel.setBounds(0, 0, 1100, 900);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    /**
+     * Verifica desigualdades
+     * @param partida la partida
+     * @param cuadricula la cuadricula de la partida
+     **/
     
     public void verificarDesigualdad(Partida partida, int[][] cuadricula) {
         
@@ -527,6 +562,9 @@ public class GUIJugar extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * La Alerta al finalizar el juego
+     **/
     
     public void alertaFinalizar(){
         String mensaje;
@@ -573,30 +611,33 @@ public class GUIJugar extends javax.swing.JFrame {
         
     }
     
+    /**
+     * Envia al controlador para generar el Top10 y guardarlo
+     **/
+    
     public void top10(){
         System.out.println("Top 10");
-        if (!nombreJugadorField.getText().equals("incognito")){
-            Top10 top = new Top10();
-            String jugador = nombreJugadorField.getText();
-            int hora = horaGlobal;
-            int minutos = minutoGlobal;
-            int segundos = segundosGlobal;
-            
-            String nivel = configFutoshiki.getNivel();
-            System.out.println(jugador +" "+ hora +" "+ minutos +" "+" "+segundos);
-            Top10.addJugadores(jugador, hora, minutos, segundos, nivel);
-            
-            Top10.guardarTopXML(top);
-            
-            System.out.println("Guardado");
-            System.out.println(Top10.toStringJugadoresFacil());
-        }
+        String jugador = nombreJugadorField.getText();
+        int hora = horaGlobal;
+        int minutos = minutoGlobal;
+        int segundos = segundosGlobal;
+        String nivel = configFutoshiki.getNivel();
+        
+        ControladorFutoshiki controlador = new ControladorFutoshiki();
+        
+        controlador.agregarAlTop10(jugador, hora, minutos, segundos, nivel);
+
+        
         horaGlobal = 0;
         minutoGlobal = 0;
         segundosGlobal = 0;
         
     }
         
+    /**
+     * Alerta error
+     * @param mensaje el mensaje del error dependiendo de que tipo
+     **/
     
     public void alertaMensaje(String mensaje){
         System.out.println("Alerta");
@@ -636,6 +677,13 @@ public class GUIJugar extends javax.swing.JFrame {
         ventanaInfo.setVisible(true);
     }
     
+    /**
+     * Crea la cuadricula que esta en juego actualmente
+     * @param filas filas 
+     * @param columnas columnas
+     * @return cuadricula
+     **/
+    
     public int[][] crearCuadriculaEnJuego(int filas, int columnas){
         int[][] cuadricula = new int[filas][columnas];
 
@@ -646,6 +694,13 @@ public class GUIJugar extends javax.swing.JFrame {
         }
         return cuadricula;
     }
+    
+    /**
+     * Crea la cuadricula de botones del juego
+     * @param filas filas
+     * @param columnas columnas
+     * @return Cuadricula de JButton
+     **/
     
     public JButton[][] crearCuadriculaBotones(int filas, int columnas){
         JButton[][] cuadricula = new JButton[filas][columnas];
@@ -658,12 +713,22 @@ public class GUIJugar extends javax.swing.JFrame {
         return cuadricula;
     }
     
+    /**
+     * Limpia los botones del juego
+     **/
+    
     public void limpiarBotonesJuego(){
         for (Component componente : numerosPanel.getComponents()){
             JButton boton = (JButton) componente;
             boton.setBackground(Color.WHITE);
         }
     }
+    
+    /**
+     * Convierte en Stringf la cuadricula dada
+     * @param cuadricula cuadricula int[][]
+     * @return String de la cuadricula
+     **/
     
     public String cuadriculaToString(int[][] cuadricula) {
         String cuadriculaString = "";
@@ -680,6 +745,11 @@ public class GUIJugar extends javax.swing.JFrame {
         return cuadriculaString;
     }
     
+    /**
+     * Comprobar Filas y columnas de una cuadricula
+     * @param cuadricula int[][] cuadricula
+     * @return Si hay un error regresa el int[] x y de la posicion del error en caso de no encontrar null
+     **/
     
     public int[] comprobarFilasColumnas(int[][] cuadricula) {
         int n = cuadricula.length; 
@@ -690,9 +760,9 @@ public class GUIJugar extends javax.swing.JFrame {
                 if (valor != 0) { 
                     for (int pComparar = columna + 1; pComparar < n; pComparar++) {
                         if (cuadricula[fila][pComparar] == valor) {
-                            errorString = "fila";
+                            errorString = "fila"; //tipo de error
                             cuadriculaBotones[fila][pComparar].setForeground(Color.RED);
-                            return new int[] {fila, pComparar}; 
+                            return new int[] {fila, pComparar}; //posicion del error
                         }
                         else if (cuadricula[fila][pComparar] != valor && cuadriculaBotones[fila][pComparar].getForeground() == Color.RED){
                             cuadriculaBotones[fila][pComparar].setForeground(new Color(0,100,0));
@@ -708,9 +778,9 @@ public class GUIJugar extends javax.swing.JFrame {
                 if (valor != 0) { 
                     for (int pComparar = fila + 1; pComparar < n; pComparar++) {
                         if (cuadricula[pComparar][columna] == valor) {
-                            errorString = "columna";
+                            errorString = "columna"; //tipo de error
                             cuadriculaBotones[pComparar][columna].setForeground(Color.RED);
-                            return new int[] {pComparar, columna}; 
+                            return new int[] {pComparar, columna};  //posicion del error
                         }
                         else if (cuadricula[pComparar][columna] != valor && cuadriculaBotones[pComparar][columna].getForeground() == Color.RED){
                             cuadriculaBotones[pComparar][columna].setForeground(new Color(0,100,0));
@@ -721,6 +791,12 @@ public class GUIJugar extends javax.swing.JFrame {
         }
         return null; 
     }
+    
+    /**
+     * Genera la cuadricula con la partida y el tamano de la matriz
+     * @param partida La partida en juego
+     * @param cuadriculaTamano tamano de matriz en byte
+     **/
     
     public void generarCuadricula(Partida partida, byte cuadriculaTamano) {
         JPanel panel = juegoPanel;
@@ -780,7 +856,22 @@ public class GUIJugar extends javax.swing.JFrame {
                         boton.addActionListener(new java.awt.event.ActionListener() {
                             public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 
-                                if (numeroElegido != 0){
+                                if (borrarGlobal == true){
+                                    boton.setText(String.valueOf(""));
+                                    cuadriculaEnJuego[filaBoton][columnaBoton] = 0;
+                                    
+                                    int [] resultado = comprobarFilasColumnas(cuadriculaEnJuego);
+                                    if (resultado!=null){
+                                        alertaMensaje(errorString);
+                                    }
+                                    else {
+                                        System.out.println("Nada");
+                                        errorString = "";
+                                        boton.setForeground(new Color(0,100,0)); //rgb de verde oscuro 
+                                    }
+                                    
+                                }
+                                else if (numeroElegido != 0){
                                     boton.setText(String.valueOf(numeroElegido));
                                     cuadriculaEnJuego[filaBoton][columnaBoton] = numeroElegido;
                                     
@@ -859,10 +950,18 @@ public class GUIJugar extends javax.swing.JFrame {
         panel.repaint();
     }
     
+    /**
+     * Cancela el timer
+     * @param timer el timer a cancelar
+     **/
+    
     public void cancelarTimer(Timer timer){
         timer.cancel(); //termina el timer
     }
     
+    /**
+     * Construye el reloj
+     **/
     
     public void construirReloj(){
         String reloj = configFutoshiki.getReloj(); //Cronometro, No, Temporizador
@@ -886,22 +985,43 @@ public class GUIJugar extends javax.swing.JFrame {
         
         
         
-    }
+    }  
     
+    /**
+     * Boton de inicio de juego
+     * @param evt evento
+     **/
     
     private void iniciarJuegoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarJuegoButtonActionPerformed
-        Jugador jugador = configFutoshiki.conseguirJugador(nombreJugadorField.getText());
-        PartidasFutoshiki partidas = PartidasFutoshiki.cargarPartidaFutoshikiXML();
-        Partida partidaJuego = partidas.partidaJugar(configFutoshiki.getNivel(), configFutoshiki.getCuadricula());
-        generarCuadricula(partidaJuego, configFutoshiki.getCuadricula());
-        construirReloj();
-        iniciarJuegoButton.setVisible(false);
+        try {
+            Jugador jugador = configFutoshiki.conseguirJugador(nombreJugadorField.getText());
+            PartidasFutoshiki partidas = PartidasFutoshiki.cargarPartidaFutoshikiXML();
+            Partida partidaJuego = partidas.partidaJugar(configFutoshiki.getNivel(), configFutoshiki.getCuadricula());
+            generarCuadricula(partidaJuego, configFutoshiki.getCuadricula());
+            construirReloj();
+            iniciarJuegoButton.setVisible(false);
+            anuncioLabel.setText("");
+        }
+        catch (Exception e) {
+            anuncioLabel.setText("Error al encontrar juego");
+        }
+        
     }//GEN-LAST:event_iniciarJuegoButtonActionPerformed
 
+    /**
+     * Terminar juego boton
+     * @param evt evento
+     **/
+    
     private void terminarJuegoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarJuegoButtonActionPerformed
-        
+
     }//GEN-LAST:event_terminarJuegoButtonActionPerformed
 
+    /**
+     * Boton de numero1
+     * @param evt evento
+     **/
+    
     private void numero1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero1ButtonActionPerformed
         limpiarBotonesJuego();
         numeroElegido = 1;
@@ -909,6 +1029,11 @@ public class GUIJugar extends javax.swing.JFrame {
         numero1Button.setBackground(Color.GREEN);
     }//GEN-LAST:event_numero1ButtonActionPerformed
 
+    /**
+     * Boton de numero 2
+     * @param evt evento
+     **/
+    
     private void numero2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero2ButtonActionPerformed
         limpiarBotonesJuego();
         numeroElegido = 2;
@@ -916,6 +1041,11 @@ public class GUIJugar extends javax.swing.JFrame {
         numero2Button.setBackground(Color.GREEN);
     }//GEN-LAST:event_numero2ButtonActionPerformed
 
+    /**
+     * Boton de numero 3
+     * @param evt evento
+     **/
+    
     private void numero3ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero3ButtonActionPerformed
         limpiarBotonesJuego();
         numeroElegido = 3;
@@ -923,55 +1053,119 @@ public class GUIJugar extends javax.swing.JFrame {
         numero3Button.setBackground(Color.GREEN);
     }//GEN-LAST:event_numero3ButtonActionPerformed
 
+    /**
+     * Boton de numero 4
+     * @param evt evento
+     **/
+    
     private void numero4ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero4ButtonActionPerformed
         limpiarBotonesJuego();
         numeroElegido = 4;
         numero4Button.setBackground(Color.GREEN);
     }//GEN-LAST:event_numero4ButtonActionPerformed
 
+    /**
+     * Boton de numero 5
+     * @param evt evento
+     **/
+    
     private void numero5ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero5ButtonActionPerformed
         limpiarBotonesJuego();
         numeroElegido = 5;
         numero5Button.setBackground(Color.GREEN);
     }//GEN-LAST:event_numero5ButtonActionPerformed
 
+    /**
+     * Boton de numero 7
+     * @param evt evento
+     **/
+    
     private void numero7ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero7ButtonActionPerformed
         limpiarBotonesJuego();
         numeroElegido = 7;
         numero7Button.setBackground(Color.GREEN);
     }//GEN-LAST:event_numero7ButtonActionPerformed
 
+    /**
+     * Boton de numero 8
+     * @param evt evento
+     **/
+    
     private void numero8ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero8ButtonActionPerformed
         limpiarBotonesJuego();
         numeroElegido = 8;
         numero8Button.setBackground(Color.GREEN);
     }//GEN-LAST:event_numero8ButtonActionPerformed
 
+    /**
+     * Boton de numero 9
+     * @param evt evento
+     **/
+    
     private void numero9ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero9ButtonActionPerformed
         limpiarBotonesJuego();
         numeroElegido = 9;
         numero9Button.setBackground(Color.GREEN);
     }//GEN-LAST:event_numero9ButtonActionPerformed
 
+    /**
+     * Boton de numero 6
+     * @param evt evento
+     **/
+    
     private void numero6ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero6ButtonActionPerformed
         limpiarBotonesJuego();
         numeroElegido = 6;
         numero6Button.setBackground(Color.GREEN);
     }//GEN-LAST:event_numero6ButtonActionPerformed
 
+    /**
+     * Boton de numero 10
+     * @param evt evento
+     **/
+    
     private void numero10ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numero10ButtonActionPerformed
         limpiarBotonesJuego();
         numeroElegido = 10;
         numero10Button.setBackground(Color.GREEN);
     }//GEN-LAST:event_numero10ButtonActionPerformed
 
+    /**
+     * Boton de borrar
+     * @param evt evento
+     **/
+    
+    private void borrarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarBotonActionPerformed
+        if (borrarGlobal == true){
+            borrarGlobal = false;
+            borrarBoton.setBackground(Color.WHITE);
+        }
+        else {
+            borrarGlobal = true;
+            borrarBoton.setBackground(Color.GREEN);
+        }
+        
+    }//GEN-LAST:event_borrarBotonActionPerformed
+
+    /**
+     * Set del nombre en el textField
+     **/
+    
     public static void setNombre(){
         nombreJugadorField.setText(GUIFutoshiki.getNombre());
     }
     
+    /**
+     * Construye el nivel
+     **/
+    
     public static void setNivel(){
         nivelLabel.setText(nivelLabel.getText() + " " + configFutoshiki.getNivel());
     }
+    
+    /**
+     * Construye el temporizador
+     **/
     
     public void temporizador(){
         Timer timer = new Timer();
@@ -1023,6 +1217,10 @@ public class GUIJugar extends javax.swing.JFrame {
         timerGlobal = timer;
     }
     
+    /**
+     * Construye el cronometro
+     **/
+    
     public void cronometro(){ 
         Timer timer = new Timer();
         horaGlobal = 0;
@@ -1060,7 +1258,9 @@ public class GUIJugar extends javax.swing.JFrame {
         timerGlobal = timer;
     }
     
-    
+    /**
+     * Construye el panel de botones junto con el boton de borrar
+     **/
     
     public static void construirPanel() { //para el panel de numeros
         boolean posicion = configFutoshiki.getPosicion();
@@ -1088,6 +1288,8 @@ public class GUIJugar extends javax.swing.JFrame {
             
             fondoPanel.setLayout(null); // para que se puedan mover los componentes bien
             numerosPanel.setBounds(90, numerosPanel.getY(), numerosPanel.getWidth(), numerosPanel.getHeight());
+            borrarBoton.setBounds(90, borrarBoton.getY(), borrarBoton.getWidth(), borrarBoton.getHeight());
+            
             
         }
         
@@ -1136,6 +1338,7 @@ public class GUIJugar extends javax.swing.JFrame {
                     relojPanel.setVisible(false);
                     relojPanel.setEnabled(false);
                 }
+                juego.setBounds(0, 0, 1100, 980);
                 construirPanel();
                 
             }
@@ -1143,6 +1346,8 @@ public class GUIJugar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel anuncioLabel;
+    private static javax.swing.JButton borrarBoton;
     private javax.swing.JButton borrarJuegoButton;
     private javax.swing.JButton borrarJugadaButton;
     private javax.swing.JButton cargarJuegoButton;
