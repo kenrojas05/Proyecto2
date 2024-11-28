@@ -2,6 +2,10 @@
 <top10>
     <jugadoresDificil>
         <entry>
+            <key>Kendallcito</key>
+            <value>0:0:9</value>
+        </entry>
+        <entry>
             <key>naty</key>
             <value>0:0:23</value>
         </entry>
@@ -22,6 +26,10 @@
         <entry>
             <key>naty</key>
             <value>00:00:10</value>
+        </entry>
+        <entry>
+            <key>Ejemplo</key>
+            <value>0:5:20</value>
         </entry>
     </jugadoresFacil>
     <jugadoresIntermedio>

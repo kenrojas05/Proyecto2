@@ -4,21 +4,12 @@ package vistaFutoshiki;
 import controladorFutoshiki.ControladorFutoshiki;
 import modeloFutoshiki.*;
 
-import modeloFutoshiki.Configuracion; //por los datos
-import modeloFutoshiki.Jugador;
-import modeloFutoshiki.Partida;
-import modeloFutoshiki.PartidasFutoshiki;
-import modeloFutoshiki.Top10;
+import modeloFutoshiki.*;
+
 import static vistaFutoshiki.GUIFutoshiki.configFutoshiki;
 
 
-
-
-//documentar awt
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashMap;
 import java.util.Map;
 
 //Documentar en PDF Timer
@@ -26,7 +17,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.SwingUtilities;
 
-//documentar awt
 import javax.swing.*;
 
 /**
@@ -514,6 +504,7 @@ public class GUIJugar extends javax.swing.JFrame {
                         int numSiguiente = cuadricula[fila][columna + 1];
                         if (!(numActual > numSiguiente) && (numActual != 0 && numSiguiente!=0)) {
                             cuadriculaBotones[fila][columna].setForeground(Color.RED);
+                            alertaMensaje("mayor");
                             System.out.println(desigualdad);
                         }
                         else if ((numActual > numSiguiente) && (numActual != 0 && numSiguiente!=0)){
@@ -526,6 +517,7 @@ public class GUIJugar extends javax.swing.JFrame {
                         
                         if (!(numActual < numSiguiente) && (numActual != 0 && numSiguiente!=0)) {
                             cuadriculaBotones[fila][columna].setForeground(Color.RED);
+                            alertaMensaje("menor");
                             System.out.println(desigualdad);
                         }
                         else if ((numActual < numSiguiente) && (numActual != 0 && numSiguiente!=0)){
@@ -538,6 +530,7 @@ public class GUIJugar extends javax.swing.JFrame {
                         int numSiguiente = cuadricula[fila + 1][columna];
                         if (!(numActual > numSiguiente) && (numActual != 0 && numSiguiente!=0)) {
                             cuadriculaBotones[fila][columna].setForeground(Color.RED);
+                            alertaMensaje("mayor");
                             System.out.println(desigualdad);
                         }
                         else if ((numActual > numSiguiente) && (numActual != 0 && numSiguiente!=0)){
@@ -545,11 +538,13 @@ public class GUIJugar extends javax.swing.JFrame {
                         }
                     }   break;
                 case "mec":
+                    
                     if (fila + 1 < cuadricula.length) {
                         
                         int numSiguiente = cuadricula[fila + 1][columna];
                         if (!(numActual < numSiguiente) && (numActual != 0 && numSiguiente!=0)) {
                             cuadriculaBotones[fila][columna].setForeground(Color.RED);
+                             alertaMensaje("menor");
                             System.out.println( desigualdad);
                         }
                         else if ((numActual < numSiguiente) && (numActual != 0 && numSiguiente!=0)){
@@ -1172,7 +1167,7 @@ public class GUIJugar extends javax.swing.JFrame {
          horaGlobal = 0;
          minutoGlobal = 0;
          segundosGlobal = 0;
-        TimerTask taskCronometro = new TimerTask(){
+        TimerTask taskTemporizador = new TimerTask(){
             int hora = configFutoshiki.getTemporizadorHora();
             int minuto = configFutoshiki.getTemporizadorMinuto();
             int segundo = configFutoshiki.getTemporizadorSegundo();
@@ -1213,7 +1208,7 @@ public class GUIJugar extends javax.swing.JFrame {
                 });
             };
         };
-        timer.scheduleAtFixedRate(taskCronometro, 0, 1000); //sin delay y actualizar cada 1000ms que son 1 segundo
+        timer.scheduleAtFixedRate(taskTemporizador, 0, 1000); //sin delay y actualizar cada 1000ms que son 1 segundo
         timerGlobal = timer;
     }
     

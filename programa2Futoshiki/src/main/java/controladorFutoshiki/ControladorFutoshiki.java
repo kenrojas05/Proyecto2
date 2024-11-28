@@ -32,6 +32,14 @@ public class ControladorFutoshiki {
         }
     }
     
+    /**
+     * Agrega el jugador al top 10 de entrar en el y comprueba el nombre
+     * @param nombre nombre del jugador
+     * @param hora numero de la hora
+     * @param minutos numero de los minutos
+     * @param segundos numero de los segundos
+     * @param nivel dificultad del nivel
+     **/
     
     public void agregarAlTop10(String nombre, int hora, int minutos, int segundos, String nivel){
         System.out.println("Top 10");
@@ -53,4 +61,62 @@ public class ControladorFutoshiki {
         
     }
     
+    /**
+     * Retorna la configuracion predeterminada
+     * @return Configuracion con los valores predeterminados del programa
+     **/
+    
+    public static Configuracion conseguirConfigPredeterminada(){
+        return new Configuracion((byte) 5, "Facil", false, "Cronometro", false); //set en predeterminado
+    }
+    
+    /**
+     * Agrega el jugador
+     * @param nombre nombre del jugador
+     * @param password contrasena del jugador
+     **/
+    
+    public static void agregarJugador(String nombre , String password){
+        if(!nombre.equals("incognito")){
+            Jugador jugador = new Jugador(nombre, password);
+            Configuracion.addJugadores(nombre, jugador);
+        }
+    }
+    
+    /**
+     * Determina si el nombre tiene un tamano valido
+     * @param nombre el nombre
+     * @return true si es valido false en caso contrario
+     **/
+    
+    public static boolean nombreValido(String nombre){
+        if (nombre.length()>=1 || nombre.length()<=30){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    /**
+     * Consigue de configuracion la contrasena de un jugador
+     * @param nombre nombre del jugador a conseguir
+     * @return String contrasena
+     **/
+    
+    public static String conseguirPasswordJugador(String nombre){
+        return Configuracion.jugadores.get(nombre).getPassword();
+    }
+    
+    /**
+     * Consigue de configuracion el nombre de un jugador
+     * @param nombre nombre del jugador a conseguir
+     * @return String nombre
+     **/
+    
+    public static String conseguirNombreJugador(String nombre){
+        return Configuracion.jugadores.get(nombre).getNombre();
+    }
+    
 }
+    

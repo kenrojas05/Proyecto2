@@ -3,6 +3,13 @@
     <cuadricula>3</cuadricula>
     <jugadores>
         <entry>
+            <key>Ejemplo</key>
+            <value>
+                <nombre>Ejemplo</nombre>
+                <password>ej1221</password>
+            </value>
+        </entry>
+        <entry>
             <key>Allan</key>
             <value>
                 <nombre>Allan</nombre>
@@ -37,9 +44,16 @@
                 <password>1221</password>
             </value>
         </entry>
+        <entry>
+            <key>Kendallcito</key>
+            <value>
+                <nombre>Kendallcito</nombre>
+                <password>lol</password>
+            </value>
+        </entry>
     </jugadores>
     <multinivel>false</multinivel>
-    <nivel>Dificil</nivel>
+    <nivel>Facil</nivel>
     <posicion>true</posicion>
     <reloj>Cronometro</reloj>
     <temporizadorHora>0</temporizadorHora>

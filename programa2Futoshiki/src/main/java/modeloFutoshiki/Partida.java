@@ -6,7 +6,7 @@ package modeloFutoshiki;
  * @author Kendall Ariel Rojas Cartin
  */
 
-//(Documentar mejor PDF final) XML
+//XML
 import javax.xml.bind.annotation.*; //para la serializacion y el guardado de archivo xml
 
 

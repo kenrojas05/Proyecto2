@@ -186,9 +186,9 @@ public class GUIJugador extends javax.swing.JFrame {
             this.setEnabled(false);
             this.setVisible(false);
         }
-        else if(Configuracion.nombreValido(nombreField.getText())){
+        else if(ControladorFutoshiki.nombreValido(nombreField.getText())){
             try {
-            if (Configuracion.jugadores.get(nombreField.getText()).getPassword().equals(passwordField.getText())){
+            if (ControladorFutoshiki.conseguirPasswordJugador(nombreField.getText()).equals(passwordField.getText())){
                 GUIFutoshiki.setNombre(nombreField.getText());
                 GUIFutoshiki.setPassword(passwordField.getText());
                 GUIFutoshiki.setJugador(Configuracion.jugadores.get(nombreField.getText()));
@@ -239,13 +239,12 @@ public class GUIJugador extends javax.swing.JFrame {
            public void actionPerformed(java.awt.event.ActionEvent evt) {  
                String nombre = nombreField.getText();
                String password = passwordField.getText();
-               Jugador jugador = new Jugador(nombre, password);
                if (nombreField.getText().isEmpty() && passwordField.getText().isEmpty()){
                    indicadorLabel.setText("Invalido");
                 }
                else {
                   try {
-                      Configuracion.addJugadores(nombre, jugador);
+                      ControladorFutoshiki.agregarJugador(nombre, password);
                       nombreField.setText("");
                       passwordField.setText("");
                       ControladorFutoshiki.guardarObjeto(configFutoshiki);

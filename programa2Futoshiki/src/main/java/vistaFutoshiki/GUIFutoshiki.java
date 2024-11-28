@@ -27,7 +27,7 @@ public class GUIFutoshiki extends javax.swing.JFrame {
     
     public static Jugador jugadorActual;
     
-    public static Configuracion configFutoshiki = new Configuracion((byte) 5, "Facil", false, "Cronometro", false); //set en predeterminado
+    public static Configuracion configFutoshiki = ControladorFutoshiki.conseguirConfigPredeterminada();
     /**
      * Creates new form GUIFutoshiki
      */

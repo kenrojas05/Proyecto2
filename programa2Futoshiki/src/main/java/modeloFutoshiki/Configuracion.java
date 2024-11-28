@@ -164,20 +164,7 @@ public class Configuracion {
         return jugadoresRegistrados;
     }
     
-    /**
-     * Determina si el nombre tiene un tamano valido
-     * @param nombre el nombre
-     * @return true si es valido false en caso contrario
-     **/
     
-    public static boolean nombreValido(String nombre){
-        if (nombre.length()>=1 || nombre.length()<=30){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
     
     /**
      * Agrega el jugador si es valido su nombre y es unico
