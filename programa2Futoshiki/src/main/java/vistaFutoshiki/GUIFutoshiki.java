@@ -556,7 +556,7 @@ public class GUIFutoshiki extends javax.swing.JFrame {
          JTextArea areaTexto = new JTextArea();
          areaTexto.setEditable(false);
          areaTexto.setText("FUTOSHIKI \n"
-                          +"Version del Programa Futoshiki: 11\n" //11 porque he hecho 11 copias de este 
+                          +"Version del Programa Futoshiki: 18\n" //18 porque he hecho 18 copias de este 
                           +"Version Java: " + System.getProperty("java.version") +"\n" //version de java usado
                           +"Fecha de creación: 24/10/2024 \n"
                           +"Autor: Kendall Ariel Rojas Cartin");
