@@ -1,62 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <configuracion>
-    <cuadricula>3</cuadricula>
+    <cuadricula>5</cuadricula>
     <jugadores>
         <entry>
             <key>Ejemplo</key>
             <value>
                 <nombre>Ejemplo</nombre>
-                <password>ej1221</password>
-            </value>
-        </entry>
-        <entry>
-            <key>Allan</key>
-            <value>
-                <nombre>Allan</nombre>
-                <password>AaA</password>
-            </value>
-        </entry>
-        <entry>
-            <key>Kendall</key>
-            <value>
-                <nombre>Kendall</nombre>
-                <password>4321</password>
-            </value>
-        </entry>
-        <entry>
-            <key>Juan</key>
-            <value>
-                <nombre>Juan</nombre>
-                <password>2</password>
-            </value>
-        </entry>
-        <entry>
-            <key>naty</key>
-            <value>
-                <nombre>naty</nombre>
-                <password>12345</password>
-            </value>
-        </entry>
-        <entry>
-            <key>jenny</key>
-            <value>
-                <nombre>jenny</nombre>
-                <password>1221</password>
-            </value>
-        </entry>
-        <entry>
-            <key>Kendallcito</key>
-            <value>
-                <nombre>Kendallcito</nombre>
-                <password>lol</password>
+                <password>1234</password>
             </value>
         </entry>
     </jugadores>
     <multinivel>false</multinivel>
     <nivel>Facil</nivel>
-    <posicion>true</posicion>
+    <posicion>false</posicion>
     <reloj>Cronometro</reloj>
     <temporizadorHora>0</temporizadorHora>
-    <temporizadorMinuto>1</temporizadorMinuto>
+    <temporizadorMinuto>0</temporizadorMinuto>
     <temporizadorSegundo>0</temporizadorSegundo>
 </configuracion>

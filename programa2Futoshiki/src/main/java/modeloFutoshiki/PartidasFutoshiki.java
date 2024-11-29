@@ -25,7 +25,7 @@ public class PartidasFutoshiki {
      * Constructor vacio de partidas futoshiki
      **/
     
-    PartidasFutoshiki(){}
+    public PartidasFutoshiki(){}
     
     /**
      * Constructor de las partidas futoshiki
